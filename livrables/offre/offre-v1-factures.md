@@ -30,7 +30,7 @@ Les données de vos clients restent sous le contrôle du cabinet, dans le respec
 
 ## Qui
 
-Prestation proposée par une micro-entreprise en cours de création, portée par un actuaire spécialisé en data science et gestion du risque. Aucun client de référence à ce jour : les premiers cabinets travaillent à des conditions de lancement.
+Prestation proposée par une micro-entreprise en cours de création, portée par un data scientist (master de l'ENSAE). Aucun client de référence à ce jour : les premiers cabinets travaillent à des conditions de lancement.
 
 ## Prochaine étape
 

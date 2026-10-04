@@ -25,7 +25,7 @@ Concevoir puis construire le site vitrine d'une **agence IA qui travaille pour l
 ## 3. Situation (S : contexte complet)
 
 ### Le porteur
-- Kélian Kaddouri, actuaire (MSc ENSAE) et data scientist (Python, mise en production, gestion du risque, cyber-risque, réglementation européenne). Micro-entreprise en cours de création. Travaille seul pour l'instant.
+- Kélian Kaddouri, data scientist (MSc ENSAE ; Python, mise en production, automatisation). Ne pas mettre en avant l'actuariat ni le cyber-risque. Micro-entreprise en cours de création. Travaille seul pour l'instant.
 - **Aucun client à ce jour.** Les premiers cabinets travaillent à des conditions de lancement.
 - Nom de l'agence : `[À COMPLÉTER : nom définitif]` (nom retenu : « Équerre » ; disponibilité non vérifiée). Si le nom n'est pas rempli, utilise « Équerre » et signale-le.
 - Adresse e-mail de contact : `[À COMPLÉTER]`. Lien de prise de rendez-vous (Calendly, Cal.com, etc.) : `[À COMPLÉTER]`. Si vides, laisse un marqueur visible `À COMPLÉTER` dans le code, n'invente rien.

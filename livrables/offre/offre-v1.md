@@ -51,7 +51,7 @@ Aucune donnée client de votre cabinet n'est nécessaire : l'atelier utilise des
 
 ## Qui
 
-Prestation proposée par une micro-entreprise en cours de création, portée par un actuaire spécialisé en data science et gestion du risque. Aucun client de référence à ce jour : les premiers cabinets participent à des conditions de lancement.
+Prestation proposée par une micro-entreprise en cours de création, portée par un data scientist (master de l'ENSAE). Aucun client de référence à ce jour : les premiers cabinets participent à des conditions de lancement.
 
 ## Prochaine étape
 

@@ -15,6 +15,8 @@
 - Modèle : vente en ligne à des entreprises (B2B), en freelance/prestation d'abord, pas de logiciel.
 - Pistes : audit et suivi des coûts IA ; kit de conformité AI Act ; veille réglementaire automatisée (DORA, cyber, AI Act) ; automatisations sur mesure ; tableaux de bord data/sinistralité.
 - Pistes retenues (2026-10-04) : reporting automatisé et traitement de documents. Écartées : audit des coûts IA (cible trop informée sur l'IA), veille (demande un secteur maîtrisé, à reprendre plus tard pour le récurrent).
+- Périmètre (Kélian, 2026-10-04) : rester uniquement sur les offres A (formation + charte IA), B (factures) et C (reporting) pour les cabinets comptables ; pas de freelance. Présentation publique : data scientist (Python, automatisation), sans actuariat ni cyber.
+- Exclusion (Kélian, 2026-10-04) : ne veut PAS vendre ni faire de missions d'actuariat ou de cyber-risque (ni en freelance, ni en offre). Pistes à écarter : veille DORA/cyber, audits cyber, missions d'actuaire. Reste ouvert : automatisation de tâches, traitement de documents, reporting, formation à l'usage de l'IA.
 - Contrainte : aucun secteur connu de l'intérieur, aucun réseau → cible à choisir par accessibilité (étape 1 de PIPELINE.md).
 
 ## Client cible
