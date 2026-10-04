@@ -1,7 +1,6 @@
-# Site agence IA pour cabinets comptables
+# Site Atelier Pointage (cabinets d'expertise comptable)
 
-- `index.html` : version actuelle du site (page unique, aucun build). Ouvrir dans le navigateur, ou clic droit > Open with Live Server dans VS Code.
-- `PROMPT.md` : prompt complet pour reconstruire le site proprement (Astro + Tailwind) avec Claude Code.
+- `index.html` : page unique, aucun build (page de conversion : calculateur, tâches, démo simulée, FAQ, mentions légales). Ouvrir dans le navigateur ou servir avec `python -m http.server 8765 --directory livrables/site-cabinets`.
+- `PROMPT.md` : prompt pour reconstruire le site (Astro + Tailwind) avec Claude Code.
 
-Direction retenue : Éditorial suisse, bandes bleu nuit. Nom provisoire : Atelier Pointage.
-Champs `À COMPLÉTER` : rendez-vous, e-mail, SIRET, adresse, hébergeur, politique de données, photo.
+À faire avant publication (Netlify) : champs `À COMPLÉTER` (SIRET, adresse, TVA, adresse de l'hébergeur, lien de rendez-vous), vérifier le nom (INPI, domaine), auto-héberger les polices, retirer `noindex`, faire valider les mentions légales.
