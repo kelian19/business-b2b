@@ -1,0 +1,27 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Réglages locaux de Claude
+.claude/settings.local.json
+
+# Documents importés (garder le dossier)
+context/import/*
+!context/import/.gitkeep
+
+# Modules installés (garder le dossier)
+module-installs/*
+!module-installs/.gitkeep
+
+# Prospection : données d'entreprises tierces, ne pas versionner
+prospection/prospects.csv
+prospection/messages/*
+!prospection/messages/.gitkeep
+
+# Divers
+node_modules/
+__pycache__/
+*.log
+.DS_Store
+Thumbs.db
