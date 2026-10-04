@@ -17,9 +17,9 @@ La source de vérité est `context/CONTEXT.md`. Le journal des décisions est `c
 ```
 context/   CONTEXT.md (vérité) · HISTORY.md (journal) · PIPELINE.md (étapes) · recherche/ (sorties du chercheur) · import/ (bruts)
 prospection/   prospects.csv (non versionné) · messages/ (non versionné) · suivi.md (retours)
-livrables/   offre/ (offre-vN.md) · analyse/ (chiffrage, scripts) · site/ (vitrine, plus tard)
+livrables/   offre/ (offre-vN.md) · design/ (charte, slides, e-mail) · analyse/ (chiffrage, scripts) · site/ (vitrine, plus tard)
 module-installs/   dépôts externes
-.claude/   agents/ (5) · commands/ (5) · skills/ (actuarial-modeling, business-ai, token-efficient + K-Dense : exploratory-data-analysis, statistical-analysis, statsmodels, scikit-learn, scientific-visualization) · settings.json
+.claude/   agents/ (8) · commands/ (5) · skills/ (actuarial-modeling, business-ai, token-efficient + K-Dense : exploratory-data-analysis, statistical-analysis, statsmodels, scikit-learn, scientific-visualization) · settings.json
 ```
 
 ## Agents (délégation)
@@ -31,6 +31,9 @@ module-installs/   dépôts externes
 | `redacteur-offre` | Sonnet | business-ai, token-efficient | (remotion, ffmpeg après étape 7) | Offre et texte de vitrine → `livrables/offre/` |
 | `analyste` | Sonnet | actuarial-modeling, business-ai, token-efficient (+ K-Dense à la demande) | Bash (Python), Skill, context7 | Chiffrage CA/marge/bénéfice, puis prototype reporting → `livrables/analyse/` |
 | `relecteur` | Haiku | business-ai, token-efficient | – | Relecture en lecture seule avant toute sortie |
+| `designer` | Sonnet | token-efficient | playwright | Charte, vitrine, slides, modèle d'e-mail → `livrables/design/`, `livrables/site/` (ne publie rien) |
+| `ceo` | Opus | business-ai | lecture seule | Décision difficile (go / ajuster / abandonner), sur demande seulement |
+| `manager` | Haiku | token-efficient | – | Suivi des envois et retours A/B, relances J+5, point hebdo → `prospection/suivi.md` |
 
 Le principal orchestre et ne fait pas le travail verbeux lui-même. Un agent à la fois.
 

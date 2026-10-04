@@ -19,9 +19,9 @@
 
 ## Client cible
 
-- Secteur : À compléter (selon l'offre : startups/PME utilisant des API d'IA, courtiers, petits assureurs, cabinets)
-- Taille d'entreprise : À compléter
-- Décideur (poste) : À compléter
+- Secteur : cabinets d'expertise comptable (décision 2026-10-04, test commercial, pas encore validé par des retours)
+- Taille d'entreprise : petits cabinets indépendants, environ 2 à 20 personnes (hypothèse de ciblage)
+- Décideur (poste) : expert-comptable associé ou gérant (hypothèse, à valider en appel)
 
 ## Problème
 
@@ -82,7 +82,7 @@ Chaque chiffre est une hypothèse tant qu'il n'a pas de source.
 
 Suivre `context/PIPELINE.md` avec `/pipeline`.
 
-1. Étape 1 : comparer 3-4 types de cibles (agent `chercheur`).
-2. Étape 2 : choisir la cible, noter la décision dans HISTORY.md.
+1. Étape 6 (Kélian) : relire et envoyer à la main les 20 messages de `prospection/messages/` (vérifier d'abord les points signalés par le prospecteur : tailles, formulaire n°15, indice n°20), noter les retours dans `prospection/suivi.md`.
+2. Étape 7 : après les retours, comparer A (formation + charte AI Act) et B (automatisation) ; seuil d'arrêt à fixer (proposé : moins de 2 appels sur 30 messages).
 3. En parallèle : vérifier le taux URSSAF.
 4. Plus tard : `gh auth login`, vérifier que `.env.example` ne contient aucune clé, puis `gh repo create business-b2b --private --source . --push`.
