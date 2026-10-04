@@ -28,3 +28,9 @@ Thumbs.db
 
 # Sorties de test Playwright
 .playwright-mcp/
+
+# Listes de prospects importables (adresses professionnelles)
+prospection/outils/suivi-import.csv
+
+# Lien local Netlify
+.netlify/

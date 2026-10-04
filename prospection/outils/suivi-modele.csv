@@ -1,0 +1,6 @@
+id,cabinet,ville,site,email_generique,offre_testee,statut,date_envoi,date_relance_J5,reponse,tache_citee,prix_evoque,notes
+1,EXEMPLE_Cabinet_Dupont,Lyon,example.fr,contact@example.fr,A,à envoyer,,,,,Exemple fictif pour démonstration
+2,EXEMPLE_Cabinet_Martin,Paris,example2.fr,contact@example2.fr,B,brouillon créé,,,,,Exemple fictif pour démonstration
+3,EXEMPLE_Cabinet_Bernard,Marseille,example3.fr,contact@example3.fr,A,envoyé,2026-10-04,2026-10-09,,,,Exemple fictif
+4,EXEMPLE_Cabinet_Thomas,Toulouse,example4.fr,contact@example4.fr,B,répondu,2026-09-29,2026-10-04,Pas d'intérêt actuellement,Factures fournisseurs,Non mentionné,Exemple fictif
+5,EXEMPLE_Cabinet_Robert,Bordeaux,example5.fr,contact@example5.fr,A,intéressé,2026-09-27,2026-10-02,Oui pour un appel,Tâche répétitive non précisée,Non mentionné,Exemple fictif

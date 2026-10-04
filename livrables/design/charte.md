@@ -4,7 +4,7 @@ Statut : proposition, à valider par Kélian. Une seule charte pour tous les sup
 
 ## Nom (provisoire, à vérifier avant usage)
 
-Retenu : **Atelier Pointage** (« pointer » = rapprocher et vérifier, vocabulaire du métier). Alternatives : **Ligne Claire**, **Atelier Équerre**.
+Retenu (2026-10-04, par Kélian) : **Équerre**. Disponibilité (INPI, nom de domaine) non vérifiée. Ancien nom provisoire : Atelier Pointage.
 
 Aucune disponibilité vérifiée. Avant tout usage public :
 1. INPI : recherche d'antériorités (base marques, classes 35, 41, 42).

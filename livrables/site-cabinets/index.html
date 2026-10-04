@@ -4,153 +4,265 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<meta name="description" content="Atelier Pointage : une tâche répétitive en moins dans votre cabinet d'expertise comptable, à prix fixe.">
-<title>Atelier Pointage : une tâche répétitive en moins dans votre cabinet</title>
+<meta name="description" content="Équerre : règles d'usage de l'IA et suppression d'une tâche répétitive pour les cabinets d'expertise comptable.">
+<title>Équerre</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: page courte à un seul objectif (l'appel de 15 min). Le héros porte la promesse ET le calculateur personnalisé; le reste lève les objections dans l'ordre où elles surgissent. */
+/* Layout: éditorial suisse. Colonne unique de 1120px, filets noirs, titres larges, un seul accent (vermillon) réservé au bouton d'action. */
 :root{
-  --paper:#E9E5D8; --navy:#0F1E3D; --ink:#111111; --mut:#4F4E47; --line:#C6C1AE; --soft:#DDD8C6; --white:#FFFFFF;
-  --red:#C8200E; --redhover:#A91B0B; --onnavy:#F7F7F4; --mutnavy:#B9C2D6; --linenavy:#34456B; --hl:#FFE9A8;
+  --paper:#E9E5D8; --bg0:#E9E5D8; --navy:#0F1E3D; --ink:#111111; --mut:#4F4E47; --line:#C6C1AE; --soft:#DDD8C6; --white:#FFFFFF;
+  --red:#C8200E; --redfg:#FFFFFF;
   --display:"Archivo","Arial Narrow",Arial,sans-serif; --body:"Public Sans",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
   color-scheme:light;
 }
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html{scroll-behavior:smooth;scroll-padding-top:72px}
 body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6 var(--body);padding-inline:max(16px,4vw)}
 .wrap{max-width:1120px;margin:0 auto}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--ink);outline-offset:3px}
-.skip{position:absolute;left:-9999px;top:8px;background:var(--ink);color:#fff;padding:8px 12px;z-index:50}.skip:focus{left:8px}
+.skip{position:absolute;left:-9999px;top:8px;background:var(--ink);color:#fff;padding:8px 12px;z-index:50}
+.skip:focus{left:8px}
 h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;letter-spacing:-.02em}
-h2{font-weight:800;font-stretch:108%;font-size:clamp(28px,4vw,44px);line-height:1.02;max-width:20ch}
-h3{font-weight:700;font-size:19px;line-height:1.25}
+h2{font-weight:800;font-stretch:108%;font-size:clamp(28px,4.2vw,48px);line-height:1;max-width:20ch}
+h3{font-weight:700;font-size:20px;line-height:1.2}
 p{margin:0}
-.eyebrow{font:600 12px/1 var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--mut);display:block;margin-bottom:20px}
-section{padding-block:80px 0}
-.todo{background:var(--hl);color:#111;padding:0 4px;font-weight:600;font-size:.92em;border-radius:2px}
+.label{font:600 12px/1 var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--mut);border-top:2px solid var(--ink);padding-top:10px;display:block;margin-bottom:28px}
+section{padding-block:88px 0}
+.todo{background:#FFE9A8;color:#111;padding:0 4px;font-weight:600;font-size:.92em;border-radius:2px}
 
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font:700 17px/1.1 var(--body);padding:18px 28px;text-decoration:none;border:2px solid transparent;cursor:pointer;min-height:56px;text-align:center}
-.btn-cta{background:var(--red);color:#fff}.btn-cta:hover{background:var(--redhover)}
-.btn-line{background:transparent;border-color:currentColor;color:inherit;font-weight:600}
-.btn-line:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-.btn-sm{padding:12px 18px;min-height:44px;font-size:15px}
+/* Boutons */
+.btn{display:inline-flex;align-items:center;gap:10px;font:600 16px/1 var(--body);padding:16px 24px;text-decoration:none;border:2px solid transparent;cursor:pointer;min-height:48px}
+.btn-cta{background:var(--red);color:var(--redfg)}
+.btn-cta:hover{background:#A91B0B}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
+.btn-ghost:hover{background:var(--ink);color:var(--bg0)}
 
+/* Bandes pleine largeur bleu nuit */
+.dark{--ink:#F7F7F4;--mut:#B9C2D6;--line:#34456B;--bg0:#0F1E3D;color:var(--ink);background:var(--navy);box-shadow:0 0 0 100vmax var(--navy);clip-path:inset(0 -100vmax);padding-block:72px}
+.dark .panel{--ink:#111111;--mut:#55554F;--line:#D6D6CF;--bg0:#FFFFFF;color:#111}
+.dark .panel .field input{background:#F7F7F4}
+.dark .panel .btn-ghost{color:#111}
+.dark .panel .btn-ghost:hover{color:#fff}
+.dark .panel .out{border-color:#111}
+.dark :focus-visible{outline-color:#fff}
+.dark .panel :focus-visible{outline-color:#111}
+.dark .todo{color:#111}
+.dark+.dark{padding-top:0}
 /* En-tête */
-header.top{position:sticky;top:0;z-index:20;background:var(--navy);color:var(--onnavy);margin-inline:calc(-1*max(16px,4vw));padding-inline:max(16px,4vw)}
-.bar{max-width:1120px;margin:0 auto;display:flex;align-items:center;gap:16px;min-height:60px}
-.brand{font:800 19px var(--display);font-stretch:110%;letter-spacing:-.02em;text-decoration:none;margin-right:auto}
-.bar .btn{padding:10px 18px;min-height:42px;font-size:15px}
+header.top{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:2px solid var(--ink);margin-inline:calc(-1*max(16px,4vw));padding-inline:max(16px,4vw)}
+.bar{max-width:1120px;margin:0 auto;display:flex;align-items:center;gap:24px;min-height:64px}
+.brand{font:800 20px var(--display);font-stretch:110%;letter-spacing:-.02em;text-decoration:none;margin-right:auto}
+nav.main{display:flex;gap:24px;font-size:15px;font-weight:500}
+nav.main a{text-decoration:none;padding-block:8px}
+nav.main a:hover{text-decoration:underline;text-underline-offset:4px}
+.bar .btn{padding:12px 18px;font-size:15px;min-height:44px}
+.burger{display:none;background:none;border:2px solid var(--ink);padding:10px 14px;font:600 14px var(--body);cursor:pointer;min-height:44px}
+@media(max-width:900px){
+  .burger{display:inline-block}
+  nav.main{display:none;position:absolute;left:0;right:0;top:100%;background:var(--paper);border-bottom:2px solid var(--ink);flex-direction:column;gap:0;padding:8px max(16px,4vw)}
+  nav.main.open{display:flex}
+  nav.main a{padding:14px 0;border-top:1px solid var(--line)}
+  .bar .btn{display:none}
+}
 
 /* Héros */
-.hero{background:var(--navy);color:var(--onnavy);margin-inline:calc(-1*max(16px,4vw));padding:64px max(16px,4vw) 72px}
-.hero-grid{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:56px;align-items:start}
-@media(max-width:920px){.hero-grid{grid-template-columns:minmax(0,1fr);gap:40px}}
-h1{font-weight:900;font-stretch:112%;font-size:clamp(38px,6.2vw,76px);line-height:.95;letter-spacing:-.035em;max-width:13ch}
-.hero .sub{font-size:20px;line-height:1.5;color:var(--mutnavy);max-width:42ch;margin-top:24px}
-.proofs{display:grid;gap:10px;margin:32px 0 0;padding:0;list-style:none}
-.proofs li{display:grid;grid-template-columns:24px 1fr;gap:10px;font-size:16px}
-.proofs svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:2.6;stroke-linecap:square;margin-top:2px}
-.hero .cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:36px}
-.hero .cta small{color:var(--mutnavy);font-size:14px}
+.hero{padding-block:72px}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:48px;align-items:end}
+@media(max-width:900px){.hero-grid{grid-template-columns:minmax(0,1fr);gap:40px}}
+h1{font-weight:900;font-stretch:115%;font-size:clamp(40px,7.2vw,92px);line-height:.92;letter-spacing:-.035em}
+.hero .sub{font-size:20px;line-height:1.5;max-width:40ch;margin-top:28px;color:var(--mut)}
+.hero .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
+.ledger{border-top:2px solid var(--ink);font:500 13px var(--mono);color:var(--mut)}
+.ledger div{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding:11px 0;gap:12px}
+.ledger svg{width:20px;height:20px;flex:none;stroke:var(--ink);fill:none;stroke-width:2.4;stroke-linecap:square;stroke-dasharray:24;stroke-dashoffset:24;animation:tick .6s ease forwards}
+.ledger div:nth-child(1) svg{animation-delay:.3s}.ledger div:nth-child(2) svg{animation-delay:.8s}.ledger div:nth-child(3) svg{animation-delay:1.3s}.ledger div:nth-child(4) svg{animation-delay:1.8s}
+@keyframes tick{to{stroke-dashoffset:0}}
+@media(prefers-reduced-motion:reduce){.ledger svg{animation:none;stroke-dashoffset:0}html{scroll-behavior:auto}}
 
-/* Calculateur dans le héros */
-.calc{background:var(--white);color:var(--ink);padding:28px;border:2px solid var(--white)}
-.calc h2{font-size:24px;line-height:1.15;max-width:none;margin-bottom:6px;font-stretch:104%}
-.calc .lead{color:var(--mut);font-size:15px;margin-bottom:20px}
-.field{display:grid;gap:6px;margin-bottom:16px}
+/* Contexte */
+.dates{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;border-top:2px solid var(--ink)}
+@media(max-width:760px){.dates{grid-template-columns:minmax(0,1fr)}}
+.date{padding:28px 28px 28px 0;border-bottom:1px solid var(--line)}
+.date+.date{padding-left:28px;border-left:1px solid var(--line)}
+@media(max-width:760px){.date+.date{padding-left:0;border-left:0}}
+.date time{font:800 40px/1 var(--display);font-stretch:110%;font-variant-numeric:tabular-nums;display:block;margin-bottom:12px;letter-spacing:-.02em}
+.date h3{margin-bottom:8px}
+.date p{color:var(--mut);max-width:44ch}
+.note{margin-top:16px;font-size:14px;color:var(--mut)}
+
+/* Services */
+.services{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+@media(max-width:860px){.services{grid-template-columns:minmax(0,1fr)}}
+.svc{border-top:2px solid var(--ink);background:var(--white);padding:28px;display:flex;flex-direction:column;gap:20px}
+.svc .tag{font:800 56px/1 var(--display);font-stretch:112%}
+.svc h3{font-size:24px}
+.svc ul{margin:0;padding-left:20px;display:grid;gap:10px}
+.svc li::marker{color:var(--ink)}
+.svc .result{border-top:1px solid var(--line);padding-top:16px;font-size:15px;color:var(--mut)}
+.svc .result b{color:var(--ink)}
+.svc .link{margin-top:auto;font-weight:600}
+.tiers{display:grid;gap:12px}
+.tier{background:var(--soft);padding:14px 16px}
+.tier b{display:block;font-family:var(--display);margin-bottom:4px}
+.tier span{font-size:15px;color:var(--mut)}
+
+/* Démo, calculateur, diagnostic */
+.tool{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:start}
+@media(max-width:900px){.tool{grid-template-columns:minmax(0,1fr);gap:28px}}
+.tool .intro{max-width:40ch;color:var(--mut)}
+.tool .intro h2{margin-bottom:20px;color:var(--ink)}
+.panel{background:var(--white);border:2px solid var(--ink);padding:24px;min-width:0}
+.inv{font-variant-numeric:tabular-nums}
+.inv .stamp{display:inline-block;font:600 11px var(--mono);letter-spacing:.1em;border:1.5px solid var(--ink);padding:3px 8px;margin-bottom:16px;text-transform:uppercase}
+.inv dl{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:0}
+.inv dt,.inv dd{margin:0;padding:11px 0;border-bottom:1px dashed var(--line)}
+.inv dt{color:var(--mut);font-size:14px;padding-right:16px}
+.inv dd{font:500 15px var(--mono);text-align:right;min-height:48px;transition:background .2s}
+.inv dd.hl{background:#FFE9A8}
+.inv dd.done{background:transparent}
+.inv .src{font:500 15px var(--mono);color:var(--mut)}
+.check{display:flex;gap:10px;align-items:center;margin-top:16px;font:500 14px var(--mono);min-height:24px;color:var(--mut)}
+.check svg{width:22px;height:22px;stroke:var(--ink);fill:none;stroke-width:2.6;stroke-linecap:square}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+.btn-sm{padding:12px 18px;min-height:44px;font-size:15px}
+.field{display:grid;gap:6px;margin-bottom:18px}
 .field label{font-weight:600;font-size:15px}
-.field input{font:500 18px var(--mono);padding:12px 14px;border:2px solid var(--ink);background:#F7F7F4;width:100%;border-radius:0;font-variant-numeric:tabular-nums;color:var(--ink)}
-.field input::placeholder{color:#7C7C74}
+.field input{font:500 18px var(--mono);padding:12px 14px;border:2px solid var(--ink);background:var(--paper);width:100%;border-radius:0;font-variant-numeric:tabular-nums}
+.field input::placeholder{color:#8A8A82}
 .field input[aria-invalid="true"]{border-color:var(--red)}
 .err{color:var(--red);font-size:14px;min-height:20px;font-weight:600}
-.out{border-top:2px solid var(--ink);margin-top:6px;padding-top:16px;min-height:104px}
-.out .big{font:800 38px/1.05 var(--display);font-stretch:108%;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.out{border-top:2px solid var(--ink);margin-top:8px;padding-top:16px;min-height:96px}
+.out .big{font:800 36px/1.1 var(--display);font-stretch:108%;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
 .out .hint{font-size:14px;color:var(--mut);margin-top:8px}
-.out .btn{margin-top:16px;width:100%}
-
-/* Bande de réassurance */
-.assure{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-bottom:2px solid var(--ink);margin-top:0}
-@media(max-width:860px){.assure{grid-template-columns:repeat(2,minmax(0,1fr))}}
-.assure div{padding:20px 16px 20px 0;font-size:15px;color:var(--mut)}
-.assure b{display:block;color:var(--ink);font-family:var(--display);font-size:18px;margin-bottom:2px}
-.assure+*{margin-top:0}
-
-/* Tâches typiques */
-.tasks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:36px}
-@media(max-width:860px){.tasks{grid-template-columns:minmax(0,1fr)}}
-.task{background:var(--white);border-top:2px solid var(--ink);padding:24px;display:grid;gap:10px;align-content:start}
-.task p{color:var(--mut);font-size:16px}
-.task .ba{font:500 13px var(--mono);color:var(--ink);border-top:1px dashed var(--line);padding-top:10px}
+.q{border-top:1px solid var(--line);padding:16px 0}
+.q:first-of-type{border-top:2px solid var(--ink)}
+.q legend{font-weight:600;padding:0;margin-bottom:10px}
+fieldset{border:0;padding:0;margin:0;min-width:0}
+.yn{display:flex;gap:10px}
+.yn label{cursor:pointer}
+.yn input{position:absolute;opacity:0;pointer-events:none}
+.yn span{display:inline-block;padding:10px 22px;border:2px solid var(--ink);font-weight:600;min-width:84px;text-align:center}
+.yn input:checked+span{background:var(--ink);color:#fff}
+.yn input:focus-visible+span{outline:3px solid var(--ink);outline-offset:3px}
+.result-box{margin-top:20px;border:2px solid var(--ink);padding:20px;background:var(--soft)}
+.result-box h3{margin-bottom:8px}
 
 /* Méthode */
-.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:2px solid var(--ink);margin-top:36px}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:2px solid var(--ink);counter-reset:s}
 @media(max-width:860px){.steps{grid-template-columns:minmax(0,1fr)}}
-.step{padding:26px 26px 26px 0}
-.step+.step{padding-left:26px;border-left:1px solid var(--line)}
+.step{padding:28px 28px 28px 0;position:relative}
+.step+.step{padding-left:28px;border-left:1px solid var(--line)}
 @media(max-width:860px){.step+.step{padding-left:0;border-left:0;border-top:1px solid var(--line)}}
-.step .n{font:800 52px/1 var(--display);font-stretch:112%;display:block;margin-bottom:10px}
-.step .d{font:500 13px var(--mono);color:var(--mut);display:block;margin-bottom:8px}
+.step .n{font:800 56px/1 var(--display);font-stretch:112%;display:block;margin-bottom:12px}
+.step .d{font:500 13px var(--mono);color:var(--mut);margin-bottom:10px;display:block}
 .step p{color:var(--mut);max-width:34ch}
 
-/* Démo */
-.demo{background:var(--navy);color:var(--onnavy);margin-inline:calc(-1*max(16px,4vw));padding:72px max(16px,4vw);margin-top:80px}
-.demo .in{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:start}
-@media(max-width:900px){.demo .in{grid-template-columns:minmax(0,1fr);gap:28px}}
-.demo p.t{color:var(--mutnavy);margin-top:18px;max-width:40ch}
-.panel{background:var(--white);color:var(--ink);padding:24px;min-width:0}
-.inv{font-variant-numeric:tabular-nums}
-.stamp{display:inline-block;font:600 11px var(--mono);letter-spacing:.1em;border:1.5px solid var(--ink);padding:3px 8px;margin-bottom:14px;text-transform:uppercase}
-.inv dl{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr)}
-.inv dt,.inv dd{margin:0;padding:10px 0;border-bottom:1px dashed var(--line)}
-.inv dt{color:var(--mut);font-size:14px;padding-right:16px}
-.inv dd{font:500 15px var(--mono);text-align:right;min-height:46px;transition:background .2s}
-.inv dd.hl{background:var(--hl)}
-.check{display:flex;gap:10px;align-items:center;margin-top:14px;font:500 14px var(--mono);min-height:24px;color:var(--mut)}
-.check svg{width:22px;height:22px;stroke:var(--ink);fill:none;stroke-width:2.6;stroke-linecap:square;flex:none}
-.panel .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
-.panel .btn-line{color:var(--ink)}
-
-/* Limites + FAQ */
-.cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;margin-top:0}
-@media(max-width:860px){.cols{grid-template-columns:minmax(0,1fr);gap:24px}}
-ul.plain{margin:0;padding:0;list-style:none}
-ul.plain li{padding:13px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:26px 1fr;gap:8px}
+/* Texte en colonnes */
+.cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px}
+@media(max-width:860px){.cols{grid-template-columns:minmax(0,1fr);gap:28px}}
+.cols h2{margin-bottom:0}
+.cols .body{display:grid;gap:16px;max-width:52ch}
+.cols .body p{color:var(--mut)}
+.cols .body p b,.cols .body li b{color:var(--ink)}
+ul.plain{margin:0;padding:0;list-style:none;display:grid}
+ul.plain li{padding:14px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:28px 1fr;gap:10px}
 ul.plain li::before{content:"–";font-weight:700}
-.faq{border-top:2px solid var(--ink);margin-top:32px}
+.empty{border:2px dashed var(--ink);padding:36px;max-width:640px}
+
+/* FAQ */
+.faq{border-top:2px solid var(--ink)}
 details{border-bottom:1px solid var(--line)}
-summary{list-style:none;cursor:pointer;padding:20px 48px 20px 0;font:700 19px/1.3 var(--display);position:relative;min-height:48px}
+summary{list-style:none;cursor:pointer;padding:22px 48px 22px 0;font:700 20px/1.3 var(--display);position:relative;min-height:48px}
 summary::-webkit-details-marker{display:none}
-summary::after{content:"+";position:absolute;right:4px;top:16px;font:500 28px/1 var(--mono)}
+summary::after{content:"+";position:absolute;right:4px;top:18px;font:500 28px/1 var(--mono);transition:transform .2s}
 details[open] summary::after{content:"–"}
-.ans{padding:0 48px 22px 0;color:var(--mut);max-width:62ch}
+details .ans{padding:0 48px 24px 0;color:var(--mut);max-width:62ch}
 
-/* Offre complémentaire */
-.alt{border:2px solid var(--ink);padding:28px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:center;background:var(--soft)}
-@media(max-width:760px){.alt{grid-template-columns:minmax(0,1fr)}}
-.alt p{color:var(--mut);margin-top:6px;max-width:58ch}
 
-/* Appel final */
-.final{background:var(--navy);color:var(--onnavy);margin:96px calc(-1*max(16px,4vw)) 0;padding:72px max(16px,4vw)}
-.final .in{max-width:1120px;margin:0 auto;display:grid;gap:24px}
+/* Facture de démonstration : document et extraction */
+.iv{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:24px;align-items:start;min-width:0;margin-top:8px}
+@media(max-width:940px){.iv{grid-template-columns:minmax(0,1fr)}}
+.paperwrap{min-width:0}
+.fict{display:inline-flex;align-items:center;gap:8px;font:600 11px "IBM Plex Mono",monospace;letter-spacing:.1em;text-transform:uppercase;border:1.5px solid currentColor;padding:4px 10px;margin-bottom:12px}
+.paper{position:relative;background:#FBFCFF;color:#111;padding:32px;overflow:hidden;font:13px/1.5 "Public Sans",system-ui,sans-serif;box-shadow:0 30px 60px rgba(0,0,0,.35);border-top:4px solid #111}
+.paper::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(15,30,61,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(15,30,61,.05) 1px,transparent 1px);background-size:24px 24px;pointer-events:none}
+.paper>*{position:relative}
+.paper .wm{position:absolute;top:46%;left:50%;transform:translate(-50%,-50%) rotate(-18deg);font:900 clamp(48px,9vw,110px)/1 "Archivo",sans-serif;letter-spacing:.1em;color:rgba(15,30,61,.05);pointer-events:none;white-space:nowrap}
+.ph{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-start}
+.sup{display:flex;gap:14px;align-items:flex-start}
+.sup svg{width:44px;height:44px;flex:none}
+.sup b{font:800 18px/1.1 "Archivo",sans-serif}
+.sup small,.client small{display:block;color:#4F5568}
+.meta{text-align:right;display:grid;gap:4px}
+.meta .big{font:900 28px/1 "Archivo",sans-serif;font-stretch:112%;letter-spacing:.02em}
+.meta div{display:flex;justify-content:flex-end;gap:10px}.meta span{color:#4F5568}
+.meta b{font:600 13px "IBM Plex Mono",monospace}
+.f{position:relative;display:inline-block;transition:background .2s}
+.f.ex{outline:2px solid #C8200E;outline-offset:3px;background:#FFE9A8}
+.f.ex::after{content:attr(data-tag);position:absolute;left:-2px;bottom:calc(100% + 7px);font:600 10px/1 "IBM Plex Mono",monospace;background:#FFE9A8;color:#111;border:1px solid #111;padding:3px 6px;white-space:nowrap;z-index:3}
+.f.got{background:#FFF3D1}
+.client{margin-top:26px;padding:12px 14px;border-left:3px solid #0F1E3D;background:rgba(15,30,61,.04);display:grid;gap:2px;justify-items:start}
+.client>span{font:600 10px "IBM Plex Mono",monospace;letter-spacing:.1em;text-transform:uppercase;color:#4F5568}
+.client b{font:700 14px "Archivo",sans-serif}
+.f.lw{display:block;margin-top:22px}
+.f.lw.ex{outline-offset:2px}
+.lt{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.lt th{font:600 10px "IBM Plex Mono",monospace;letter-spacing:.1em;text-transform:uppercase;text-align:left;color:#4F5568;border-bottom:2px solid #111;padding:6px 8px}
+.lt td{padding:9px 8px;border-bottom:1px solid #D8DCEA}
+.lt th:not(:first-child),.lt td:not(:first-child){text-align:right;font-family:"IBM Plex Mono",monospace;white-space:nowrap}
+.tt{margin:16px 0 0 auto;width:min(100%,290px);display:grid;gap:4px;font-variant-numeric:tabular-nums}
+.tt div{display:flex;justify-content:space-between;gap:12px;padding:3px 0;align-items:center}
+.tt span{color:#4F5568}.tt b{font:600 13px "IBM Plex Mono",monospace}
+.tt .ttc{border-top:2px solid #111;margin-top:4px;padding-top:8px;font-size:15px}.tt .ttc b{font-size:16px;font-weight:700}
+.foot{margin-top:26px;display:flex;justify-content:space-between;gap:20px;align-items:flex-end;flex-wrap:wrap;border-top:1px dashed #AEB7D3;padding-top:14px}
+.foot small{display:block;color:#4F5568}
+.foot b{font:600 12px "IBM Plex Mono",monospace;overflow-wrap:anywhere}
+.qr{width:56px;height:56px;display:grid;grid-template-columns:repeat(7,1fr);grid-template-rows:repeat(7,1fr);gap:1px;flex:none}
+.qr i{background:#0F1E3D}.qr i.o{background:transparent}
+.pscan{position:absolute!important;left:0;right:0;top:0;height:3px;background:#C8200E;box-shadow:0 0 22px 8px rgba(200,32,14,.35);opacity:0;z-index:4;pointer-events:none}
+.pscan.go{opacity:1;animation:psc var(--dur,4s) linear forwards}
+@keyframes psc{from{top:0}to{top:100%}}
+.dp{min-width:0}
+.dph{font:600 11px "Public Sans",sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#4F4E47;margin-bottom:10px}
+.rows,.checks{list-style:none;margin:0;padding:0}
+.rows li{display:grid;grid-template-columns:84px minmax(0,1fr) 20px;gap:10px;align-items:center;padding:8px 0;border-bottom:1px dashed #C6C1AE;font-size:14px;transition:background .25s}
+.rows li.done{background:linear-gradient(90deg,#F3F9F0,transparent)}
+.rows .k{color:#4F4E47;font-size:13px}
+.rows .v{font:600 13px "IBM Plex Mono",monospace;overflow-wrap:anywhere;min-height:16px;display:block;font-variant-numeric:tabular-nums}
+.rows .v.sk{height:10px;min-height:10px;background:linear-gradient(90deg,#E6E1D2 25%,#F3F0E6 50%,#E6E1D2 75%);background-size:200% 100%;animation:shm 1.4s linear infinite}
+@keyframes shm{to{background-position:-200% 0}}
+.st svg,.ci svg{width:18px;height:18px;stroke:#111;fill:none;stroke-width:2.6;stroke-linecap:square;display:block}
+.checks li{display:grid;grid-template-columns:20px minmax(0,1fr);gap:10px;align-items:start;padding:7px 0;font-size:13px;color:#7A7A70}
+.checks li.done{color:#111}
+.ci{width:18px;height:18px;margin-top:1px}
+.ci.ring{border:2px solid #C6C1AE;border-radius:50%}
+.checks small{display:block;font:500 12px "IBM Plex Mono",monospace;color:#4F4E47;min-height:16px;font-variant-numeric:tabular-nums}
+.final2{margin-top:14px;padding:10px 12px;background:#F2EEE0;font:500 13px "IBM Plex Mono",monospace;display:flex;gap:8px;align-items:center;min-height:40px;color:#111}
+.final2.ok{background:#CDEFD9}
+.final2 svg{width:18px;height:18px;stroke:#111;fill:none;stroke-width:2.6;flex:none}
+.dp .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+@media(prefers-reduced-motion:reduce){.rows .v.sk,.pscan.go{animation:none}.pscan{display:none}}
+#demo .tool{grid-template-columns:minmax(0,1fr)}
+#demo .intro{max-width:60ch}
+
+/* Appel final et pied */
+.final{background:var(--navy);color:#fff;margin-top:96px;padding:72px max(16px,4vw);margin-inline:calc(-1*max(16px,4vw))}
+.final .wrap{display:grid;gap:28px}
 .final h2{color:#fff;max-width:18ch}
-.final p{color:var(--mutnavy);max-width:50ch}
-.final .contact{font:500 15px var(--mono);display:grid;gap:8px;color:var(--onnavy)}
-.final .contact .todo{color:#111}
-.final :focus-visible,.hero :focus-visible,.demo :focus-visible{outline-color:#fff}
-.panel :focus-visible,.calc :focus-visible{outline-color:#111}
-footer{padding-block:40px 120px;font-size:14px;color:var(--mut)}
-footer .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+.final p{color:#D4D4CC;max-width:48ch}
+.final .btn-ghost{border-color:#fff;color:#fff}
+.final .btn-ghost:hover{background:#fff;color:var(--ink)}
+.contact{font:500 15px var(--mono);display:grid;gap:6px}
+.contact .todo{color:#111}
+footer{padding-block:48px 56px;font-size:14px;color:var(--mut)}
+footer h3{font-size:15px;color:var(--ink);margin-bottom:12px}
+footer .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}
 @media(max-width:860px){footer .grid{grid-template-columns:minmax(0,1fr)}}
-footer h3{font-size:15px;color:var(--ink);margin-bottom:10px}
-footer dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px}footer dt{color:var(--ink);font-weight:600}footer dd{margin:0}
-
-/* Barre d'appel collante sur mobile */
-.sticky{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--navy);padding:10px max(16px,4vw) calc(10px + env(safe-area-inset-bottom,0px));display:none;box-shadow:0 -2px 0 rgba(255,255,255,.12)}
-.sticky .btn{width:100%;min-height:52px}
-@media(max-width:760px){.sticky{display:block}.bar .btn{display:none}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+footer dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px}
+footer dt{color:var(--ink);font-weight:600}footer dd{margin:0}
 .legal{margin-top:48px;border-top:2px solid var(--ink);padding-top:28px}
 .legal h2{font-size:clamp(24px,3vw,32px);margin-bottom:24px;max-width:none}
 .legal .blocks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 48px}
@@ -158,143 +270,312 @@ footer dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px}foot
 .legal p+p,.legal ul+p{margin-top:8px}
 .legal ul{margin:8px 0 0;padding-left:18px;display:grid;gap:4px}
 .legal a{overflow-wrap:anywhere}
-footer a{text-underline-offset:3px}
 </style>
 
 </head>
 <body>
 <a class="skip" href="#contenu">Aller au contenu</a>
-<header class="top"><div class="bar"><a class="brand" href="#top">Atelier Pointage</a><a class="btn btn-cta" href="#appel">Réserver un appel de 15 min</a></div></header>
+
+<header class="top">
+  <div class="bar">
+    <a class="brand" href="#top" style="display:inline-flex;align-items:center;gap:10px"><svg viewBox="0 0 64 64" width="30" height="30" aria-hidden="true" style="flex:none"><path d="M8 6H24V40H58V56H8Z" fill="currentColor"/><path d="M32 26L40 34L57 11" fill="none" stroke="#FF6A55" stroke-width="6.5" stroke-linecap="square"/></svg>Équerre</a>
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="menu">Menu</button>
+    <nav class="main" id="menu" aria-label="Navigation principale">
+      <a href="#services">Services</a><a href="#demo">Démo</a><a href="#methode">Méthode</a><a href="#confidentialite">Confidentialité</a><a href="#faq">FAQ</a>
+    </nav>
+    <a class="btn btn-cta" href="#appel">Réserver un appel</a>
+  </div>
+</header>
 
 <main id="contenu">
-<section class="hero" id="top" style="padding-block:64px 72px;margin-top:0" aria-labelledby="h1">
+<div class="wrap" id="top">
+
+<!-- Héros -->
+<section class="hero dark" aria-labelledby="h1">
   <div class="hero-grid">
     <div>
-      <h1 id="h1">Une tâche répétitive en moins dans votre cabinet.</h1>
-      <p class="sub">Vous gardez vos outils. En 15 minutes, on repère la tâche qui vous coûte le plus de temps. Je la fais disparaître, à prix fixe.</p>
-      <ul class="proofs">
-        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6"/></svg><span>Votre équipe relit tout et garde la responsabilité de ses dossiers</span></li>
-        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6"/></svg><span>Diagnostic possible avec des exemples fictifs, sans toucher à vos données</span></li>
-        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6"/></svg><span>Testé sur un seul dossier avant d'être étendu</span></li>
-      </ul>
-      <div class="cta"><a class="btn btn-cta" href="#appel">Réserver un appel de 15 min</a><small>Sans engagement</small></div>
+      <h1 id="h1">Des règles claires pour l'IA de votre cabinet.</h1>
+      <p class="sub">Votre équipe utilise déjà l'IA. Donnons-lui un cadre simple, et supprimons une tâche répétitive.</p>
+      <div class="cta">
+        <a class="btn btn-cta" href="#appel">Réserver un appel de 15 min</a>
+        <a class="btn btn-ghost" href="#demo">Voir la démo</a>
+      </div>
     </div>
-    <form class="calc" id="calcForm" novalidate aria-labelledby="ch">
-      <h2 id="ch">Combien d'heures cette tâche vous prend-elle ?</h2>
-      <p class="lead">Dix secondes, vos chiffres, aucune donnée envoyée.</p>
+    <div class="ledger" aria-hidden="true">
+      <div><span>Règles d'usage écrites</span><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6"/></svg></div>
+      <div><span>Secret professionnel préservé</span><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6"/></svg></div>
+      <div><span>Trace datée et dossier à jour</span><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6"/></svg></div>
+      <div><span>Une tâche répétitive en moins</span><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6"/></svg></div>
+    </div>
+  </div>
+</section>
+
+<!-- Contexte -->
+<section aria-labelledby="ctx">
+  <span class="label" id="ctx">Ce qui change pour les cabinets</span>
+  <div class="dates">
+    <article class="date">
+      <time datetime="2025-02-02">2 février 2025</time>
+      <h3>IA au travail : former les équipes</h3>
+      <p>Le règlement européen sur l'IA (article 4) demande aux entreprises qui utilisent l'IA de prendre des mesures pour favoriser un niveau suffisant de maîtrise de l'IA chez leur personnel. Aucune certification n'est exigée. Cette formulation a été assouplie par le règlement (UE) 2026/1744, en vigueur depuis le 27 juillet 2026.</p>
+    </article>
+    <article class="date">
+      <time datetime="2026-09-01">1<sup>er</sup> septembre 2026</time>
+      <h3>Factures électroniques</h3>
+      <p>Depuis cette date, toutes les entreprises doivent pouvoir recevoir des factures électroniques. L'émission devient obligatoire pour les PME, TPE et micro-entreprises le 1<sup>er</sup> septembre 2027.</p>
+    </article>
+  </div>
+  <p class="note">Ces repères sont informatifs. Ce site ne constitue pas un conseil juridique.</p>
+</section>
+
+<!-- Services -->
+<section id="services" aria-labelledby="sv">
+  <span class="label">Services</span>
+  <h2 id="sv">Deux façons de travailler ensemble</h2>
+  <div class="services" style="margin-top:40px">
+    <article class="svc">
+      <span class="tag" aria-hidden="true">A</span>
+      <h3>Votre équipe utilise l'IA sans risque pour le secret professionnel, et vous avez la preuve prête</h3>
+      <div class="tiers">
+        <div class="tier"><b>Express</b><span>Livré en moins de 2 semaines</span></div>
+        <ul>
+          <li>Atelier d'équipe en visio (environ 1 h 30) sur ce qu'on peut faire ou non avec l'IA au cabinet, avec des cas concrets du métier</li>
+          <li>Charte d'usage de l'IA adaptée au cabinet : secret professionnel, données clients, RGPD, outils autorisés</li>
+          <li>Attestation interne de formation pour chaque participant</li>
+        </ul>
+        <div class="tier"><b>Kit complet</b><span>Tout l'Express, plus :</span></div>
+        <ul>
+          <li>Registre des outils IA utilisés : qui, quoi, pour quelles tâches, avec quelles données</li>
+          <li>Dossier de preuve article 4 qui réunit l'ensemble</li>
+          <li>Point de suivi annuel, en option</li>
+        </ul>
+      </div>
+      <p class="result"><b>Vous obtenez</b> une équipe alignée sur des règles simples, une trace écrite datée, et un dossier à jour en cas de question d'un client, d'un confrère ou d'un contrôle.</p>
+      <a class="link" href="#appel">En parler en 15 minutes →</a>
+    </article>
+    <article class="svc">
+      <span class="tag" aria-hidden="true">B</span>
+      <h3>Je supprime une tâche répétitive de votre cabinet</h3>
+      <p>On choisit ensemble une seule tâche, et on la fait disparaître. Vous gardez vos outils. Je ne remplace pas votre logiciel comptable, je m'y branche.</p>
+      <ul>
+        <li>Un outil qui pré-remplit les factures fournisseurs des clients du cabinet, que votre équipe valide, et qui prépare la facture électronique</li>
+        <li>Un reporting mensuel automatique pour vos clients, à partir de vos exports</li>
+        <li>Un petit outil sur mesure : relance de pièces manquantes, contrôle, tri</li>
+      </ul>
+      <div class="tiers">
+        <div class="tier"><b>1. Diagnostic</b><span>Environ 1 h 30 en visio : on choisit la tâche et on mesure le temps qu'elle prend aujourd'hui.</span></div>
+        <div class="tier"><b>2. Mise en place à prix fixe</b><span>2 à 3 semaines environ, testée sur un dossier avant généralisation.</span></div>
+        <div class="tier"><b>3. Suivi mensuel</b><span>En option.</span></div>
+      </div>
+      <p class="result"><b>Gain de temps :</b> à mesurer pendant le diagnostic. Aucun chiffre n'est annoncé à l'avance.</p>
+      <a class="link" href="#appel">En parler en 15 minutes →</a>
+    </article>
+  </div>
+</section>
+
+<!-- Démo -->
+<section id="demo" class="dark" aria-labelledby="dm">
+  <span class="label">Démo</span>
+  <div class="tool">
+    <div class="intro">
+      <h2 id="dm">Une facture lue en deux secondes</h2>
+      <p>Démonstration simulée dans votre navigateur, sur une facture fictive. Sur vos documents, l'outil est adapté à votre cabinet et chaque résultat reste à valider par votre équipe.</p>
+    </div>
+    <div class="iv">
+      <div class="paperwrap">
+        <span class="fict">Document fictif, démo</span>
+        <div class="paper" id="paper" role="img" aria-label="Facture fictive de Zorglub et Fils, numéro F-2026-0417, datée du 14 septembre 2026, trois lignes pour 1 250 euros hors taxes, 250 euros de TVA, 1 500 euros toutes taxes comprises">
+          <div class="pscan" id="pscan" aria-hidden="true"></div>
+          <div class="wm" aria-hidden="true">FICTIF</div>
+          <div class="ph">
+            <div class="sup">
+              <svg viewBox="0 0 44 44" aria-hidden="true"><path d="M22 3L39 12.5V31.5L22 41L5 31.5V12.5Z" fill="none" stroke="#0F1E3D" stroke-width="3"/><path d="M14 28L22 12L30 28" fill="none" stroke="#0F1E3D" stroke-width="3"/><circle cx="22" cy="28" r="3" fill="#C8200E"/></svg>
+              <div><b class="f" data-f="fournisseur" data-tag="Fournisseur">Zorglub &amp; Fils</b><small>Fournitures techniques</small><small>12 rue des Exemples, 00000 Ville</small></div>
+            </div>
+            <div class="meta">
+              <span class="big">FACTURE</span>
+              <div><span>N°</span><b class="f" data-f="numero" data-tag="Numéro">F-2026-0417</b></div>
+              <div><span>Date</span><b class="f" data-f="date" data-tag="Date">14/09/2026</b></div>
+              <div><span>Échéance</span><b class="f" data-f="echeance" data-tag="Échéance">14/10/2026</b></div>
+            </div>
+          </div>
+          <div class="client"><span>Facturé à</span><b class="f" data-f="client" data-tag="Client">Cabinet Exemple</b><small>3 avenue des Tests, 00000 Ville</small></div>
+          <div class="f lw" data-f="lignes" data-tag="3 lignes détectées">
+            <table class="lt">
+              <thead><tr><th>Désignation</th><th>Qté</th><th>PU HT</th><th>Total HT</th></tr></thead>
+              <tbody>
+                <tr><td>Maintenance serveurs, septembre</td><td>1</td><td>600,00</td><td data-t="600">600,00</td></tr>
+                <tr><td>Licence outil de gestion</td><td>5</td><td>90,00</td><td data-t="450">450,00</td></tr>
+                <tr><td>Intervention sur site (heures)</td><td>2</td><td>100,00</td><td data-t="200">200,00</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tt">
+            <div><span>Total HT</span><b class="f" data-f="ht" data-tag="Total HT">1 250,00 €</b></div>
+            <div><span>TVA 20 %</span><b class="f" data-f="tva" data-tag="TVA">250,00 €</b></div>
+            <div class="ttc"><span>Total TTC</span><b class="f" data-f="ttc" data-tag="Total TTC">1 500,00 €</b></div>
+          </div>
+          <div class="foot">
+            <div><small>Règlement par virement sous 30 jours</small><small>IBAN (fictif)</small><b class="f" data-f="iban" data-tag="IBAN">FR76 0000 0000 0000 0000 0000 000</b></div>
+            <div class="qr" aria-hidden="true"><i class=""></i><i class=""></i><i class=""></i><i class="o"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="o"></i><i class=""></i><i class=""></i><i class=""></i><i class="o"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="o"></i><i class="o"></i><i class=""></i><i class=""></i><i class="o"></i><i class=""></i><i class="o"></i><i class=""></i><i class=""></i><i class="o"></i><i class="o"></i><i class=""></i><i class="o"></i><i class=""></i><i class=""></i><i class="o"></i><i class=""></i><i class=""></i><i class="o"></i><i class=""></i><i class=""></i><i class="o"></i><i class=""></i><i class="o"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="o"></i><i class=""></i><i class=""></i><i class="o"></i></div>
+          </div>
+        </div>
+      </div>
+      <div class="panel dp" id="demoPanel">
+        <div class="dph">Données extraites</div>
+        <ul class="rows" id="rows">
+          <li data-k="fournisseur"><span class="k">Fournisseur</span><span class="v sk" data-v="Zorglub &amp; Fils"></span><span class="st"></span></li>
+          <li data-k="client"><span class="k">Client</span><span class="v sk" data-v="Cabinet Exemple"></span><span class="st"></span></li>
+          <li data-k="numero"><span class="k">Numéro</span><span class="v sk" data-v="F-2026-0417"></span><span class="st"></span></li>
+          <li data-k="date"><span class="k">Date</span><span class="v sk" data-v="14/09/2026"></span><span class="st"></span></li>
+          <li data-k="echeance"><span class="k">Échéance</span><span class="v sk" data-v="14/10/2026"></span><span class="st"></span></li>
+          <li data-k="lignes"><span class="k">Lignes</span><span class="v sk" data-v="3 lignes détectées"></span><span class="st"></span></li>
+          <li data-k="ht"><span class="k">Total HT</span><span class="v sk" data-v="1 250,00 €"></span><span class="st"></span></li>
+          <li data-k="tva"><span class="k">TVA 20 %</span><span class="v sk" data-v="250,00 €"></span><span class="st"></span></li>
+          <li data-k="ttc"><span class="k">Total TTC</span><span class="v sk" data-v="1 500,00 €"></span><span class="st"></span></li>
+          <li data-k="iban"><span class="k">IBAN</span><span class="v sk" data-v="FR76 0000 0000 0000 0000 0000 000"></span><span class="st"></span></li>
+        </ul>
+        <div class="dph" style="margin-top:20px">Contrôles automatiques</div>
+        <ul class="checks" id="checks">
+          <li data-c="1"><span class="ci ring"></span><span>Somme des lignes = Total HT<small></small></span></li>
+          <li data-c="2"><span class="ci ring"></span><span>HT + TVA = TTC<small></small></span></li>
+          <li data-c="3"><span class="ci ring"></span><span>TVA = 20 % du HT<small></small></span></li>
+        </ul>
+        <div class="final2" id="demoCheck" aria-live="polite">En attente d'extraction</div>
+        <div class="actions"><button class="btn btn-ghost btn-sm" id="demoGo" type="button">Extraire</button><button class="btn btn-ghost btn-sm" id="demoReset" type="button" hidden>Recommencer</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Calculateur -->
+<section id="calcul" class="dark" aria-labelledby="cl">
+  <span class="label">Calculateur</span>
+  <div class="tool">
+    <div class="intro">
+      <h2 id="cl">Combien de temps pourriez-vous récupérer ?</h2>
+      <p>Saisissez vos propres valeurs. Aucune valeur n'est préremplie, et aucun chiffre moyen n'est avancé.</p>
+    </div>
+    <form class="panel" id="calcForm" novalidate>
       <div class="field"><label for="c1">Factures traitées par mois</label><input id="c1" inputmode="decimal" placeholder="exemple : 200" autocomplete="off"></div>
       <div class="field"><label for="c2">Minutes par facture</label><input id="c2" inputmode="decimal" placeholder="exemple : 4" autocomplete="off"></div>
       <div class="field"><label for="c3">Part que vous jugez automatisable (%)</label><input id="c3" inputmode="decimal" placeholder="exemple : 50" autocomplete="off"></div>
       <div class="err" id="calcErr" role="alert"></div>
-      <div class="out" id="calcOut" aria-live="polite"><div class="hint">Renseignez les trois champs pour voir le résultat.</div></div>
+      <div class="out" aria-live="polite" id="calcOut"><div class="hint">Renseignez les trois champs pour voir le résultat.</div></div>
     </form>
   </div>
 </section>
 
-<div class="wrap">
-<div class="assure" style="margin-top:0">
-  <div><b>15 minutes</b>pour le premier appel</div>
-  <div><b>Prix fixe</b>pour la mise en place</div>
-  <div><b>2 à 3 semaines</b>environ, après le diagnostic</div>
-  <div><b>0 donnée client</b>nécessaire pour commencer</div>
-</div>
-
-<section aria-labelledby="tk">
-  <span class="eyebrow">Exemples de tâches</span>
-  <h2 id="tk">Choisissez la tâche, pas la technologie</h2>
-  <div class="tasks">
-    <article class="task"><h3>Factures fournisseurs de vos clients</h3><p>Un outil pré-remplit les champs. Votre équipe valide. Prépare aussi la facture électronique, reçue par toutes les entreprises depuis le 1<sup>er</sup> septembre 2026.</p><div class="ba">Saisie à la main → relecture</div></article>
-    <article class="task"><h3>Reporting mensuel pour vos clients</h3><p>Le rapport se génère à partir de vos exports habituels, au même format chaque mois.</p><div class="ba">Export → rapport prêt à relire</div></article>
-    <article class="task"><h3>Relances de pièces manquantes, tris, contrôles</h3><p>Un petit outil sur mesure pour la tâche qui revient chaque mois et que personne n'aime faire.</p><div class="ba">Tâche récurrente → outil dédié</div></article>
+<!-- Diagnostic -->
+<section id="diagnostic" class="dark" aria-labelledby="dg">
+  <span class="label">Auto-diagnostic</span>
+  <div class="tool">
+    <div class="intro">
+      <h2 id="dg">Votre cabinet et l'IA</h2>
+      <p>Cinq questions, aucune donnée envoyée. Le résultat oriente vers un service, il ne mesure pas la conformité de votre cabinet.</p>
+    </div>
+    <form class="panel" id="diagForm">
+      <fieldset class="q"><legend>L'équipe utilise-t-elle déjà l'IA ?</legend><div class="yn"><label><input type="radio" name="q1" value="1"><span>Oui</span></label><label><input type="radio" name="q1" value="0"><span>Non</span></label></div></fieldset>
+      <fieldset class="q"><legend>Existe-t-il des règles écrites sur son usage ?</legend><div class="yn"><label><input type="radio" name="q2" value="1"><span>Oui</span></label><label><input type="radio" name="q2" value="0"><span>Non</span></label></div></fieldset>
+      <fieldset class="q"><legend>Une tâche revient-elle chaque mois ?</legend><div class="yn"><label><input type="radio" name="q3" value="1"><span>Oui</span></label><label><input type="radio" name="q3" value="0"><span>Non</span></label></div></fieldset>
+      <fieldset class="q"><legend>Vos clients posent-ils des questions sur la facture électronique ?</legend><div class="yn"><label><input type="radio" name="q4" value="1"><span>Oui</span></label><label><input type="radio" name="q4" value="0"><span>Non</span></label></div></fieldset>
+      <fieldset class="q"><legend>Avez-vous des exports réguliers ?</legend><div class="yn"><label><input type="radio" name="q5" value="1"><span>Oui</span></label><label><input type="radio" name="q5" value="0"><span>Non</span></label></div></fieldset>
+      <div class="result-box" id="diagOut" aria-live="polite" hidden></div>
+    </form>
   </div>
 </section>
 
-<section aria-labelledby="mt">
-  <span class="eyebrow">Déroulé</span>
-  <h2 id="mt">Trois étapes, un risque limité au départ</h2>
+<!-- Méthode -->
+<section id="methode" aria-labelledby="mt">
+  <span class="label">Méthode</span>
+  <h2 id="mt" style="margin-bottom:40px">Trois étapes, sans engagement au départ</h2>
   <div class="steps">
-    <div class="step"><span class="n">1</span><span class="d">15 minutes, gratuit</span><h3>Appel découverte</h3><p>On parle de votre cabinet et de ce qui vous prend du temps. Je vous dis honnêtement si je peux vous aider.</p></div>
-    <div class="step"><span class="n">2</span><span class="d">Environ 1 h 30 en visio</span><h3>Diagnostic</h3><p>On choisit UNE tâche et on mesure le temps qu'elle prend aujourd'hui. Le gain est mesuré, jamais promis à l'avance.</p></div>
-    <div class="step"><span class="n">3</span><span class="d">2 à 3 semaines environ</span><h3>Mise en place à prix fixe</h3><p>Test sur un dossier, puis généralisation. Suivi mensuel en option.</p></div>
+    <div class="step"><span class="n">1</span><span class="d">15 minutes</span><h3>Appel découverte</h3><p>On parle de votre cabinet, de ce que fait déjà l'équipe avec l'IA, et de ce qui vous prend du temps. Je vous dis honnêtement si je peux vous aider.</p></div>
+    <div class="step"><span class="n">2</span><span class="d">Environ 1 h 30</span><h3>Diagnostic ou atelier</h3><p>Service A : atelier d'équipe sur les usages de l'IA. Service B : diagnostic pour choisir la tâche et mesurer son coût actuel.</p></div>
+    <div class="step"><span class="n">3</span><span class="d">2 à 3 semaines</span><h3>Mise en place et suivi</h3><p>Livraison à prix fixe, test sur un dossier, puis suivi en option. Votre équipe relit tout.</p></div>
   </div>
 </section>
-</div>
 
-<section class="demo" aria-labelledby="dm" style="padding-block:72px">
-  <div class="in">
+<!-- Confidentialité -->
+<section id="confidentialite" aria-labelledby="cf">
+  <span class="label">Confidentialité et sécurité</span>
+  <div class="cols">
+    <h2 id="cf">Vos données restent les vôtres</h2>
+    <div class="body">
+      <p>Les données des clients du cabinet restent sous le contrôle du cabinet. <b>Aucune donnée client n'est placée dans un outil que le cabinet n'a pas validé.</b></p>
+      <p>Le diagnostic et l'atelier peuvent se faire uniquement avec des exemples fictifs.</p>
+      <p>Avant tout accès à des données réelles, un contrat de sous-traitance des données (article 28 du RGPD) est signé avec le cabinet.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Ce que je ne fais pas -->
+<section aria-labelledby="nf">
+  <span class="label">Limites</span>
+  <div class="cols">
+    <h2 id="nf">Ce que je ne fais pas</h2>
     <div>
-      <span class="eyebrow" style="color:var(--mutnavy)">Démo</span>
-      <h2 id="dm" style="color:#fff">Une facture lue en deux secondes</h2>
-      <p class="t">Démonstration simulée dans votre navigateur, sur une facture fictive. Sur vos documents, l'outil est adapté à votre cabinet et chaque résultat reste à valider par votre équipe.</p>
-    </div>
-    <div class="panel inv" id="demoPanel">
-      <span class="stamp">Document fictif, démo</span>
-      <dl>
-        <dt>Fournisseur</dt><dd data-k="f" data-v="Établissements Zorglub &amp; Fils">Établissements Zorglub &amp; Fils</dd>
-        <dt>Date</dt><dd data-k="d" data-v="14/09/2026">14/09/2026</dd>
-        <dt>Numéro</dt><dd data-k="n" data-v="F-2026-0417">F-2026-0417</dd>
-        <dt>Montant HT</dt><dd data-k="ht" data-v="1 250,00 €">1 250,00 €</dd>
-        <dt>TVA 20 %</dt><dd data-k="tva" data-v="250,00 €">250,00 €</dd>
-        <dt>Total TTC</dt><dd data-k="ttc" data-v="1 500,00 €">1 500,00 €</dd>
-      </dl>
-      <div class="check" id="demoCheck" aria-live="polite">En attente d'extraction</div>
-      <div class="actions"><button class="btn btn-line btn-sm" id="demoGo" type="button">Extraire</button><button class="btn btn-line btn-sm" id="demoReset" type="button" hidden>Recommencer</button></div>
+      <ul class="plain">
+        <li>Je ne délivre ni certification ni garantie de conformité.</li>
+        <li>Je ne donne pas de conseil juridique ou fiscal.</li>
+        <li>Je ne tiens pas la comptabilité et ne fais pas la saisie pour les clients du cabinet. Je fournis l'outil, le cabinet fait le travail comptable.</li>
+        <li>Je ne remplace pas votre logiciel comptable.</li>
+        <li>Je ne signe rien à la place du cabinet.</li>
+      </ul>
+      <p style="margin-top:20px;color:var(--mut)">Les résultats sont toujours relus par l'équipe du cabinet, qui garde la responsabilité de ses dossiers.</p>
     </div>
   </div>
 </section>
 
-<div class="wrap">
-<section aria-labelledby="lm" style="padding-top:80px">
-  <div class="cols">
-    <div><span class="eyebrow">Limites</span><h2 id="lm">Ce que je ne fais pas</h2><p style="margin-top:16px;color:var(--mut);max-width:40ch">Je préfère le dire avant l'appel. Les résultats sont toujours relus par l'équipe du cabinet.</p></div>
-    <ul class="plain">
-      <li>Pas de certification ni de garantie de conformité.</li>
-      <li>Pas de conseil juridique ou fiscal.</li>
-      <li>Pas de comptabilité ni de saisie pour vos clients : je fournis l'outil, vous faites le travail comptable.</li>
-      <li>Pas de remplacement de votre logiciel comptable.</li>
-      <li>Pas de signature à la place du cabinet.</li>
-    </ul>
+<!-- Premiers retours -->
+<section aria-labelledby="pr">
+  <span class="label">Premiers retours</span>
+  <div class="empty">
+    <h3 id="pr" style="margin-bottom:12px">Pas encore de cas publié</h3>
+    <p>Les premières études de cas seront publiées avec l'accord écrit des cabinets.</p>
+    <p style="margin-top:12px"><span class="todo">À COMPLÉTER</span></p>
   </div>
 </section>
 
-<section aria-labelledby="fq">
-  <span class="eyebrow">Questions fréquentes</span>
-  <h2 id="fq">Avant de réserver</h2>
-  <div class="faq">
-    <details><summary>Faut-il nous donner accès à nos données ?</summary><div class="ans">Pas pour commencer. Le diagnostic peut se faire avec des exemples fictifs. Avant tout accès à des données réelles, nous signons ensemble un contrat de sous-traitance des données (article 28 du RGPD).</div></details>
-    <details><summary>Combien ça coûte ?</summary><div class="ans">Le tarif est communiqué après l'appel de découverte. La mise en place se fait à prix fixe, annoncé avant de commencer.</div></details>
-    <details><summary>Remplacez-vous notre logiciel ?</summary><div class="ans">Non. Vous gardez vos outils, l'automatisation se branche dessus.</div></details>
-    <details><summary>Que se passe-t-il après la mise en place ?</summary><div class="ans">Vous pouvez choisir un suivi mensuel. Il est optionnel.</div></details>
-    <details><summary>Travaillez-vous à distance ?</summary><div class="ans">Oui. L'appel et le diagnostic se font en visio.</div></details>
-  </div>
-</section>
-
-<section aria-labelledby="ab">
+<!-- À propos -->
+<section aria-labelledby="ap">
+  <span class="label">À propos</span>
   <div class="cols">
-    <div><span class="eyebrow">Qui êtes-vous ?</span><h2 id="ab">Je travaille seul, et directement avec vous</h2></div>
-    <div style="display:grid;gap:14px;color:var(--mut);max-width:52ch">
+    <h2 id="ap">Je travaille seul, et directement avec vous</h2>
+    <div class="body">
       <p>Je m'appelle Kélian Kaddouri. Je suis actuaire (master de l'ENSAE) et data scientist.</p>
-      <p>Mon métier : mesurer les risques, mettre des outils en production avec Python, lire la réglementation européenne.</p>
-      <p>Les premiers cabinets bénéficient de conditions de lancement. Les premières études de cas seront publiées avec l'accord écrit des cabinets. <span class="todo">À COMPLÉTER</span></p>
+      <p>Mon métier : mesurer les risques, mettre des outils en production avec Python, et lire la réglementation européenne, notamment sur le cyber-risque.</p>
+      <p>Je travaille seul pour l'instant. Les premiers cabinets bénéficient de conditions de lancement. Photo : <span class="todo">À COMPLÉTER</span></p>
     </div>
   </div>
 </section>
 
-<section aria-labelledby="alt">
-  <div class="alt">
-    <div><h3 id="alt">Votre équipe utilise déjà l'IA, sans règles écrites ?</h3><p>Atelier d'équipe en visio d'environ 1 h 30, charte d'usage adaptée au cabinet, attestation interne et dossier de preuve. Livré en moins de 2 semaines pour la formule Express. Cette offre ne délivre ni certification ni garantie de conformité.</p></div>
-    <a class="btn btn-line btn-sm" href="#appel">En parler en 15 min</a>
+<!-- FAQ -->
+<section id="faq" aria-labelledby="fq">
+  <span class="label">Questions fréquentes</span>
+  <h2 id="fq" style="margin-bottom:40px">Vos questions</h2>
+  <div class="faq">
+    <details><summary>Est-ce une mise en conformité garantie ?</summary><div class="ans">Non. Je ne délivre ni certification ni garantie de conformité. Vous repartez avec des règles écrites, une trace datée et un dossier à jour, que votre cabinet garde sous sa responsabilité.</div></details>
+    <details><summary>Faut-il nous donner accès à nos données ?</summary><div class="ans">Pas pour commencer. L'atelier et le diagnostic peuvent se faire avec des exemples fictifs. Avant tout accès à des données réelles, nous signons un contrat de sous-traitance des données (article 28 du RGPD).</div></details>
+    <details><summary>Remplacez-vous notre logiciel ?</summary><div class="ans">Non. Vous gardez vos outils. Les automatisations se branchent dessus.</div></details>
+    <details><summary>Combien de temps cela prend-il ?</summary><div class="ans">Service A, formule Express : moins de 2 semaines. Service B : un diagnostic d'environ 1 h 30, puis une mise en place de 2 à 3 semaines environ, testée sur un dossier avant généralisation.</div></details>
+    <details><summary>Combien ça coûte ?</summary><div class="ans">Le tarif est communiqué après l'appel de découverte. La mise en place du service B se fait à prix fixe.</div></details>
+    <details><summary>Que se passe-t-il après la mise en place ?</summary><div class="ans">Vous pouvez choisir un suivi : un point annuel pour le service A, un suivi mensuel pour le service B. Les deux sont optionnels.</div></details>
+    <details><summary>Travaillez-vous à distance ?</summary><div class="ans">Oui. L'atelier et le diagnostic se font en visio.</div></details>
   </div>
 </section>
+
 </div>
 
-<section class="final" id="appel" aria-labelledby="fn" style="padding-block:72px">
-  <div class="in">
-    <h2 id="fn">Quinze minutes pour repérer votre tâche.</h2>
-    <p>Sans engagement. Je vous dis franchement si je peux vous aider, et sinon pourquoi.</p>
+<!-- Appel final -->
+<section class="final" id="appel" aria-labelledby="ap2" style="padding-block:72px">
+  <div class="wrap">
+    <h2 id="ap2">Des règles claires, et une tâche en moins.</h2>
+    <p>Quinze minutes pour voir si je peux vous aider. Sans engagement.</p>
     <div class="contact">
-      <span>Pour réserver : <a class="mail" href="mailto:keliankaddouripro@gmail.com?subject=Appel%20de%2015%20min">keliankaddouripro@gmail.com</a></span>
-      <span>Lien de prise de rendez-vous en ligne : <span class="todo">À COMPLÉTER</span></span>
+      <span>Lien de prise de rendez-vous : <span class="todo">À COMPLÉTER</span></span>
+      <span>Téléphone : <a href="tel:+33602436599" style="color:inherit">+33 6 02 43 65 99</a></span>
+      <span>E-mail : <a href="mailto:keliankaddouripro@gmail.com?subject=Appel%20de%2015%20min" style="color:inherit">keliankaddouripro@gmail.com</a></span>
     </div>
   </div>
 </section>
@@ -302,19 +583,26 @@ footer a{text-underline-offset:3px}
 
 <footer class="wrap">
   <div class="grid">
-    <!-- nom à vérifier : INPI, domaine -->
-    <div><h3>Atelier Pointage</h3><p>Contact : <a href="mailto:keliankaddouripro@gmail.com?subject=Appel%20de%2015%20min">keliankaddouripro@gmail.com</a></p></div>
-    <div><h3>Éditeur</h3><p>Kélian Kaddouri, entrepreneur individuel, sous le nom commercial « Atelier Pointage ».</p></div>
-    <div><h3>Informations légales</h3><p><a href="#mentions">Mentions légales et données personnelles</a></p><p>Aucun cookie ni traceur.</p></div>
+    <div><h3>Équerre</h3><!-- nom à vérifier : INPI, domaine --><p>Cabinet de conseil indépendant pour experts-comptables.</p></div>
+    <div><h3>Mentions légales</h3>
+      <dl>
+        <dt>Éditeur</dt><dd>Kélian Kaddouri, micro-entreprise en cours de création</dd>
+        <dt>SIRET</dt><dd><span class="todo">À COMPLÉTER</span></dd>
+        <dt>Adresse</dt><dd><span class="todo">À COMPLÉTER</span></dd>
+        <dt>Contact</dt><dd>+33 6 02 43 65 99 · e-mail <a href="mailto:keliankaddouripro@gmail.com?subject=Appel%20de%2015%20min" style="color:inherit">keliankaddouripro@gmail.com</a></dd>
+        <dt>Publication</dt><dd>Directeur : Kélian Kaddouri</dd>
+        <dt>Hébergeur</dt><dd>Netlify, Inc. Adresse : <span class="todo">À COMPLÉTER</span></dd>
+      </dl>
+    </div>
+    <div><h3>Données</h3><p>Ce site n'utilise aucun traceur. <a href="#mentions">Politique de données et mentions complètes</a>.</p></div>
   </div>
-
-  <!-- Mentions à faire valider (juriste ou modèle CNIL/entreprises.gouv.fr) avant publication -->
+<!-- Mentions à faire valider (juriste ou modèle CNIL/entreprises.gouv.fr) avant publication -->
   <section class="legal" id="mentions" aria-labelledby="ml" style="padding-block:28px 0">
     <h2 id="ml">Mentions légales et données personnelles</h2>
     <div class="blocks">
       <div>
         <h3>Éditeur</h3>
-        <p>Kélian Kaddouri, entrepreneur individuel (micro-entrepreneur), sous le nom commercial « Atelier Pointage ».</p>
+        <p>Kélian Kaddouri, entrepreneur individuel (micro-entrepreneur), sous le nom commercial « Équerre ».</p>
         <p>SIRET : <span class="todo">À COMPLÉTER</span></p>
         <p>Adresse professionnelle : <span class="todo">À COMPLÉTER</span></p>
         <p>E-mail : <a href="mailto:keliankaddouripro@gmail.com?subject=Appel%20de%2015%20min">keliankaddouripro@gmail.com</a></p>
@@ -351,53 +639,111 @@ footer a{text-underline-offset:3px}
     </div>
   </section>
 </footer>
-<div class="sticky"><a class="btn btn-cta" href="#appel">Réserver un appel de 15 min</a></div>
 
 <script>
 (function(){
+  /* Menu mobile */
+  var b=document.getElementById('burger'),m=document.getElementById('menu');
+  b.addEventListener('click',function(){var o=m.classList.toggle('open');b.setAttribute('aria-expanded',o)});
+  m.addEventListener('click',function(e){if(e.target.tagName==='A'){m.classList.remove('open');b.setAttribute('aria-expanded','false')}});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&m.classList.contains('open')){m.classList.remove('open');b.setAttribute('aria-expanded','false');b.focus()}});
+
+  /* Démo d'extraction */
+  var KEYS=["fournisseur","client","numero","date","echeance","lignes","ht","tva","ttc","iban"];
+  var paper=document.getElementById("paper"),pscan=document.getElementById("pscan");
+  var go=document.getElementById("demoGo"),rs=document.getElementById("demoReset"),fin=document.getElementById("demoCheck");
+  var tick='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6"/></svg>',timers=[];
+  var nf=new Intl.NumberFormat("fr-FR",{minimumFractionDigits:2,maximumFractionDigits:2});
+  function money(n){return nf.format(n)+" €"}
+  function rowOf(k){return document.querySelector('#rows [data-k="'+k+'"]')}
+  function elOf(k){return paper.querySelector('[data-f="'+k+'"]')}
+  function checkOf(n){return document.querySelector('#checks [data-c="'+n+'"]')}
+  function red(){return window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches}
+  function num(s){return parseFloat(s.replace(/\s/g,"").replace("€","").replace(",","."))}
+  function run(){
+    go.disabled=true;fin.className="final2";fin.textContent="Lecture en cours";
+    var d=red()?0:380,t=KEYS.length*d;
+    if(d){pscan.style.setProperty("--dur",(t+300)+"ms");pscan.classList.add("go")}
+    KEYS.forEach(function(k,i){
+      timers.push(setTimeout(function(){elOf(k).classList.add("ex")},i*d));
+      timers.push(setTimeout(function(){
+        var e=elOf(k);e.classList.remove("ex");e.classList.add("got");
+        var r=rowOf(k),v=r.querySelector(".v");v.classList.remove("sk");v.textContent=v.getAttribute("data-v");
+        r.classList.add("done");r.querySelector(".st").innerHTML=tick;
+      },i*d+(d?300:0)));
+    });
+    var lines=[].slice.call(paper.querySelectorAll("td[data-t]")).map(function(c){return parseFloat(c.getAttribute("data-t"))});
+    var ht=num(rowOf("ht").querySelector(".v").getAttribute("data-v")),tva=num(rowOf("tva").querySelector(".v").getAttribute("data-v")),ttc=num(rowOf("ttc").querySelector(".v").getAttribute("data-v"));
+    var sum=lines.reduce(function(a,b){return a+b},0);
+    var res=[
+      {ok:Math.abs(sum-ht)<0.005,txt:lines.map(function(x){return nf.format(x)}).join(" + ")+" = "+money(sum)},
+      {ok:Math.abs(ht+tva-ttc)<0.005,txt:nf.format(ht)+" + "+nf.format(tva)+" = "+money(ttc)},
+      {ok:Math.abs(ht*0.2-tva)<0.005,txt:"20 % de "+nf.format(ht)+" = "+money(ht*0.2)}
+    ];
+    var base=t+(d?250:0),step=d?420:0;
+    res.forEach(function(r,j){
+      timers.push(setTimeout(function(){
+        var li=checkOf(j+1);li.classList.add("done");
+        var ci=li.querySelector(".ci");ci.classList.remove("ring");ci.innerHTML=r.ok?tick:"!";
+        li.querySelector("small").textContent=r.ok?r.txt:"Écart : "+r.txt;
+      },base+j*step));
+    });
+    timers.push(setTimeout(function(){
+      var all=res.every(function(r){return r.ok});
+      fin.className=all?"final2 ok":"final2";
+      fin.innerHTML=all?tick+"<span>3 contrôles réussis. À relire et valider par votre équipe.</span>":"Écart détecté : à vérifier par votre équipe.";
+      pscan.classList.remove("go");rs.hidden=false;go.hidden=true;rs.focus();
+    },base+res.length*step+(d?200:0)));
+  }
+  function reset(){
+    timers.forEach(clearTimeout);timers=[];pscan.classList.remove("go");
+    KEYS.forEach(function(k){
+      var e=elOf(k);e.classList.remove("ex","got");
+      var r=rowOf(k),v=r.querySelector(".v");v.classList.add("sk");v.textContent="";
+      r.classList.remove("done");r.querySelector(".st").innerHTML="";
+    });
+    [1,2,3].forEach(function(n){var li=checkOf(n);li.classList.remove("done");var ci=li.querySelector(".ci");ci.className="ci ring";ci.innerHTML="";li.querySelector("small").textContent=""});
+    fin.className="final2";fin.textContent="En attente d'extraction";
+    go.hidden=false;go.disabled=false;rs.hidden=true;go.focus();
+  }
+  go.addEventListener("click",run);rs.addEventListener("click",reset);
+
+  /* Calculateur */
   var f=['c1','c2','c3'].map(function(i){return document.getElementById(i)});
   var err=document.getElementById('calcErr'),out=document.getElementById('calcOut');
-  var ctaBtn='<a class="btn btn-cta" href="#appel">Récupérer ces heures : réserver 15 min</a>';
   function fmt(n){return n.toLocaleString('fr-FR',{maximumFractionDigits:1})}
   function calc(){
     var vals=f.map(function(i){return i.value.trim()});
     f.forEach(function(i){i.removeAttribute('aria-invalid')});err.textContent='';
     if(vals.some(function(v){return v===''})){out.innerHTML='<div class="hint">Renseignez les trois champs pour voir le résultat.</div>';return}
-    var n=vals.map(function(v){return Number(v.replace(',','.'))}),bad=null;
-    n.forEach(function(x,i){if(!isFinite(x)||x<0){bad=bad||{i:i,m:'Entrez un nombre positif ou nul.'}}});
+    var n=vals.map(function(v){return Number(v.replace(',','.'))});
+    var bad=null;
+    n.forEach(function(x,i){if(!isFinite(x)||isNaN(x)||x<0){bad=bad||{i:i,m:'Entrez un nombre positif ou nul.'}}});
     if(!bad&&n[2]>100)bad={i:2,m:'La part automatisable ne peut pas dépasser 100 %.'};
     if(bad){f[bad.i].setAttribute('aria-invalid','true');err.textContent=bad.m;out.innerHTML='<div class="hint">Corrigez la saisie pour voir le résultat.</div>';return}
-    var m=n[0]*n[1]/60*n[2]/100;
-    out.innerHTML='<div class="big">'+fmt(m)+' h par mois</div><div class="big" style="margin-top:4px">'+fmt(m*12)+' h par an</div><div class="hint">Estimation calculée à partir de vos saisies. Le diagnostic mesure le chiffre réel.</div>'+ctaBtn;
+    var month=n[0]*n[1]/60*n[2]/100,year=month*12;
+    out.innerHTML='<div class="big">'+fmt(month)+' h par mois</div><div class="big" style="margin-top:6px">'+fmt(year)+' h par an</div><div class="hint">Estimation calculée à partir de vos saisies.</div>';
   }
   f.forEach(function(i){i.addEventListener('input',calc)});
   document.getElementById('calcForm').addEventListener('submit',function(e){e.preventDefault()});
 
-  var cells=[].slice.call(document.querySelectorAll('#demoPanel dd'));
-  var go=document.getElementById('demoGo'),rs=document.getElementById('demoReset'),ck=document.getElementById('demoCheck');
-  var tick='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6"/></svg>',timers=[];
-  function num(s){return parseFloat(s.replace(/\s/g,'').replace('€','').replace(',','.'))}
-  function red(){return window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches}
-  function run(){
-    go.disabled=true;ck.textContent='Extraction en cours';var d=red()?0:420;
-    cells.forEach(function(c){c.textContent=''});
-    cells.forEach(function(c,i){
-      timers.push(setTimeout(function(){c.classList.add('hl')},i*d));
-      timers.push(setTimeout(function(){c.classList.remove('hl');c.textContent=c.getAttribute('data-v')},i*d+(d?260:0)));
-    });
-    timers.push(setTimeout(function(){
-      var v={};cells.forEach(function(c){v[c.dataset.k]=num(c.dataset.v)});
-      var ok=Math.abs(v.ht+v.tva-v.ttc)<0.005;
-      ck.innerHTML=ok?tick+'<span>Contrôle : HT + TVA = TTC (1 250,00 + 250,00 = 1 500,00)</span>':'Écart détecté : à vérifier par l\'équipe';
-      rs.hidden=false;go.hidden=true;rs.focus();
-    },cells.length*d+(d?200:0)));
+  /* Auto-diagnostic */
+  var form=document.getElementById('diagForm'),res=document.getElementById('diagOut');
+  function val(n){var e=form.querySelector('input[name="'+n+'"]:checked');return e?e.value:null}
+  function diag(){
+    var q=['q1','q2','q3','q4','q5'].map(val);
+    if(q.some(function(x){return x===null}))return;
+    var a=(q[0]==='1'?1:0)+(q[1]==='0'?1:0),bp=(q[2]==='1'?1:0)+(q[3]==='1'?1:0)+(q[4]==='1'?1:0);
+    var needA=a>=1,needB=bp>=2,t,p;
+    if(needA&&needB){t='Les deux services peuvent vous concerner';p='Votre équipe gagnerait à se donner des règles d\'usage de l\'IA (service A), et vous avez des tâches qui reviennent et pourraient être allégées (service B). On peut commencer par celui qui vous presse le plus.'}
+    else if(needA){t='Le service A semble le plus utile';p='Un cadre écrit sur l\'usage de l\'IA au cabinet vous aiderait : atelier d\'équipe, charte, attestations.'}
+    else if(needB){t='Le service B semble le plus utile';p='Vous avez des tâches ou des exports qui reviennent. Un diagnostic permettrait de choisir celle à supprimer en premier.'}
+    else{t='Pas de besoin évident à ce stade';p='Un appel de 15 minutes permet de le confirmer, sans engagement.'}
+    res.hidden=false;
+    res.innerHTML='<h3>'+t+'</h3><p style="margin-bottom:16px;color:var(--mut)">'+p+'</p><p style="font-size:14px;color:var(--mut);margin-bottom:16px">Cette orientation ne constitue ni un audit ni une promesse de conformité.</p><a class="btn btn-cta btn-sm" href="#appel">Réserver un appel de 15 min</a>';
   }
-  function reset(){
-    timers.forEach(clearTimeout);timers=[];
-    cells.forEach(function(c){c.classList.remove('hl');c.textContent=c.getAttribute('data-v')});
-    ck.textContent='En attente d\'extraction';go.hidden=false;go.disabled=false;rs.hidden=true;go.focus();
-  }
-  go.addEventListener('click',run);rs.addEventListener('click',reset);
+  form.addEventListener('change',diag);
+  form.addEventListener('submit',function(e){e.preventDefault()});
 })();
 </script>
 
