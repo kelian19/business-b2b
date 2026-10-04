@@ -67,8 +67,9 @@ Chaque chiffre est une hypothèse tant qu'il n'a pas de source.
 ## Environnement technique
 
 - Windows, Europe/Paris. Claude Code 2.1.289, Node v24.19.0.
-- MCP à ajouter via `cmd /c npx` : playwright (`@playwright/mcp@latest`), context7 (`@upstash/context7-mcp`). GitHub via CLI `gh`. Pas de Firecrawl ni Perplexity.
-- Skills : actuarial-modeling, business-ai, token-efficient ; K-Dense : statistical-analysis, statsmodels, scikit-learn, scientific-visualization, exploratory-data-analysis.
+- MCP connectés (niveau utilisateur, via `cmd /c npx`) : playwright (`@playwright/mcp@latest`), context7 (`@upstash/context7-mcp`). GitHub via CLI `gh`, non connecté (dépôt distant reporté). Firecrawl, Perplexity, remotion, ffmpeg : non installés, pré-câblés dans les agents.
+- Skills (tous dans `.claude/skills/` du projet) : actuarial-modeling, business-ai, token-efficient ; K-Dense : statistical-analysis, statsmodels, scikit-learn, scientific-visualization, exploratory-data-analysis (chargés à la demande par `analyste`, trop lourds pour être préchargés).
+- Agents : chercheur, prospecteur, redacteur-offre, analyste, relecteur ; skills et outils par agent dans CLAUDE.md.
 - Règles tokens : Sonnet par défaut, Haiku pour le simple, Opus rarement ; sous-agents pour le verbeux ; /clear entre tâches ; CLAUDE.md < 200 lignes ; lire des extraits.
 
 ## Risques
@@ -84,3 +85,4 @@ Suivre `context/PIPELINE.md` avec `/pipeline`.
 1. Étape 1 : comparer 3-4 types de cibles (agent `chercheur`).
 2. Étape 2 : choisir la cible, noter la décision dans HISTORY.md.
 3. En parallèle : vérifier le taux URSSAF.
+4. Plus tard : `gh auth login`, vérifier que `.env.example` ne contient aucune clé, puis `gh repo create business-b2b --private --source . --push`.
