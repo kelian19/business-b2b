@@ -30,3 +30,5 @@ Règle : aucun développement (prototype, site) avant 2-3 retours concordants à
 | firecrawl, perplexity | Seulement si WebSearch/WebFetch + playwright ne suffisent plus (étapes 1, 4) | Recherche et extraction web à plus grande échelle |
 
 Déjà branchés : playwright (`chercheur`, `prospecteur`) ; skills `business-ai` et `token-efficient` préchargés dans tous les agents ; `actuarial-modeling` dans `analyste` (appui aux étapes 3 et 7 : grille de prix, chiffrage CA/marge/bénéfice ; prototype seulement après un go à l'étape 7).
+
+Pré-câblage (2026-10-04, non installés) : `mcp__perplexity__*` et `mcp__firecrawl__*` déclarés dans `chercheur` ; `mcp__firecrawl__*` dans `prospecteur` ; remotion et ffmpeg notés dans `redacteur-offre`. context7 actif dans `analyste`. Installer un MCP suffit à l'activer : `cmd /c claude mcp add --scope user <nom> -- cmd /c npx -y <paquet>` (clé API dans `.env`).

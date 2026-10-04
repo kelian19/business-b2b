@@ -18,3 +18,5 @@ Règles :
 - Ne jamais inventer de client, de témoignage ni de chiffre.
 
 Sortie : `livrables/offre/offre-vN.md` (nouvelle version, ne pas écraser l'ancienne). Renvoie 5 lignes maximum : ce qui change et les hypothèses à tester.
+
+Plus tard (après un go à l'étape 7 de `context/PIPELINE.md`) : vidéo de démonstration avec remotion et ffmpeg, non installés à ce jour. Ne pas les utiliser avant.

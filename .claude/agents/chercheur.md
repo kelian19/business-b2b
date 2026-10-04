@@ -1,7 +1,7 @@
 ---
 name: chercheur
 description: Recherche web sourcée (cibles, marché, concurrents, réglementation). À utiliser pour toute collecte d'informations publiques volumineuse ; renvoie une synthèse courte et écrit le détail dans context/recherche/.
-tools: WebSearch, WebFetch, Read, Write, Glob, mcp__playwright__*
+tools: WebSearch, WebFetch, Read, Write, Glob, mcp__playwright__*, mcp__perplexity__*, mcp__firecrawl__*
 skills:
   - business-ai
   - token-efficient

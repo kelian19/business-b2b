@@ -26,10 +26,10 @@ module-installs/   dépôts externes
 
 | Agent | Modèle | Skills préchargés | Outils en plus | Rôle |
 |---|---|---|---|---|
-| `chercheur` | Haiku | business-ai, token-efficient | playwright | Recherche web sourcée → `context/recherche/` |
-| `prospecteur` | Sonnet | business-ai, token-efficient | playwright | Liste de prospects et messages de découverte |
-| `redacteur-offre` | Sonnet | business-ai, token-efficient | – | Offre et texte de vitrine → `livrables/offre/` |
-| `analyste` | Sonnet | actuarial-modeling, business-ai, token-efficient (+ K-Dense à la demande) | Bash (Python), Skill | Chiffrage CA/marge/bénéfice, puis prototype reporting → `livrables/analyse/` |
+| `chercheur` | Haiku | business-ai, token-efficient | playwright (+ perplexity, firecrawl pré-câblés) | Recherche web sourcée → `context/recherche/` |
+| `prospecteur` | Sonnet | business-ai, token-efficient | playwright (+ firecrawl pré-câblé) | Liste de prospects et messages de découverte |
+| `redacteur-offre` | Sonnet | business-ai, token-efficient | (remotion, ffmpeg après étape 7) | Offre et texte de vitrine → `livrables/offre/` |
+| `analyste` | Sonnet | actuarial-modeling, business-ai, token-efficient (+ K-Dense à la demande) | Bash (Python), Skill, context7 | Chiffrage CA/marge/bénéfice, puis prototype reporting → `livrables/analyse/` |
 | `relecteur` | Haiku | business-ai, token-efficient | – | Relecture en lecture seule avant toute sortie |
 
 Le principal orchestre et ne fait pas le travail verbeux lui-même. Un agent à la fois.

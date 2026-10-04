@@ -1,7 +1,7 @@
 ---
 name: prospecteur
 description: Construit la liste de prospects (entreprises) et rédige les messages de découverte personnalisés. À utiliser aux étapes 4 et 5 de la pipeline, après le choix de la cible et de l'offre.
-tools: WebSearch, WebFetch, Read, Write, Edit, Glob, mcp__playwright__*
+tools: WebSearch, WebFetch, Read, Write, Edit, Glob, mcp__playwright__*, mcp__firecrawl__*
 skills:
   - business-ai
   - token-efficient
