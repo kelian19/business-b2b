@@ -4,7 +4,7 @@
 
 ## Porteur
 
-- Kélian Kaddouri, MSc actuariat ENSAE (promo 2025/2026), stagiaire cyber-risque chez Nexialog jusqu'en novembre 2026, disponible en février 2027.
+- Kélian Kaddouri, MSc actuariat ENSAE (promo 2025/2026), stagiaire cyber-risque jusqu'en novembre 2026 (employeur à ne jamais citer dans les livrables), disponible en février 2027.
 - Profil actuaire × data scientist (cyber, DORA), deux ans de data science (Python, mise en production).
 - Temps disponible : 4-5 h/semaine (déclaré), contraint par le stage, le mémoire et la recherche d'emploi.
 - Objectifs : 1) mémoire d'actuariat et data science ; 2) business B2B IA à 1 000 €/mois de bénéfice ; 3) minimiser les tokens.
@@ -74,7 +74,7 @@ Chaque chiffre est une hypothèse tant qu'il n'a pas de source.
 
 ## Risques
 
-- Juridiques : RGPD (aucune donnée nominative ni donnée Nexialog dans Claude) ; AI Act si chatbot. Pas de conflit avec le stage : l'activité n'a aucun lien avec Nexialog (précisé par Kélian, 2026-10-04) et le stage se termine début décembre 2026 (~2 mois).
+- Juridiques : RGPD (aucune donnée nominative ni donnée de l'employeur dans Claude) ; AI Act si chatbot. Pas de conflit avec le stage : l'activité n'a aucun lien avec l'employeur (précisé par Kélian, 2026-10-04) et le stage se termine début décembre 2026 (~2 mois).
 - Opérationnels : temps limité ; consommation de tokens (sous-agents en parallèle coûteux).
 - Commerciaux : prix non validés, aucun client ni prospect à ce jour.
 

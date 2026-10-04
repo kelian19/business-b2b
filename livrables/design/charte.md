@@ -1,50 +1,57 @@
-# Charte visuelle v1 (2026-10-04)
+# Charte visuelle v2 (2026-10-04)
 
-Statut : proposition, à valider par Kélian. Une seule charte pour tous les supports (site, slides, e-mail).
+Statut : proposition, à valider par Kélian. Une seule charte pour tous les supports (site, slides, e-mail). La v2 remplace la v1 (sobre, claire) par une direction « agence IA à la pointe, crédible pour des experts-comptables » : sections sombres et claires alternées, dégradés subtils, grain, verre léger, grille bento, titres display forts. Site de référence : `livrables/site/index.html` (la v1 reste en `v1.html`).
 
 ## Nom (provisoire, à vérifier avant usage)
 
-Retenu : **Atelier Pointage** (« pointer » = rapprocher et vérifier, vocabulaire du métier ; ni IA ni jargon).
-Alternatives : **Ligne Claire**, **Atelier Équerre**.
+Retenu : **Atelier Pointage** (« pointer » = rapprocher et vérifier, vocabulaire du métier). Alternatives : **Ligne Claire**, **Atelier Équerre**.
 
 Aucune disponibilité vérifiée. Avant tout usage public :
-1. INPI : recherche d'antériorités (base marques, classes 35, 41, 42) sur le nom retenu.
+1. INPI : recherche d'antériorités (base marques, classes 35, 41, 42).
 2. Nom de domaine : tester .fr et .com chez un registrar (sans acheter avant décision).
-3. Recherche web : nom entre guillemets, seul et avec « comptable », « formation », « automatisation » ; vérifier qu'aucune entreprise ou marque connue ne l'utilise.
+3. Recherche web : nom entre guillemets, seul et avec « comptable », « formation », « automatisation ».
 
-## Couleurs (contraste WCAG calculé, seuil AA : 4,5:1 texte normal)
+## Couleurs (contraste WCAG calculé, seuil AA : 4,5:1 texte, 3:1 éléments d'interface)
 
-| Rôle | Hex | Usage | Contraste |
+| Rôle | Hex | Usage | Contraste vérifié |
 |---|---|---|---|
-| Principale : bleu nuit | `#1B3A57` | titres, bandeaux, boutons secondaires | 11,8:1 sur blanc |
-| Accent : terre cuite | `#B4532A` | bouton d'action unique, filets, liens | 4,97:1 sur blanc ; 4,53:1 sur fond `#F6F4EF` |
-| Texte | `#1F2933` | corps de texte | > 13:1 sur blanc |
-| Texte atténué | `#52606D` | légendes, mentions | 6,5:1 sur blanc ; 5,8:1 sur fond |
-| Fond | `#F6F4EF` | fond de page (blanc cassé) | |
-| Surface | `#FFFFFF` | cartes | |
-| Teinte | `#E8EDF1` | encadrés, bandeaux clairs | texte principal OK |
+| Encre (fond sombre) | `#0A1220` | héros, démo, diagnostic, sécurité, à propos, appel final, pied de page | texte `#E8EDF4` 15,9:1 ; texte atténué `#A9B6C6` 9,1:1 |
+| Bleu nuit | `#1B3A57` | titres sur fond clair, carte service B (dégradé vers `#0F2338`) | 10,7:1 sur `#F6F4EF` ; `#A9B6C6` dessus 5,7:1 |
+| Terre cuite (action) | `#B4532A` | bouton d'action unique (dégradé vers `#9A4422`) | texte blanc 4,99:1 |
+| Terre cuite foncée | `#9A4422` | liens et surtitres sur fond clair | 5,9:1 sur `#F6F4EF` ; 6,5:1 sur blanc |
+| Terre cuite claire | `#F2A27B` | accents et liens sur fond sombre | 9,1:1 sur encre ; 5,7:1 sur bleu nuit |
+| Menthe (signal) | `#5FD4B5` | éléments « extraits / validés » sur fond sombre uniquement | 10,3:1 sur encre ; 6,5:1 sur bleu nuit |
+| Texte | `#1F2933` | corps sur fond clair | 13,4:1 sur `#F6F4EF` |
+| Texte atténué | `#52606D` | légendes sur fond clair | 5,9:1 sur `#F6F4EF` ; 5,5:1 sur `#E8EDF1` ; 6,5:1 sur blanc |
+| Fond clair | `#F6F4EF` / blanc `#FFFFFF` / teinte `#E8EDF1` | sections et cartes claires | |
+| Erreur | `#9A1B14` | messages de saisie | 8,3:1 sur blanc |
+| Marqueur | `#FFF4C2` sur `#3D3200` | « À COMPLÉTER » | 11,5:1 |
 
-Justification : le bleu nuit évoque le sérieux et la confiance attendus d'un cabinet ; la terre cuite chaude, utilisée avec parcimonie, signale l'unique action sans l'agressivité d'un rouge ; les neutres chauds rappellent le papier. Texte blanc sur accent ou sur bleu nuit : AA validé. Ne jamais placer le texte atténué sur l'accent ou le bleu nuit.
+Règles : deux couleurs vives seulement (terre cuite, menthe) ; la menthe ne sert jamais de fond de bouton ni de texte sur fond clair. Bordure des champs de saisie `#6B7885` (3:1 minimum). Ne jamais placer le texte atténué sur l'accent.
 
-## Polices (Google Fonts, licence OFL)
+Effets autorisés : dégradés radiaux flous (terre cuite et menthe, faible opacité), grain SVG à 9 % (overlay), verre léger (`rgba(255,255,255,.04 à .1)` + flou 14 px) réservé aux panneaux interactifs, lueur qui suit le pointeur sur les cartes, réseau de points en canvas dans le héros. Tous coupés ou figés avec `prefers-reduced-motion`.
 
-- Titres : **Source Serif 4** (600). Sobre, éditoriale.
-- Texte, interface : **Source Sans 3** (400, 600). Très lisible.
-- Chiffres (si besoin) : Source Sans 3 avec `font-variant-numeric: tabular-nums`. Pas de troisième police.
-- Repli : Georgia / Segoe UI, system-ui.
+## Polices (Google Fonts, licence OFL, `font-display: swap`)
+
+- Titres : **Bricolage Grotesque** (600, 700), interlettrage serré (-0,02 à -0,035 em).
+- Texte et interface : **Inter** (400, 500, 600).
+- Données (démo) : pile système monospace, pas de troisième police chargée.
+- Chiffres : `font-variant-numeric: tabular-nums`.
+- Repli : system-ui, Segoe UI.
 
 ## Ton éditorial
 
-Vouvoiement, phrases courtes, concret. Pas de jargon, pas de superlatifs, pas de « révolution ». L'IA reste en coulisse : on parle de tâche, de règles, de preuve. Dire ce qu'on ne fait pas. Aucun chiffre sans source ; tout prix est une « hypothèse » tant que non validé.
+Vouvoiement, « je » (une seule personne), phrases courtes, concret. Pas de jargon ni de superlatifs. L'IA reste en coulisse : on parle de tâche, de règles, de preuve. Dire ce qu'on ne fait pas. Aucun chiffre sans source ; tout prix est une « hypothèse » tant que non validé (aucun prix n'est affiché publiquement).
 
 ## Règles d'usage
 
 - Une seule action par support : « Réserver un appel de 15 min » (bouton terre cuite).
-- Pas de logo décidé : nom en texte (Source Serif 4, bleu nuit). Ne pas dessiner de logo avant validation du nom.
+- Pas de logo décidé : nom en texte (Bricolage Grotesque 700). Ne pas dessiner de logo avant validation du nom.
 - Pas de prix publics : « Tarif communiqué après l'appel de découverte ».
-- Aucun client, témoignage ni résultat chiffré inventé. Les exemples fictifs portent l'étiquette « Exemple fictif, à titre d'illustration ».
+- Aucun client, logo de client, témoignage, note, nombre de clients, gain chiffré ou statistique inventé. Les exemples fictifs portent la mention « fictif ». Les outils interactifs (calculateur) n'affichent que des résultats calculés à partir des saisies du visiteur, sans valeur par défaut.
 - Pas de mention de l'employeur actuel.
-- Interdit : fonds sombres pour de longs textes, plus de 2 couleurs vives, textes sous 16 px.
+- Fonds sombres réservés aux sections courtes (titres, cartes, démos) ; les textes longs restent sur fond clair. Texte courant 16 px minimum.
+- Accessibilité : focus visible (3 px), navigation clavier, aria sur accordéon et démo, cibles tactiles 44 px.
 
 ## Étude de cas réelle (plus tard)
 

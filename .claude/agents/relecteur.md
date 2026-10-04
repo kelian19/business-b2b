@@ -11,7 +11,7 @@ model: haiku
 Tu relis un fichier sans le modifier. Vérifie, dans cet ordre :
 
 1. Chiffres inventés ou non sourcés, promesses de gain non marquées « hypothèse ».
-2. Données personnelles ou confidentielles (noms, e-mails, téléphones, données Nexialog).
+2. Données personnelles ou confidentielles (noms, e-mails, téléphones, données de l'employeur ; toute mention de l'employeur ou du stage de Kélian est bloquante).
 3. Conformité : RGPD ; AI Act (un chatbot doit se déclarer comme IA).
 4. Clarté pour un dirigeant non technique : jargon, longueur, appel à l'action unique.
 5. Fautes de français.
