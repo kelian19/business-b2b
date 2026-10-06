@@ -470,8 +470,14 @@ test('registre : analyseEffective ajoute les codes du registre et garde les 7 co
 });
 
 test('registre : fixture du fichier de vérification : état cessée et écart de nom en « à vérifier »', function () {
-  var txt = require('fs').readFileSync(require('path').join(__dirname, 'fixtures', 'registre-fictif.csv'), 'utf8');
-  var parsed = L.parseCsv(txt.replace(/^﻿/, ''));
+  // même contenu que tests/fixtures/registre-fictif.csv (format de verif_registre.py), construit ici pour ne dépendre d'aucun fichier généré
+  var reg = [];
+  D.tiers.slice(0, 8).forEach(function (t, i) {
+    if (!L.cleanId(t.siren)) return;
+    reg.push([L.cleanId(t.siren), 'ok', i === 4 ? 'Ébénisterie Echo et Fils' : t.nom, i === 3 ? 'C' : 'A', t.adresse, t.code_postal, t.ville, '2026-10-05']);
+  });
+  var txt = L.toCsv(['siren', 'statut_verification', 'nom_registre', 'etat_administratif', 'adresse_registre', 'code_postal_registre', 'ville_registre', 'date_verification'], reg);
+  var parsed = L.parseCsv(txt);
   var cm = L.canonicalizeCsv(parsed, 'registre');
   assert.deepStrictEqual(cm.missing, []);
   var recs = cm.records.map(function (r, i) { return L.KINDS.registre.normaliser(r, i + 2).valeur; });

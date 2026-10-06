@@ -2,19 +2,9 @@
 
 Outil facultatif en ligne de commande, lancé par le consultant (pas par le client) avant l'import dans l'application Équerre. Il compare un CSV de tiers (clients, fournisseurs) au registre public des entreprises et écrit un nouveau CSV à réimporter.
 
-## Lequel utiliser ?
+## Un seul outil
 
-Deux outils coexistent. Ils font la même chose (comparer des SIREN au registre public) avec des options et des formats de sortie différents : n'en utilisez qu'un par dossier.
-
-| | Node : `verifier.js` (recommandé) | Python : `verif_registre.py` |
-|---|---|---|
-| Sortie | Fichier « registre » prêt à importer dans l'étape 2 d'Équerre | Copie du fichier de tiers avec colonnes ajoutées (nom_registre, etat_administratif, écart…) |
-| Confirmation | `--oui` | `--accord-client` |
-| Essai sans réseau | `--simuler` ou `--dry-run` : écrit un fichier d'essai (statut `simule`) que l'application refuse à l'import | `--dry-run` : n'écrit rien, compte les requêtes |
-| Cache | `registre-cache.json` | `registre_cache.json` |
-| Adresse du service | https obligatoire (http seulement pour 127.0.0.1 ou localhost, essais) | https obligatoire |
-
-Le guide de livraison (`livrables/outil-equerre/GUIDE-LIVRAISON.md`, étape 4) décrit l'outil Node. Dans les deux cas : le cache est à supprimer en fin de mission, et un fichier d'essai ne se remet jamais à un client.
+`verif_registre.py` est l'unique outil de vérification au registre du projet. Le guide de livraison (`livrables/outil-equerre/GUIDE-LIVRAISON.md`, étape 4) décrit son usage. Le cache est à supprimer en fin de mission, et un fichier produit ne se remet pas à un client sans l'avoir relu.
 
 ## Confidentialité : à lire avant d'utiliser
 
@@ -36,20 +26,25 @@ python verif_registre.py tiers.csv -o resultat.csv --accord-client
 
 Le CSV d'entrée doit avoir une colonne `siren` (variantes reconnues : `n_siren`, `numero_siren`, etc.). À défaut, les 9 premiers chiffres d'une colonne `siret` sont utilisés. Séparateur (`;` `,` tabulation `|`) et encodage (UTF-8, Windows-1252, Latin-1) sont détectés. Les colonnes `nom`, `adresse`, `code_postal`, `ville` (ou `raison_sociale`, `cp`...) servent à l'indicateur d'écart ; au besoin, `--col-siren`, `--col-nom`, `--col-adresse`, `--col-code-postal`, `--col-ville` désignent les colonnes.
 
-Le fichier de sortie est en UTF-8 avec BOM (ouvre correctement dans Excel), avec le même séparateur. Il refuse d'écraser un fichier existant sans `--force`. Les colonnes d'origine sont conservées.
+Le fichier de sortie est en UTF-8 avec BOM (ouvre correctement dans Excel), avec le même séparateur. Il refuse d'écraser un fichier existant sans `--force`. Les colonnes d'origine sont conservées. L'étape 2 de l'application Équerre lit directement ce fichier (zone « vérification au registre ») : les lignes sans vérification y sont affichées « Non vérifié » et ne sont jamais comptées comme vérifiées.
 
 ### Options utiles
 
 | Option | Rôle |
 |---|---|
-| `--dry-run` | Compte les SIREN valides, ceux déjà en cache, les requêtes à faire et la durée estimée. Rien n'est envoyé ni écrit. |
-| `--cadence N` | Requêtes par seconde (5 maximum, valeur par défaut). |
+| `--dry-run` | Compte les SIREN valides, ceux déjà en cache, les requêtes à faire et la durée minimale estimée. Rien n'est envoyé ni écrit : aucun fichier n'est produit, donc rien à importer. |
+| `--cadence N` | Requêtes par seconde, 5 au plus (valeur par défaut). |
 | `--reprises N` | Réessais par SIREN en cas d'erreur (3 par défaut, attente 1 s, 2 s, 4 s ; `Retry-After` respecté). |
 | `--max-echecs N` | Arrêt après N SIREN consécutifs en échec (5 par défaut). |
 | `--cache FICHIER`, `--sans-cache`, `--ttl-jours N` | Cache local (30 jours par défaut). |
 | `--journal FICHIER` | Copie le journal dans un fichier. `-v` pour le détail. |
 
 Codes de sortie : 0 tout est traité, 1 certains SIREN n'ont pas pu être vérifiés (relancer : le cache évite de refaire les autres), 2 erreur d'usage, 130 interruption (cache enregistré).
+
+## Débit réel
+
+- Les requêtes partent **une par une**, avec **au moins 0,2 seconde entre deux envois** (1 divisé par 5) : **5 requêtes par seconde au plus**, reprises après erreur comprises. Le plafond n'est pas contournable (`--cadence` refuse une valeur supérieure à 5). Vérifiez la limite de débit en vigueur dans la documentation publique de l'API avant un gros fichier.
+- Durée : au mieux 0,2 seconde par SIREN à interroger, soit environ 3 minutes 20 secondes pour 1 000 SIREN, davantage si le service répond lentement ou refuse (reprises espacées de 1 s, 2 s, 4 s). Les SIREN déjà en cache ne sont pas interrogés. `--dry-run` affiche le nombre de requêtes et cette durée minimale.
 
 ## Colonnes ajoutées
 
@@ -63,7 +58,7 @@ Codes de sortie : 0 tout est traité, 1 certains SIREN n'ont pas pu être vérif
 | `date_verification` | Date de la consultation (celle du cache si la réponse en vient). |
 | `ecart_registre` | `oui` si le nom ou l'adresse du fichier diffère du registre, `non` sinon, vide si rien n'était comparable. |
 | `ecart_detail` | Éléments qui diffèrent : `nom`, `code_postal`, `ville`, `adresse`. |
-| `statut_verification` | `ok`, `introuvable`, `non_diffusible`, `siren_invalide`, `siren_vide`, `erreur_api`, `non_verifie`. |
+| `statut_verification` | `ok` (le registre a répondu : seule valeur « vérifiée » avec `introuvable`), `introuvable` (le registre ne connaît pas ce SIREN), et, sans vérification : `non_diffusible`, `siren_invalide`, `siren_vide`, `erreur_api`, `non_verifie` (SIREN non interrogé, par exemple après un arrêt sur échecs consécutifs). |
 
 Si le fichier d'entrée contient déjà ces colonnes (seconde passe), elles sont remplacées, pas dupliquées.
 
@@ -84,18 +79,3 @@ python -m unittest discover -s livrables/registre-cli/tests
 ```
 
 Les tests utilisent une API simulée ; tout appel réseau réel y est bloqué.
-
-## Version Node (verifier.js)
-
-Une seconde version, en Node 18 ou plus et sans dépendance, réutilise les modules de l'application (lecture du CSV, contrôle des SIREN) et écrit directement le fichier « registre » attendu par l'étape 2 d'Équerre (colonnes `siren`, `statut_verification`, `denomination_registre`, `etat_administratif`, `adresse_registre`, `code_postal_registre`, `ville_registre`, `date_verification`).
-
-```
-node verifier.js --tiers tiers.csv --sortie registre.csv --oui
-node verifier.js --tiers tiers.csv --simuler          # (ou --dry-run) aucun appel réseau, fichier d'essai (statut « simule »), refusé par l'application à l'import
-node verifier.js --aide
-```
-
-- Service interrogé : l'API ouverte « Recherche d'entreprises » (adresse de base configurable par `--base-url`). Sa page sur data.gouv.fr indique 7 appels par seconde au plus, sans clé ; l'outil reste en dessous (4 par seconde par défaut ; délai minimal de 150 ms, soit environ 6,7 au plus). `--base-url` n'accepte que https (http seulement pour 127.0.0.1 ou localhost, pour les essais).
-- Seuls les SIREN valides (9 chiffres, clé correcte, sans doublon) sont envoyés. Un avertissement sur les entrepreneurs individuels (personnes physiques) s'affiche avant tout envoi : confirmation à taper, ou `--oui`.
-- Reprise : refus 429 ou erreur du serveur retentés (Retry-After respecté) ; cache local `registre-cache.json` des résultats publics pour reprendre après une interruption ; un SIREN non vérifié est écrit « non_verifie », jamais « introuvable ».
-- Tests : `node livrables/registre-cli/tests/test-cli.js` (serveur local 127.0.0.1, aucun accès à Internet).

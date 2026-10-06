@@ -62,7 +62,7 @@ test('registre : les lignes simulées sont refusées à l\'import (raison « sim
 test('registre : statuts non vérifiés (erreur, non diffusible, siren invalide) conservés mais sans date ni état, et comptés', function () {
   var r = eval1('siren;statut_verification;denomination_registre;etat_administratif;date_verification\n' +
     '844083246;non_verifie;;;2026-10-07\n172408825;erreur_api;;;2026-10-07\n600217426;non_diffusible;;;2026-10-07\n' +
-    '732829320;siren_invalide;;;2026-10-07\n552120222;trouve;Delta;A;2026-10-07\n', 'registre');
+    '732829320;siren_invalide;;;2026-10-07\n552120222;ok;Delta;A;2026-10-07\n', 'registre');
   assert.strictEqual(r.ev.records.length, 5);
   var nv = r.ev.records.filter(function (x) { return x.verifie === false; });
   assert.strictEqual(nv.length, 4);
@@ -78,8 +78,9 @@ test('registre : classement des statuts', function () {
   assert.strictEqual(L.classerStatutRegistre('simule'), 'simule');
   assert.strictEqual(L.classerStatutRegistre('Simulé'.toLowerCase().replace('é', 'e')), 'simule');
   assert.strictEqual(L.classerStatutRegistre('introuvable'), 'introuvable');
-  assert.strictEqual(L.classerStatutRegistre('trouve'), 'ok');
-  assert.strictEqual(L.classerStatutRegistre(''), 'ok');
+  assert.strictEqual(L.classerStatutRegistre('ok'), 'ok');
+  assert.strictEqual(L.classerStatutRegistre('trouve'), 'non_verifie');
+  assert.strictEqual(L.classerStatutRegistre(''), 'non_verifie');
   ['non_verifie', 'erreur_api', 'non_diffusible', 'siren_invalide', 'siren_vide'].forEach(function (s) { assert.strictEqual(L.classerStatutRegistre(s), 'non_verifie', s); });
 });
 
@@ -156,17 +157,24 @@ test('dates : année sur 2 chiffres (00 à 69 en 20xx, 70 à 99 en 19xx), jour i
   assert.strictEqual(L.parseDate('31/02/26'), null);
 });
 
-/* ---------- Registre-cli : adresse du service ---------- */
+/* ---------- Fenêtre « 12 mois » : même période pour le texte, le nombre de factures et le CA ---------- */
 
-test('outil registre : seul https (ou http en local pour les essais) est accepté pour --base-url', function () {
-  var V = require('../../registre-cli/verifier.js');
-  assert.strictEqual(V.baseUrlAutorisee('https://recherche-entreprises.api.gouv.fr'), true);
-  assert.strictEqual(V.baseUrlAutorisee('http://127.0.0.1:8080'), true);
-  assert.strictEqual(V.baseUrlAutorisee('http://localhost:3000'), true);
-  assert.strictEqual(V.baseUrlAutorisee('http://exemple.fr'), false);
-  assert.strictEqual(V.baseUrlAutorisee('ftp://127.0.0.1'), false);
-  assert.strictEqual(V.baseUrlAutorisee('pas une url'), false);
-  assert.strictEqual(V.analyserArguments(['--tiers', 'a.csv', '--dry-run']).simuler, true);
+test('fenêtre de 12 mois : du 1er jour du mois situé 12 mois avant la date de référence à cette date, identique pour le nombre de factures et le CA', function () {
+  var D = require('../js/data.js');
+  var w = L.fenetre12Mois('2026-10-06');
+  assert.deepStrictEqual(w, { debut: '2025-10-01', fin: '2026-10-06' });
+  assert.deepStrictEqual(L.fenetre12Mois('2026-03-31'), { debut: '2025-03-01', fin: '2026-03-31' });
+  // bornes : le 30/09/2025 est hors fenêtre, le 01/10/2025 et la date de référence sont dedans, le lendemain est hors fenêtre
+  var fac = ['2025-09-30', '2025-10-01', '2026-10-06', '2026-10-07'].map(function (d) { return { dateEmission: d }; });
+  assert.strictEqual(L.nbFactures12Mois(fac, '2026-10-06'), 2);
+  // la démonstration : même nombre de factures que celles retenues pour le CA par fiche
+  var inv = L.normalizeInvoices(D.exportFacturation).invoices;
+  var attendu = inv.filter(function (i) { return i.dateEmission >= w.debut && i.dateEmission <= w.fin; }).length;
+  assert.strictEqual(L.nbFactures12Mois(inv, '2026-10-06'), attendu);
+  // le texte affiché reprend cette même fenêtre et dit que le premier mois est pris en entier
+  var der = H.lire('js/ui/derived.js');
+  assert.ok(/L\.fenetre12Mois\(refDate\(\)\)/.test(der) && /le premier mois est pris en entier/.test(der));
+  ['js/ui/aide.js'].forEach(function (f) { assert.ok(/du premier jour du mois situé 12 mois avant la date de référence/.test(H.lire(f)), f); });
 });
 
 /* ---------- Effacement de la session ---------- */

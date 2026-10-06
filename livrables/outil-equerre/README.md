@@ -77,7 +77,7 @@ Le nom d'entreprise se modifie dans le rapport ou dans l'en-tête (80 caractère
 - Aucune requête réseau : les fichiers sont lus dans le navigateur ; une politique de sécurité de contenu (`connect-src 'none'`) bloque toute tentative.
 - Aucune donnée de dossier n'est écrite dans le stockage du navigateur. Seules deux préférences d'affichage (raccourcis activés, visite vue) peuvent l'être, avec repli en mémoire : l'outil fonctionne sans.
 - Toute saisie ou donnée de fichier est affichée comme du texte, jamais interprétée comme du HTML.
-- La vérification au registre n'existe pas dans l'outil web : elle se fait avec l'outil en ligne de commande `livrables/registre-cli/verifier.js`, qui n'envoie que des SIREN.
+- La vérification au registre n'existe pas dans l'outil web : elle se fait avec l'outil en ligne de commande `livrables/registre-cli/verif_registre.py`, qui n'envoie que des SIREN, au plus 5 requêtes par seconde.
 
 ## Limites à connaître
 
@@ -96,7 +96,7 @@ Le nom d'entreprise se modifie dans le rapport ou dans l'en-tête (80 caractère
 - `js/data.js` : données fictives. `js/ui/` : interface sans règle métier (dont `aide.js`). `js/views/` : un fichier par écran (`view-report.js`, `view-cabinet.js`, `view-help.js`...). `js/app.js` : coque, routeur par hash, clavier, mode présentation.
 - `tests/` : `node livrables/outil-equerre/tests/run-tests.js` (code de sortie 0 si tout passe). `tests/make-fixtures.js` génère les fichiers d'essai (CSV, dossiers `cabinet-*.equerre.json` ; `--gros` pour 10 000 tiers et 50 000 lignes, non versionnés).
 - `GUIDE-LIVRAISON.md` : procédure de livraison pour un client. `script-demo.md` : déroulé de la démonstration en visio.
-- Outil facultatif en ligne de commande : `livrables/registre-cli/verifier.js`, test : `node livrables/registre-cli/tests/test-cli.js`.
+- Outil facultatif en ligne de commande (Python, bibliothèque standard) : `livrables/registre-cli/verif_registre.py`, tests : `python -m unittest discover -s livrables/registre-cli/tests`.
 
 ## Contrôle visuel
 

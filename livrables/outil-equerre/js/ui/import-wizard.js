@@ -22,7 +22,7 @@
     tiers: 'Une ligne par client ou fournisseur. Colonnes attendues : nom et SIREN (obligatoires), puis SIRET, TVA, adresses.',
     factures: 'Un export de vos factures de vente : client, date d\'émission, montant HT, et le statut de paiement ou, à défaut, le solde restant dû (payée si le solde est nul). La date d\'échéance est facultative : sans elle, l\'ancienneté des impayés n\'est pas évaluable. Un SIREN du client permet un rapprochement exact.',
     lignes: 'Facultatif. Une ligne par ligne de facture : le contrôle automatique des 4 nouvelles mentions s\'appuie sur ces données (présent, manquant, à vérifier ou sans objet, facture par facture).',
-    registre: 'Facultatif. Le fichier produit par l\'outil de vérification au registre (SIREN, état administratif, adresse). Les écarts apparaissent dans l\'étape 2, à vérifier : aucune valeur du registre n\'est appliquée automatiquement.'
+    registre: 'Facultatif. Le fichier produit par l\'outil verif_registre.py (importez-le tel quel : une requête à la fois, 5 par seconde au plus, uniquement des SIREN). Seuls les statuts « ok » et « introuvable » sont des réponses du registre ; les autres lignes sont affichées « Non vérifié ». Les écarts apparaissent dans l\'étape 2, à vérifier : aucune valeur du registre n\'est appliquée automatiquement.'
   };
 
   function guideExport() {

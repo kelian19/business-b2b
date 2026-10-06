@@ -90,14 +90,17 @@
     tva: 'taux_tva', tx_tva: 'taux_tva', taux: 'taux_tva', taux_de_tva: 'taux_tva'
   };
 
+  // Colonnes écrites par livrables/registre-cli/verif_registre.py : siren (colonne d'origine, copiée du fichier de tiers),
+  // statut_verification, etat_administratif, nom_registre, adresse_registre, code_postal_registre, ville_registre,
+  // date_verification (+ naf_registre, ecart_registre, ecart_detail, ignorées : l'application refait la comparaison).
+  // Le fichier de sortie conserve aussi les colonnes d'origine du fichier de tiers (nom, adresse, ville, type…) : aucun
+  // synonyme générique (statut, etat, adresse, ville, date, denomination) n'est donc accepté ici, il se confondrait avec elles.
   var REGISTRE_ALIASES = {
     n_siren: 'siren', numero_siren: 'siren',
-    statut: 'statut_verification', resultat: 'statut_verification', verification: 'statut_verification',
-    denomination: 'denomination_registre', nom_registre: 'denomination_registre',
-    etat: 'etat_administratif', etat_administratif_registre: 'etat_administratif',
-    adresse: 'adresse_registre', cp_registre: 'code_postal_registre', ville: 'ville_registre',
-    date: 'date_verification', date_de_verification: 'date_verification', statut_de_la_verification: 'statut_verification',
-    nom_au_registre: 'denomination_registre', denomination_au_registre: 'denomination_registre'
+    nom_registre: 'denomination_registre',
+    nom_au_registre: 'denomination_registre', denomination_au_registre: 'denomination_registre',
+    etat_administratif_registre: 'etat_administratif', cp_registre: 'code_postal_registre',
+    date_de_verification: 'date_verification', statut_de_la_verification: 'statut_verification'
   };
 
   // Jetons : un en-tête qui contient tous les mots de « tous » (et aucun de « sauf ») est reconnu.
@@ -185,16 +188,19 @@
     };
   }
 
-  /** Classe le statut d'une ligne du fichier de vérification : 'simule' (essai, jamais une vérification), 'introuvable',
-   *  'ok' (réponse du registre, ou statut absent) ou 'non_verifie' (erreur du service, non diffusible, SIREN invalide… :
-   *  rien n'a été vérifié, aucune date de vérification n'est conservée). Un autre statut (« trouve », « ok »…) est une réponse du registre. */
+  /** Statuts écrits par verif_registre.py dans la colonne statut_verification (et eux seuls) :
+   *  - « ok » : le registre a répondu pour ce SIREN (état, nom, adresse sont lus) ;
+   *  - « introuvable » : le registre a répondu qu'il ne connaît pas ce SIREN ;
+   *  - « non_diffusible », « siren_invalide », « siren_vide », « erreur_api », « non_verifie » : rien n'a été vérifié.
+   *  Classement : 'ok', 'introuvable', 'simule' (ligne d'essai, refusée à l'import : l'outil Python n'en écrit jamais, --dry-run n'écrit
+   *  aucun fichier) ou 'non_verifie' (les cinq statuts ci-dessus, statut absent ou statut inconnu : jamais présenté comme vérifié). */
+  var STATUTS_NON_VERIFIES = ['non_diffusible', 'siren_invalide', 'siren_vide', 'erreur_api', 'non_verifie'];
   function classerStatutRegistre(statut) {
     var s = normalizeHeader(statut);
-    if (!s) return 'ok';
-    if (s === 'simule' || s === 'simulation' || s === 'simulee') return 'simule';
-    if (['introuvable', 'siren_introuvable', 'non_trouve', 'inconnu'].indexOf(s) >= 0) return 'introuvable';
-    if (['non_verifie', 'non_verifiee', 'a_verifier', 'erreur', 'erreur_api', 'echec', 'non_diffusible', 'siren_invalide', 'siren_vide', 'invalide'].indexOf(s) >= 0) return 'non_verifie';
-    return 'ok';
+    if (s === 'simule' || s === 'simulation' || s === 'simulee' || s === 'dry_run') return 'simule';
+    if (s === 'ok') return 'ok';
+    if (s === 'introuvable') return 'introuvable';
+    return 'non_verifie';
   }
 
   function normaliserRegistre(rec, ligne, w) {
@@ -625,7 +631,7 @@
       return out;
     }
     if (kindId === 'registre') {
-      if (ctx.nonVerifiees) out.push(ctx.nonVerifiees + ' SIREN non vérifié(s) (erreur du service, non diffusible, SIREN invalide ou statut inconnu) : ils ne sont pas comptés comme vérifiés et n\'ont pas de date de vérification');
+      if (ctx.nonVerifiees) out.push(ctx.nonVerifiees + ' SIREN non vérifié(s) (erreur du service, non diffusible, SIREN invalide ou vide, statut absent ou inconnu) : ils ne sont pas comptés comme vérifiés et n\'ont pas de date de vérification');
       return out;
     }
     if (kindId !== 'factures') return out;
@@ -735,6 +741,7 @@
     KINDS: KINDS,
     ORDRE_KINDS: ORDRE_KINDS,
     classerStatutRegistre: classerStatutRegistre,
+    STATUTS_NON_VERIFIES: STATUTS_NON_VERIFIES,
     typeTiers: typeTiers,
     RAISONS: RAISONS,
     MESSAGES: MESSAGES,

@@ -390,5 +390,41 @@ class TestProgramme(NoNetworkMixin, unittest.TestCase):
         self.assertEqual(self.run_main([p, "--dry-run"]), 2)
 
 
+class TestContratEtDebit(unittest.TestCase):
+    """Ce que lisent l'application Equerre et ce qu'annoncent les README : colonnes, statuts, debit."""
+
+    def test_colonnes_et_statuts_lus_par_l_application(self):
+        self.assertEqual(vr.NEW_COLUMNS, [
+            "etat_administratif", "nom_registre", "adresse_registre", "code_postal_registre", "ville_registre",
+            "naf_registre", "date_verification", "ecart_registre", "ecart_detail", "statut_verification"])
+        self.assertEqual(
+            [vr.ST_OK, vr.ST_INTROUVABLE, vr.ST_NON_DIFFUSIBLE, vr.ST_SIREN_INVALIDE, vr.ST_SIREN_VIDE, vr.ST_ERREUR,
+             vr.ST_NON_VERIFIE],
+            ["ok", "introuvable", "non_diffusible", "siren_invalide", "siren_vide", "erreur_api", "non_verifie"])
+
+    def test_debit_annonce_5_requetes_par_seconde_soit_200_secondes_pour_1000_siren(self):
+        self.assertEqual(vr.MAX_CADENCE, 5.0)
+        ft = FakeTime()
+        limiter = vr.RateLimiter(vr.MAX_CADENCE, ft.clock, ft.sleep)
+        start = ft.t
+        for _ in range(1000):
+            limiter.wait()
+        # 1000 envois : 999 intervalles de 0,2 s au minimum (le premier part tout de suite)
+        self.assertAlmostEqual(ft.t - start, 999 * 0.2, places=6)
+
+    def test_dry_run_annonce_la_duree_minimale_au_debit_reel(self):
+        with tempfile.TemporaryDirectory() as d:
+            p = os.path.join(d, "t.csv")
+            with open(p, "w", encoding="utf-8", newline="") as f:
+                f.write("siren\n%s\n%s\n" % (S1, S2))
+            messages = []
+            with mock.patch.object(vr, "setup_logging", lambda verbose, journal: None), \
+                    mock.patch.object(vr.log, "info", lambda msg, *a: messages.append(msg % a if a else msg)):
+                self.assertEqual(vr.main([p, "--dry-run"]), 0)
+            texte = " ".join(messages)
+            self.assertIn("2 requete(s) seraient envoyees", texte)
+            self.assertIn("environ 0 s a 5 requete(s)/s", texte)  # 2 / 5 = 0,4 s
+
+
 if __name__ == "__main__":
     unittest.main()

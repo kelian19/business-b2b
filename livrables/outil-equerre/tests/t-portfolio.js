@@ -12,7 +12,11 @@ var MF = require('./make-fixtures.js');
 
 var REF = '2026-10-06';
 var T0 = '2026-10-06T08:00:00.000Z';
-MF.genererDossiersCabinet();
+// Les tests ne réécrivent pas tests/fixtures à chaque lancement : les dossiers ne sont générés que s'ils manquent
+// ou sur demande explicite (EQUERRE_FIXTURES=1).
+if (process.env.EQUERRE_FIXTURES === '1' || ['demo', 'client-a', 'client-b', 'invalide', 'pas-json'].some(function (n) {
+  return !fs.existsSync(path.join(MF.DIR, 'cabinet-' + n + '.equerre.json'));
+})) MF.genererDossiersCabinet();
 
 function charger(nom) {
   var texte = fs.readFileSync(path.join(MF.DIR, 'cabinet-' + nom + '.equerre.json'), 'utf8');

@@ -507,7 +507,7 @@
 
   function statutIntrouvable(statut) {
     var s = U.normalizeHeader(statut);
-    return s === 'introuvable' || s === 'siren_introuvable' || s === 'non_trouve' || s === 'inconnu';
+    return s === 'introuvable';
   }
 
   /** Index du fichier de vérification : SIREN → enregistrement (le plus récent en cas de répétition). */

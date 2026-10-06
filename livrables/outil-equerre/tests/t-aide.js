@@ -157,7 +157,7 @@ test('documentation : les trois documents existent et ne contiennent ni prix, ni
 
 test('documentation : chaque fichier ou dossier cité entre accents graves existe', function () {
   var racine = require('path').join(H.RACINE, '..', '..');
-  var attendus = ['index.html', 'GUIDE-LIVRAISON.md', 'script-demo.md', 'tests/make-fixtures.js', 'livrables/registre-cli/verifier.js', 'livrables/registre-cli/tests/test-cli.js',
+  var attendus = ['index.html', 'GUIDE-LIVRAISON.md', 'script-demo.md', 'tests/make-fixtures.js', 'livrables/registre-cli/verif_registre.py', 'livrables/registre-cli/tests/test_verif_registre.py',
     'prospection/suivi.md', 'livrables/demo-appel/', 'livrables/registre-cli/'];
   attendus.forEach(function (f) {
     var ok = H.fs.existsSync(H.path.join(H.RACINE, f)) || H.fs.existsSync(H.path.join(racine, f));

@@ -526,7 +526,12 @@
 
     if (lv.registre) {
       var rg = lv.registre;
-      corps.push(h('section', { class: 'tt-anom-bloc', 'aria-label': 'Données du registre' }, [
+      if (rg.verifie === false) {
+        corps.push(h('section', { class: 'tt-anom-bloc', 'aria-label': 'Données du registre' }, [
+          h('h4', { text: 'Ce que dit le registre' }),
+          h('p', { class: 'notice' }, [U.icon('info'), h('span', { text: 'Cette ligne n\'a pas été vérifiée au registre' + (rg.statut ? ' (statut du fichier : « ' + rg.statut + ' »)' : ' (statut absent)') + '. Aucune donnée du registre n\'est affichée ni comparée. Relancez la vérification pour ce SIREN.' })])
+        ]));
+      } else corps.push(h('section', { class: 'tt-anom-bloc', 'aria-label': 'Données du registre' }, [
         h('h4', { text: 'Ce que dit le registre' }),
         h('dl', { class: 'infos tt-ident' }, [
           ['Dénomination', rg.denomination || '–'], ['État administratif', rg.etat || '–'],

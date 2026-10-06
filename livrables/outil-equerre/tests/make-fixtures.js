@@ -167,10 +167,10 @@ function generer(opts) {
   var reg = [];
   D.tiers.slice(0, 8).forEach(function (t, i) {
     if (!L.cleanId(t.siren)) return;
-    // ligne 3 : entreprise cessée ; ligne 4 : dénomination différente au registre (écart de nom à vérifier)
-    reg.push([L.cleanId(t.siren), i === 3 ? 'etat_cesse' : 'trouve', i === 4 ? 'Ébénisterie Echo et Fils' : t.nom, i === 3 ? 'cessée' : 'active', t.adresse, t.code_postal, t.ville, '2026-10-05']);
+    // format de verif_registre.py (statut « ok », état « A » ou « C », colonne nom_registre) ; ligne 3 : entreprise cessée ; ligne 4 : dénomination différente au registre (écart de nom à vérifier)
+    reg.push([L.cleanId(t.siren), 'ok', i === 4 ? 'Ébénisterie Echo et Fils' : t.nom, i === 3 ? 'C' : 'A', t.adresse, t.code_postal, t.ville, '2026-10-05']);
   });
-  ecrire('registre-fictif.csv', Buffer.concat([Buffer.from([0xEF, 0xBB, 0xBF]), Buffer.from(L.toCsv(L.KINDS.registre.entetes, reg), 'utf8')]));
+  ecrire('registre-fictif.csv', Buffer.concat([Buffer.from([0xEF, 0xBB, 0xBF]), Buffer.from(L.toCsv(L.KINDS.registre.entetes.map(function (c) { return c === 'denomination_registre' ? 'nom_registre' : c; }), reg), 'utf8')]));
   // Date « série » de tableur (nombre pur) dans un export de factures
   ecrire('factures-date-serie.csv', 'numero;client;date_emission;date_echeance;montant_ht;montant_ttc;statut;date_paiement\r\nF-1;Client Fictif A;45000;2026-02-01;100;120;non payée;\r\nF-2;Client Fictif B;2026-01-10;2026-02-09;200;240;non payée;\r\n;;;;;;;\r\nF-4;;2026-01-10;2026-02-09;5;6;payée;2026-01-20\r\nF-5;Client Fictif C;n/a;2026-02-09;5;6;payée;2026-01-20\r\n');
   genererDossiersCabinet();
