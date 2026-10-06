@@ -30,7 +30,7 @@ export const MARQUEE = [
   'Secret professionnel',
   'RGPD',
   'Facture électronique',
-  'Article 4',
+  "Maîtrise de l'IA",
   "Charte d'usage",
   'Registre des outils',
   'Reporting mensuel',
@@ -54,6 +54,15 @@ export const FAQ = [
   ['Combien ça coûte ?', 'Le tarif est communiqué après l\'appel de découverte. La mise en place du service B se fait à prix fixe.'],
   ['Que se passe-t-il après la mise en place ?', 'Vous pouvez choisir un suivi : un point annuel pour le service A, un suivi mensuel pour le service B. Les deux sont optionnels.'],
   ['Travaillez-vous à distance ?', "Oui. L'atelier et le diagnostic se font en visio."],
+];
+
+// Section « pont » : [souci du cabinet, bénéfice obtenu]. Pas de chiffre, uniquement ce que l'offre promet.
+export const BRIDGE = [
+  ["Votre équipe utilise déjà l'IA, sans règles écrites.", "Une charte simple, une équipe alignée et une attestation de formation pour chacun."],
+  ["Un client ou un confrère vous demande comment vous encadrez l'IA.", 'Un dossier de preuve daté et à jour, prêt à montrer.'],
+  ['La même ressaisie, chaque mois, sur les factures de vos clients.', 'Une tâche répétitive qui disparaît : les champs sont pré-remplis, votre équipe valide.'],
+  ["La facture électronique s'installe et les questions de vos clients arrivent.", 'Des factures préparées pour le nouveau format, sans changer de logiciel.'],
+  ['Peur de confier des données clients à un outil.', 'Vos données restent sous votre contrôle, et tout peut se faire sur des exemples fictifs.'],
 ];
 
 // Retour d'expérience. Tant que `fictif` est true, la section s'affiche comme « cas illustratif ».

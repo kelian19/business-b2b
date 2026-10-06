@@ -37,7 +37,7 @@
 
 ## Prix et revenus
 
-- Modèle (abonnement, projet, licence) : À compléter (scénario mixte envisagé : 1 projet + abonnements)
+- Modèle (décision Kélian, 2026-10-06) : projet en une fois (hypothèse de prix : 450 à 1 000 €, hors diagnostic) suivi d'une petite « mise à niveau » optionnelle ; pas d'abonnement comme offre principale. Calcul : à 700 € le projet, il faut environ 2 projets par mois pour 1 400 € de chiffre d'affaires (hypothèse), soit plutôt du volume que du « high ticket ».
 - Prix : À compléter. Fourchettes du plan, non validées : audit 800–1 500 € + suivi 150–300 €/mois ; kit AI Act 500–1 500 € ; veille 80–150 €/mois.
 
 ## Acquisition
@@ -64,7 +64,7 @@ Chaque chiffre est une hypothèse tant qu'il n'a pas de source.
 
 ## Contexte réglementaire
 
-- AI Act : depuis le 2 août 2026, transparence (un chatbot se déclare comme IA) et formation du personnel ; obligations « haut risque » repoussées à fin 2027/2028. Source : blog Ingeni Solution (août 2026), à revérifier.
+- AI Act : l'article 4 (maîtrise de l'IA du personnel) a été assoupli par le règlement (UE) 2026/1744 (en vigueur le 27 juillet 2026, sources secondaires, à confirmer sur EUR-Lex) : devoir de prendre des mesures, sans niveau garanti ; depuis le 2 août 2026, transparence (un chatbot se déclare comme IA) ; obligations « haut risque » repoussées à fin 2027/2028. Source : blog Ingeni Solution (août 2026), à revérifier.
 
 ## Environnement technique
 

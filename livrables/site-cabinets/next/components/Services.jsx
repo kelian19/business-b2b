@@ -47,7 +47,7 @@ export default function Services() {
                 <div className="tier"><b>Kit complet</b><span>Tout l'Express, plus :</span></div>
                 <ul>
                   <li>Registre des outils IA utilisés : qui, quoi, pour quelles tâches, avec quelles données</li>
-                  <li>Dossier de preuve article 4 qui réunit l'ensemble</li>
+                  <li>Dossier de preuve de votre démarche, qui réunit l'ensemble</li>
                   <li>Point de suivi annuel, en option</li>
                 </ul>
               </div>

@@ -10,6 +10,7 @@ import Method from '@/components/Method';
 import SplitTitle from '@/components/SplitTitle';
 import Reveal from '@/components/Reveal';
 import Faq from '@/components/Faq';
+import Bridge from '@/components/Bridge';
 import CaseStudy from '@/components/CaseStudy';
 import GiantSlogan from '@/components/GiantSlogan';
 import { FAQ, SITE } from '@/lib/site';
@@ -27,6 +28,7 @@ export default function Page() {
         <Marquee />
         <div className="wrap">
           <Manifesto />
+          <Bridge />
 
           {/* Contexte */}
           <section aria-labelledby="ctx">
