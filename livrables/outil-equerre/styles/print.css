@@ -1,0 +1,46 @@
+/* Équerre : impression. Quelle que soit l'étape ou l'écran affiché, seule la section « rapport » est imprimée (A4).
+ * Aucun bouton, aucun champ, aucun menu. Couleurs conservées (print-color-adjust) ; texte noir sur blanc. */
+@page {
+  size: A4;
+  margin: 16mm 14mm 20mm;
+}
+
+@media print {
+  :root { --paper: #fff; --surface-2: #fff; --night-06: #fff; }
+  html { font-size: 100% !important; }
+  html, body { background: #fff !important; color: #000; margin: 0; padding: 0; }
+  body.presentation { font-size: 100%; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  /* Tout est masqué, sauf le rapport */
+  .banner, .head, .steps, .skip, .foot, .pastille, #live, dialog, .screen, .no-print, .secondary, .pn, .r-ecran-seul, .toolbar { display: none !important; }
+  #parcours > [role="tabpanel"]:not(#panel-report) { display: none !important; }
+  #parcours, #parcours[hidden], #panel-report, #panel-report[hidden] { display: block !important; }
+  main, #contenu { display: block; max-width: none; padding: 0; margin: 0; }
+  .wrap { max-width: none; padding: 0; }
+  #panel-report { padding: 0; }
+
+  .feuilles { display: block; padding: 0; background: #fff; border-radius: 0; gap: 0; }
+  .feuille {
+    width: auto; max-width: none; min-height: 0; padding: 0; margin: 0; box-shadow: none; border: 0; background: #fff;
+    display: block; font-size: 9.5pt; break-after: page; page-break-after: always;
+  }
+  .feuille:last-child { break-after: auto; page-break-after: auto; }
+  .feuille-couverture { min-height: 255mm; }
+  .feuille-couverture .feuille-corps { min-height: 250mm; }
+  .feuille-synthese, .feuille-plan { break-inside: avoid; page-break-inside: avoid; }
+  .r-bloc, .r-cadre, .r-action { break-inside: avoid; page-break-inside: avoid; }
+  .r-table { display: table; overflow: visible; }
+  .r-table thead { display: table-header-group; }
+  .r-table tr { break-inside: avoid; page-break-inside: avoid; }
+  .r-table thead th { background: #0F1E3D !important; color: #fff !important; }
+  .r-table th, .r-table td { border-bottom: 1px solid #3F4552; }
+  .r-h, .r-h2, .r-h3 { break-after: avoid; page-break-after: avoid; }
+
+  /* Pied de page répété : par défaut dans les marges de page (voir view-report.js) ; repli fixe pour les navigateurs sans marges de page */
+  .pied-repli .r-pied-print {
+    display: block; position: fixed; left: 0; right: 0; bottom: 0; padding: 2mm 28mm 0 0; box-sizing: border-box; border-top: .3mm solid #0F1E3D; background: #fff;
+    font-size: 8pt; line-height: 1.3; color: #111;
+  }
+  a { color: inherit; text-decoration: none; }
+}

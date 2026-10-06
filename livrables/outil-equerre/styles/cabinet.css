@@ -1,0 +1,32 @@
+/* Équerre : mode cabinet (portefeuille de dossiers). Rien ne repose sur la couleur seule : icône, texte ou motif toujours présents. */
+.cab-depot { margin-bottom: var(--sp-4); }
+.cab-progres:empty { display: none; }
+.cab-statut { margin: var(--sp-2) 0; min-height: 1.4em; }
+.cab-erreurs { margin-top: var(--sp-3); }
+.cab-err-t { font-weight: 700; }
+.cab-err-l { margin: 0 0 var(--sp-2); padding-left: 1.2rem; font-weight: 400; }
+.cab-outils { align-items: flex-end; gap: var(--sp-4); }
+.cab-filtre { flex: 1 1 16rem; max-width: 26rem; margin-bottom: 0; }
+#screen-cabinet .avertissement { margin-bottom: var(--sp-4); }
+.cab-vide { padding: var(--sp-8) var(--sp-4); max-width: 60ch; margin: 0 auto; }
+.cab-vide-ic { width: 2.4rem; height: 2.4rem; color: var(--night); }
+.cab-table th[scope="row"] { min-width: 11rem; }
+.cab-sect { display: block; margin-bottom: var(--sp-1); color: var(--muted); }
+.cab-nom-t { display: block; font-weight: 700; overflow-wrap: anywhere; margin-bottom: var(--sp-1); }
+.cab-actions { display: flex; flex-direction: column; align-items: flex-start; gap: var(--sp-2); min-width: 0; }
+.cab-table thead th { padding: 0; }
+.th-btn {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--sp-2); width: 100%; min-height: 44px; padding: var(--sp-2) var(--sp-3);
+  font: inherit; font-weight: 600; color: inherit; background: transparent; border: 0; cursor: pointer; text-align: left; white-space: normal; line-height: 1.25;
+}
+.cab-table th.num .th-btn { justify-content: flex-end; }
+.th-btn:hover { background: var(--night-90); }
+.th-btn:focus-visible { outline-color: var(--paper); outline-offset: -3px; box-shadow: inset 0 0 0 5px var(--night); }
+.th-fleche { font-size: .8em; }
+.cab-table thead th:last-child { padding: var(--sp-2) var(--sp-3); }
+@media (max-width: 700px) {
+  .cab-actions { min-width: 0; }
+}
+
+.cab-notes { display: block; margin-top: var(--sp-3); }
+.cab-notes p { margin: 0 0 var(--sp-1); }

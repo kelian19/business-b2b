@@ -1,0 +1,30 @@
+/* Équerre : aide (boutons « ? » contextuels, glossaire, écran d'aide). */
+.aide-btn {
+  display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; min-width: 44px; min-height: 44px; margin: -8px 0 -8px calc(var(--sp-2) * -1);
+  padding: 0; background: transparent; border: 0; cursor: pointer; color: var(--night); font: inherit; font-weight: 700;
+}
+.aide-btn span {
+  display: inline-flex; align-items: center; justify-content: center; width: 1.7rem; height: 1.7rem; border-radius: 50%; border: 2px solid var(--night);
+  background: var(--surface-2); line-height: 1; font-size: .9rem;
+}
+.aide-btn:hover span { background: var(--night); color: var(--paper); }
+.aide-btn[aria-expanded="true"] span { background: var(--night); color: var(--paper); }
+.aide-panneau {
+  border: 2px solid var(--night); border-radius: var(--r-2); background: var(--surface-2); padding: var(--sp-3) var(--sp-4); margin: 0 0 var(--sp-3); font-size: .93rem;
+}
+.aide-panneau p { margin: 0 0 var(--sp-1); }
+.aide-panneau-t { font-weight: 700; color: var(--night); }
+.glossaire { margin: 0 0 var(--sp-3); display: grid; gap: var(--sp-3); }
+.glossaire-item { padding-left: var(--sp-3); border-left: 4px solid var(--night); }
+.glossaire dt { font-family: var(--serif); font-weight: 700; color: var(--night); font-size: 1.05rem; }
+.glossaire dd { margin: var(--sp-1) 0 0; max-width: 90ch; }
+.liste-aide { font-size: 1rem; display: grid; gap: var(--sp-1); }
+.table-raccourcis { max-width: 46rem; }
+.table-raccourcis th[scope="row"] { white-space: nowrap; width: 8rem; }
+.visite-texte { font-size: 1.05rem; max-width: 60ch; }
+#screen-aide .card + .card { margin-top: var(--sp-4); }
+.titre-aide { display: flex; align-items: center; gap: var(--sp-1); min-width: 0; }
+.titre-aide h3, .titre-aide .label { margin: 0; }
+.card-entete { margin-bottom: var(--sp-3); }
+.card-entete .card-tete { margin-bottom: var(--sp-2); }
+.tt-dec-tete .titre-aide .label { margin: 0; }

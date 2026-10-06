@@ -36,3 +36,9 @@ prospection/outils/suivi-import.csv
 .netlify/
 prospection/outils/suivi-import*.csv
 prospection/outils/domaines-*.csv
+
+# Captures d'écran de contrôle : jamais versionnées (elles peuvent montrer des données clients)
+/r-*.png
+
+# Jeux d'essai régénérés à chaque lancement des tests
+livrables/outil-equerre/tests/fixtures/
