@@ -22,9 +22,9 @@
 
 ## Client cible
 
-- Secteur : cabinets d'expertise comptable (décision 2026-10-04, test commercial, pas encore validé par des retours)
-- Taille d'entreprise : petits cabinets indépendants, environ 2 à 20 personnes (hypothèse de ciblage)
-- Décideur (poste) : expert-comptable associé ou gérant (hypothèse, à valider en appel)
+- Secteur (2026-10-06) : offre e-facture → PME B2B (négoce, distribution, fabrication) et, en variante, cabinets comptables en sous-traitance ; offre Décodeur → PME qui veulent utiliser l'IA sans savoir par où commencer. Ancienne cible (2026-10-04) : cabinets comptables, offres A/B/C, non testée.
+- Taille d'entreprise : e-facture 20 à 249 salariés ; Décodeur 10 à 249 salariés (hypothèses de ciblage)
+- Décideur (poste) : DAF / RAF pour l'e-facture ; dirigeant ou responsable des opérations pour le Décodeur (hypothèses)
 
 ## Problème
 
@@ -32,7 +32,7 @@
 
 ## Offre
 
-- Ce qu'on vend : À compléter
+- Ce qu'on vend : (1) « Dossier facture électronique » : fichier clients/fournisseurs fiabilisé (SIREN, TVA, adresses, doublons) + contrôle de 3 modèles de factures au regard des 4 nouvelles mentions + rapport (livrables/offre/offre-v2-efacture.md) ; (2) « Le Décodeur » : besoin métier traduit en solution automatisée, cartographie de 3 à 5 tâches + prototype (livrables/offre/offre-v2-decodeur.md). Prix hypothèses : 490 € HT et 750 € HT, mise à niveau 150 € HT.
 - Différenciation : À compléter (atout possible : profil conformité/risque)
 - Comparaison avec une solution sans IA : À compléter
 
