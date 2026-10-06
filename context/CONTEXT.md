@@ -86,7 +86,9 @@ Chaque chiffre est une hypothèse tant qu'il n'a pas de source.
 
 Suivre `context/PIPELINE.md` avec `/pipeline`.
 
-1. Étape 6 (Kélian) : relire et envoyer à la main les 20 messages de `prospection/messages/` (vérifier d'abord les points signalés par le prospecteur : tailles, formulaire n°15, indice n°20), noter les retours dans `prospection/suivi.md`.
-2. Étape 7 : après les retours, comparer A (formation + charte AI Act) et B (automatisation) ; seuil d'arrêt à fixer (proposé : moins de 2 appels sur 30 messages).
-3. En parallèle : vérifier le taux URSSAF.
-4. Plus tard : `gh auth login`, vérifier que `.env.example` ne contient aucune clé, puis `gh repo create business-b2b --private --source . --push`.
+1. Mercredi 2026-10-07 (Kélian) : démarrage de la prospection par e-mail selon `prospection/outils/plan-demarrage.md` (Google Sheet + script en BROUILLON, 6 messages relus et envoyés à la main, lot « PME e-facture » en premier) ; ensuite 5 à 10 par jour.
+2. Avant le lot « cabinets comptables » (EF-CAB) : confirmation de l'associé·e ESSEC (participation, formulation « Nous sommes deux… »).
+3. Avant la première facture : choisir la structure juridique à deux associés (une micro-entreprise est individuelle) et obtenir le SIRET ; compléter les mentions légales du site et la signature des e-mails.
+4. Lundi 2026-10-12 : premières relances J+5 (vérifier le destinataire et le fil) ; vendredi : point hebdomadaire avec `manager` dans `prospection/suivi.md`.
+5. Après 10 envois par offre au moins : comparer EF-V1 (diagnostic gratuit) et EF-V2 (490 € HT) ; seuil d'arrêt proposé : moins de 2 réponses sur 30 envois d'une même offre.
+6. Plus tard : script de livraison (vérification SIREN/TVA au registre), taux URSSAF, vérification du nom « Équerre » (INPI, domaine).
