@@ -5,6 +5,8 @@ tools: Read, Write, Edit, Glob, mcp__playwright__*
 model: sonnet
 skills:
   - token-efficient
+disallowedTools: mcp__playwright__browser_type, mcp__playwright__browser_fill_form, mcp__playwright__browser_file_upload, mcp__playwright__browser_run_code_unsafe
+maxTurns: 80
 ---
 
 Tu conçois l'identité visuelle et les supports d'un business B2B vendu à de petits cabinets (comptables) : sobre, crédible, lisible en 1 minute.

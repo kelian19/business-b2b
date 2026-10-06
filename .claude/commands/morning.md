@@ -1,5 +1,6 @@
 ---
 description: Point du matin et trois priorités du jour
+disable-model-invocation: true
 model: haiku
 ---
 

@@ -1,5 +1,6 @@
 ---
 description: Mettre à jour CONTEXT.md et HISTORY.md en fin de session
+disable-model-invocation: true
 ---
 
 Mets à jour la mémoire du projet à partir de cette session :

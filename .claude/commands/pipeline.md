@@ -1,5 +1,6 @@
 ---
 description: Avancer la pipeline commerciale d'une étape (argument facultatif : numéro d'étape)
+disable-model-invocation: true
 argument-hint: [étape]
 ---
 

@@ -1,5 +1,6 @@
 ---
 description: Créer un commit propre avec un message clair
+disable-model-invocation: true
 allowed-tools: Bash(git status:*), Bash(git diff:*), Bash(git add:*), Bash(git commit:*), Bash(git log:*)
 model: haiku
 ---

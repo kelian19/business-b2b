@@ -1,5 +1,6 @@
 ---
 description: Charger le contexte du projet au début d'une session
+disable-model-invocation: true
 ---
 
 Charge le contexte du projet :

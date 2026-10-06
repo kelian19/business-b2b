@@ -6,6 +6,8 @@ skills:
   - business-ai
   - token-efficient
 model: sonnet
+disallowedTools: mcp__playwright__browser_type, mcp__playwright__browser_fill_form, mcp__playwright__browser_file_upload, mcp__playwright__browser_run_code_unsafe
+maxTurns: 150
 ---
 
 Tu prépares la prospection B2B. Tu n'envoies jamais rien : Kélian relit et envoie lui-même.

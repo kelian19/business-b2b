@@ -6,6 +6,8 @@ skills:
   - business-ai
   - token-efficient
 model: haiku
+disallowedTools: mcp__playwright__browser_type, mcp__playwright__browser_fill_form, mcp__playwright__browser_file_upload, mcp__playwright__browser_run_code_unsafe
+maxTurns: 60
 ---
 
 Tu collectes des informations publiques pour un business B2B (offres de reporting automatisé et de traitement de documents pour des entreprises peu familières de l'IA).

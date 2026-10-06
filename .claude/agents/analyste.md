@@ -1,8 +1,9 @@
 ---
 name: analyste
-description: Chiffrage et analyse de données : hypothèses de prix, CA/marge/bénéfice, coût d'acquisition, puis (après validation de l'offre) prototype de reporting ou tableau de bord. À utiliser pour tout calcul ou modèle chiffré ; écrit dans livrables/analyse/.
+description: "Chiffrage et analyse de données (hypothèses de prix, CA/marge/bénéfice, coût d'acquisition), puis, après validation de l'offre, prototype de reporting ou tableau de bord. À utiliser pour tout calcul ou modèle chiffré ; écrit dans livrables/analyse/."
 tools: Read, Write, Edit, Glob, Bash, Skill, mcp__context7__*
 model: sonnet
+maxTurns: 50
 skills:
   - actuarial-modeling
   - business-ai

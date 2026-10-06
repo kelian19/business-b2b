@@ -6,7 +6,7 @@
 
 - Kélian Kaddouri, MSc actuariat ENSAE (promo 2025/2026), stagiaire cyber-risque jusqu'en novembre 2026 (employeur à ne jamais citer dans les livrables), disponible en février 2027.
 - Profil actuaire × data scientist (cyber, DORA), deux ans de data science (Python, mise en production).
-- Temps disponible : 4-5 h/semaine (déclaré), contraint par le stage, le mémoire et la recherche d'emploi.
+- Temps disponible : 10 h/semaine (Kélian, 2026-10-06 ; avant : 4-5 h), contraint par le stage, le mémoire et la recherche d'emploi.
 - Objectifs : 1) mémoire d'actuariat et data science ; 2) business B2B IA à 1 000 €/mois de bénéfice ; 3) minimiser les tokens.
 
 ## Vision
@@ -15,6 +15,7 @@
 - Modèle : vente en ligne à des entreprises (B2B), en freelance/prestation d'abord, pas de logiciel.
 - Pistes : audit et suivi des coûts IA ; kit de conformité AI Act ; veille réglementaire automatisée (DORA, cyber, AI Act) ; automatisations sur mesure ; tableaux de bord data/sinistralité.
 - Pistes retenues (2026-10-04) : reporting automatisé et traitement de documents. Écartées : audit des coûts IA (cible trop informée sur l'IA), veille (demande un secteur maîtrisé, à reprendre plus tard pour le récurrent).
+- Abandonné (Kélian, 2026-10-06) : sites vitrines (trop de concurrence) et gestion de réseaux sociaux. Piste à l'étude : « dossier facture électronique » pour PME B2B (fiabilisation du fichier clients/fournisseurs + contrôle des 4 nouvelles mentions), voir context/recherche/2026-10-06-idees-demande.md.
 - Périmètre (Kélian, 2026-10-04) : rester uniquement sur les offres A (formation + charte IA), B (factures) et C (reporting) pour les cabinets comptables ; pas de freelance. Présentation publique : data scientist (Python, automatisation), sans actuariat ni cyber.
 - Exclusion (Kélian, 2026-10-04) : ne veut PAS vendre ni faire de missions d'actuariat ou de cyber-risque (ni en freelance, ni en offre). Pistes à écarter : veille DORA/cyber, audits cyber, missions d'actuaire. Reste ouvert : automatisation de tâches, traitement de documents, reporting, formation à l'usage de l'IA.
 - Contrainte : aucun secteur connu de l'intérieur, aucun réseau → cible à choisir par accessibilité (étape 1 de PIPELINE.md).
