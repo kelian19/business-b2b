@@ -1,32 +1,23 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
-  "model": "sonnet",
-  "disableClaudeAiConnectors": true,
   "permissions": {
-    "defaultMode": "default",
-    "disableBypassPermissionsMode": "disable",
     "allow": [
       "Bash(git status:*)",
       "Bash(git diff:*)",
       "Bash(git log:*)",
       "WebSearch"
     ],
-    "ask": [
-      "Bash(*git push*)",
-      "PowerShell(*git push*)",
-      "Bash(*netlify*)",
-      "PowerShell(*netlify*)",
-      "mcp__playwright__browser_type",
-      "mcp__playwright__browser_fill_form",
-      "mcp__playwright__browser_file_upload",
-      "mcp__playwright__browser_run_code_unsafe"
-    ],
     "deny": [
       "Read(**/.env)",
       "Read(**/.env.*)",
       "Read(./module-installs/**)"
-    ]
+    ],
+    "ask": [],
+    "defaultMode": "default",
+    "disableBypassPermissionsMode": "disable"
   },
+  "model": "sonnet",
+  "disableClaudeAiConnectors": true,
   "hooks": {
     "PreToolUse": [
       {
@@ -35,7 +26,9 @@
           {
             "type": "command",
             "command": "C:\\Program Files\\nodejs\\node.exe",
-            "args": ["${CLAUDE_PROJECT_DIR}/.claude/hooks/guard.js"],
+            "args": [
+              "${CLAUDE_PROJECT_DIR}/.claude/hooks/guard.js"
+            ],
             "timeout": 10
           }
         ]

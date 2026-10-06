@@ -6,6 +6,7 @@
 
 - Kélian Kaddouri, MSc actuariat ENSAE (promo 2025/2026), stagiaire cyber-risque jusqu'en novembre 2026 (employeur à ne jamais citer dans les livrables), disponible en février 2027.
 - Profil actuaire × data scientist (cyber, DORA), deux ans de data science (Python, mise en production).
+- Équipe (déclaration de Kélian, 2026-10-06) : deux associés. Kélian (data scientist, formé à l'ENSAE Paris) et un·e associé·e formé·e à l'ESSEC Business School (nom, statut et rôle à confirmer). Textes publics : « formé à », sans nom ni titre inventés.
 - Temps disponible : 10 h/semaine (Kélian, 2026-10-06 ; avant : 4-5 h), contraint par le stage, le mémoire et la recherche d'emploi.
 - Objectifs : 1) mémoire d'actuariat et data science ; 2) business B2B IA à 1 000 €/mois de bénéfice ; 3) minimiser les tokens.
 
