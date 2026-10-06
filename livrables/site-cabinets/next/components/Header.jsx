@@ -32,7 +32,7 @@ export default function Header() {
         <nav className={'main' + (open ? ' open' : '')} id="menu" aria-label="Navigation principale" onClick={(e) => { if (e.target.tagName === 'A') close(); }}>
           {NAV.map((l) => <a key={l.href} href={l.href}>{l.label}</a>)}
         </nav>
-        <a className="btn btn-cta" href="#appel">Réserver un appel</a>
+        <a className="btn btn-cta" href="#appel">Nous écrire</a>
       </div>
     </motion.header>
   );

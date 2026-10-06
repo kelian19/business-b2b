@@ -44,7 +44,7 @@ function Row({ w, b, reduced }) {
         <Span draw={draw} dotX={dotX} dotOp={dotOp} reduced={reduced} />
       </div>
       <motion.div className="bridge-benefit" style={reduced ? undefined : { opacity: benOp, x: benX }}>
-        <span className="bridge-tag">Avec moi</span>
+        <span className="bridge-tag">Avec nous</span>
         <p>{b}</p>
       </motion.div>
     </li>
@@ -56,15 +56,15 @@ export default function Bridge() {
   return (
     <section id="pont" aria-labelledby="pt">
       <span className="label">Le pont</span>
-      <SplitTitle id="pt" text="Entre vos soucis et un cabinet plus serein, un pont." />
-      <p className="bridge-intro">Je ne remplace pas votre logiciel ni votre équipe : je fais le lien entre ce qui vous pèse aujourd'hui et ce que vous voulez obtenir. Voici, souci par souci, ce que vous gagnez.</p>
+      <SplitTitle id="pt" text="Entre vos soucis et ce que vous recevez, un pont." />
+      <p className="bridge-intro">Nous ne remplaçons ni votre logiciel ni votre équipe : nous faisons le lien entre ce qui vous pèse aujourd'hui et ce que vous voulez obtenir. Voici, souci par souci, ce que vous recevez.</p>
       <div className="bridge-heads" aria-hidden="true">
         <span>Aujourd'hui</span><span>Le pont</span><span>Après</span>
       </div>
       <ul className="bridge-list">
         {BRIDGE.map(([w, b]) => <Row key={w} w={w} b={b} reduced={reduced} />)}
       </ul>
-      <p className="note">Schéma qualitatif : aucun gain chiffré n'est annoncé. Le temps gagné se mesure avec vous pendant le diagnostic.</p>
+      <p className="note">Schéma qualitatif : aucun gain chiffré n'est annoncé. Le temps gagné s'estime avec vous à partir de vos réponses.</p>
     </section>
   );
 }

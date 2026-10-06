@@ -3,8 +3,8 @@ import { useState } from 'react';
 
 const fmt = (n) => n.toLocaleString('fr-FR', { maximumFractionDigits: 1 });
 const FIELDS = [
-  ['Factures traitées par mois', 'exemple : 200'],
-  ['Minutes par facture', 'exemple : 4'],
+  ['Nombre de fois où la tâche revient par mois', 'exemple : 200'],
+  ['Minutes par occurrence', 'exemple : 4'],
   ['Part que vous jugez automatisable (%)', 'exemple : 50'],
 ];
 
@@ -13,11 +13,17 @@ export default function Calculator() {
   const [v, setV] = useState(['', '', '']);
   const set = (i, val) => setV((a) => a.map((x, j) => (j === i ? val : x)));
   let bad = null, out = null;
-  if (v.every((x) => x.trim() !== '')) {
-    const n = v.map((x) => Number(x.trim().replace(',', '.')));
-    n.forEach((x, i) => { if (!isFinite(x) || x < 0) bad = bad || { i, m: 'Entrez un nombre positif ou nul.' }; });
-    if (!bad && n[2] > 100) bad = { i: 2, m: 'La part automatisable ne peut pas dépasser 100 %.' };
-    if (!bad) { const month = ((n[0] * n[1]) / 60) * (n[2] / 100); out = { month, year: month * 12 }; }
+  const num = (x) => (/^\d+([.,]\d+)?$/.test(x.trim()) ? Number(x.trim().replace(',', '.')) : NaN);
+  v.forEach((x, i) => {
+    if (x.trim() === '' || bad) return;
+    const n = num(x);
+    if (!isFinite(n)) bad = { i, m: 'Entrez un nombre positif ou nul.' };
+    else if (i === 2 && n > 100) bad = { i, m: 'La part automatisable ne peut pas dépasser 100 %.' };
+  });
+  if (!bad && v.every((x) => x.trim() !== '')) {
+    const n = v.map(num);
+    const month = ((n[0] * n[1]) / 60) * (n[2] / 100);
+    out = { month, year: month * 12 };
   }
   return (
     <form className="panel" noValidate onSubmit={(e) => e.preventDefault()}>

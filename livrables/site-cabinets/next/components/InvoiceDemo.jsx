@@ -2,11 +2,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { INVOICE as I, QR } from '@/lib/site';
 
-const KEYS = ['fournisseur', 'client', 'numero', 'date', 'echeance', 'lignes', 'ht', 'tva', 'ttc', 'iban'];
+const KEYS = ['fournisseur', 'client', 'siren', 'nature', 'numero', 'date', 'echeance', 'lignes', 'ht', 'tva', 'ttc', 'iban'];
 const nf = new Intl.NumberFormat('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const money = (n) => nf.format(n) + ' €';
 const LABEL = {
-  fournisseur: ['Fournisseur', I.fournisseur], client: ['Client', I.client], numero: ['Numéro', I.numero],
+  fournisseur: ['Fournisseur', I.fournisseur], client: ['Client', I.client], siren: ['SIREN client', I.siren], nature: ['Nature', I.nature], numero: ['Numéro', I.numero],
   date: ['Date', I.date], echeance: ['Échéance', I.echeance], lignes: ['Lignes', `${I.lignes.length} lignes détectées`],
   ht: ['Total HT', money(I.ht)], tva: ['TVA 20 %', money(I.tva)], ttc: ['Total TTC', money(I.ttc)], iban: ['IBAN', I.iban],
 };
@@ -16,10 +16,13 @@ const Tick = () => <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l
 function computeChecks() {
   const lines = I.lignes.map(([, q, pu]) => q * pu);
   const sum = lines.reduce((a, b) => a + b, 0);
+  const siren = I.siren.replace(/\s/g, '');
   return [
-    { ok: Math.abs(sum - I.ht) < 0.005, txt: lines.map((x) => nf.format(x)).join(' + ') + ' = ' + money(sum) },
-    { ok: Math.abs(I.ht + I.tva - I.ttc) < 0.005, txt: nf.format(I.ht) + ' + ' + nf.format(I.tva) + ' = ' + money(I.ttc) },
-    { ok: Math.abs(I.ht * 0.2 - I.tva) < 0.005, txt: '20 % de ' + nf.format(I.ht) + ' = ' + money(I.ht * 0.2) },
+    { label: 'SIREN du client présent (9 chiffres)', ok: /^\d{9}$/.test(siren), txt: I.siren },
+    { label: "Nature de l'opération indiquée", ok: I.nature.trim() !== '', txt: I.nature },
+    { label: 'Somme des lignes = Total HT', ok: Math.abs(sum - I.ht) < 0.005, txt: lines.map((x) => nf.format(x)).join(' + ') + ' = ' + money(sum) },
+    { label: 'HT + TVA = TTC', ok: Math.abs(I.ht + I.tva - I.ttc) < 0.005, txt: nf.format(I.ht) + ' + ' + nf.format(I.tva) + ' = ' + money(I.ttc) },
+    { label: 'TVA = 20 % du HT', ok: Math.abs(I.ht * 0.2 - I.tva) < 0.005, txt: '20 % de ' + nf.format(I.ht) + ' = ' + money(I.ht * 0.2) },
   ];
 }
 
@@ -61,7 +64,7 @@ export default function InvoiceDemo() {
     <div className="iv">
       <div className="paperwrap">
         <span className="fict">Document fictif, démo</span>
-        <div className="paper" role="img" aria-label="Facture fictive de Zorglub et Fils, numéro F-2026-0417, datée du 14 septembre 2026, trois lignes pour 1 250 euros hors taxes, 250 euros de TVA, 1 500 euros toutes taxes comprises">
+        <div className="paper" role="img" aria-label="Facture fictive de Zorglub et Fils à la Société Exemple, numéro F-2026-0417, datée du 14 septembre 2026, SIREN du client fictif, prestation de services, trois lignes pour 1 250 euros hors taxes, 250 euros de TVA, 1 500 euros toutes taxes comprises">
           <div className={'pscan' + (phase === 'running' && dur ? ' go' : '')} style={{ '--dur': dur + 'ms' }} aria-hidden="true" />
           <div className="wm" aria-hidden="true">FICTIF</div>
           <div className="ph">
@@ -76,7 +79,8 @@ export default function InvoiceDemo() {
               <div><span>Échéance</span><b className={f('echeance')} data-tag="Échéance">{I.echeance}</b></div>
             </div>
           </div>
-          <div className="client"><span>Facturé à</span><b className={f('client')} data-tag="Client">{I.client}</b><small>3 avenue des Tests, 00000 Ville</small></div>
+          <div className="client"><span>Facturé à</span><b className={f('client')} data-tag="Client">{I.client}</b><small>3 avenue des Tests, 00000 Ville</small><small>SIREN : <b className={f('siren')} data-tag="SIREN client">{I.siren}</b></small></div>
+          <div className="nature"><span>Nature de l'opération</span> <b className={f('nature')} data-tag="Nature">{I.nature}</b></div>
           <div className={f('lignes') + ' lw'} data-tag="3 lignes détectées">
             <table className="lt">
               <thead><tr><th>Désignation</th><th>Qté</th><th>PU HT</th><th>Total HT</th></tr></thead>
@@ -113,7 +117,7 @@ export default function InvoiceDemo() {
         </ul>
         <div className="dph" style={{ marginTop: 20 }}>Contrôles automatiques</div>
         <ul className="checks">
-          {['Somme des lignes = Total HT', 'HT + TVA = TTC', 'TVA = 20 % du HT'].map((c, j) => {
+          {results.map(({ label: c }, j) => {
             const done = nChecks > j;
             return (
               <li key={c} className={done ? 'done' : ''}>
@@ -126,7 +130,7 @@ export default function InvoiceDemo() {
         <div className={'final2' + (phase === 'done' && allOk ? ' ok' : '')} aria-live="polite">
           {phase === 'idle' && "En attente d'extraction"}
           {phase === 'running' && 'Lecture en cours'}
-          {phase === 'done' && (allOk ? <><Tick /><span>3 contrôles réussis. À relire et valider par votre équipe.</span></> : 'Écart détecté : à vérifier par votre équipe.')}
+          {phase === 'done' && (allOk ? <><Tick /><span>{results.length} contrôles réussis. À relire et valider par votre équipe.</span></> : 'Écart détecté : à vérifier par votre équipe.')}
         </div>
         <div className="actions">
           {phase !== 'done' && <button ref={goBtn} className="btn btn-ghost btn-sm" type="button" disabled={phase === 'running'} onClick={run}>Extraire</button>}

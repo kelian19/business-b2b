@@ -1,7 +1,7 @@
 # Équerre : version Next.js animée
 
-Même contenu, mêmes outils (démo, calculateur, auto-diagnostic) et même direction (éditorial suisse, bleu nuit) que `../index.html`, avec des animations liées au défilement.
-`../index.html` n'est pas modifié : les deux versions coexistent.
+Site animé des deux offres v2 (Dossier facture électronique, Le Décodeur), pour dirigeants et DAF de PME (cabinets comptables en second public). Éditorial suisse, bleu nuit, animations liées au défilement.
+`../index.html` (ancienne page, anciennes offres) n'est pas modifié : il ne correspond plus à ce site.
 
 ## Lancer
 ```
@@ -12,8 +12,8 @@ npm start        # sert out/ en local
 ```
 
 ## Modifier
-- `lib/site.js` : coordonnées, navigation, bandeau, manifeste, méthode, FAQ, facture fictive. Lien de rendez-vous : `SITE.bookingUrl` (vide = marqueur « À COMPLÉTER »).
-- `app/page.jsx` : textes des autres sections et mentions légales.
+- `lib/site.js` : contact (e-mail unique), navigation, bandeau, manifeste, méthode, FAQ, pont, facture fictive.
+- `app/page.jsx` : repères datés, textes des autres sections et mentions légales. `components/Services.jsx` : les deux offres. `components/Team.jsx` : équipe (champs « À COMPLÉTER » pour l'associé·e).
 - `app/globals.css` : styles. Les tons sont définis en haut (`:root`).
 
 ## Animations (composants)
@@ -23,3 +23,5 @@ Avec `prefers-reduced-motion`, tout devient statique.
 ## Mise en ligne
 Netlify : dossier de publication `out`, commande `npm run build`. Le site reste en `noindex` (voir `app/layout.jsx`) tant que le lancement n'est pas validé.
 Les polices sont auto-hébergées : le texte « Cookies et polices » des mentions légales a été adapté en conséquence.
+
+- Nom « Équerre » provisoire : INPI et domaine non vérifiés. Mentions légales (éditeur, structure à deux associés, adresse, moyen de contact direct) à faire valider par un juriste avant publication.

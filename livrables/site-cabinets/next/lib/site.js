@@ -3,89 +3,74 @@
 
 export const SITE = {
   name: 'Équerre', // nom provisoire : INPI et domaine à vérifier
-  email: 'keliankaddouripro@gmail.com',
-  emailSubject: 'Appel de 15 min',
-  phone: '+33 6 02 43 65 99',
-  phoneHref: 'tel:+33602436599',
-  bookingUrl: '', // lien Calendly / Cal.com : vide = marqueur « À COMPLÉTER » affiché
+  email: 'keliankaddouripro@gmail.com', // contact unique
+  emailSubject: 'Premier échange',
 };
 
 export const NAV = [
-  { href: '#services', label: 'Services' },
+  { href: '#services', label: 'Offres' },
   { href: '#demo', label: 'Démo' },
   { href: '#methode', label: 'Méthode' },
-  { href: '#confidentialite', label: 'Confidentialité' },
+  { href: '#equipe', label: 'Équipe' },
+  { href: '#confidentialite', label: 'Données' },
   { href: '#faq', label: 'FAQ' },
 ];
 
+// Coches du héros : ce que contiennent les deux offres, rien d'autre.
 export const LEDGER = [
-  "Règles d'usage écrites",
-  'Secret professionnel préservé',
-  'Trace datée et dossier à jour',
-  'Une tâche répétitive en moins',
+  'Fichier clients fiabilisé',
+  '4 nouvelles mentions contrôlées',
+  '3 à 5 tâches répétitives cartographiées',
+  'Un prototype sur la première',
 ];
 
 // Bandeau défilant : thèmes déjà présents dans le contenu du site
 export const MARQUEE = [
-  'Secret professionnel',
-  'RGPD',
   'Facture électronique',
-  "Maîtrise de l'IA",
-  "Charte d'usage",
-  'Registre des outils',
-  'Reporting mensuel',
-  'Une tâche en moins',
+  'SIREN',
+  '4 nouvelles mentions',
+  'Septembre 2027',
+  'Le Décodeur',
+  'Prix fixe',
+  'RGPD',
+  'Sur un export',
 ];
 
 export const MANIFESTO =
-  "Votre équipe utilise déjà l'IA. Donnons-lui des règles claires, supprimons une tâche répétitive, et gardez la preuve. Vous gardez vos outils, votre équipe relit tout.";
+  "Deux sujets, un même point de départ : vos données et vos tâches de tous les jours. Nous contrôlons vos fichiers et vos factures pour que vous sachiez quoi corriger avant septembre 2027, et nous vous disons franchement où l'IA vous fait gagner du temps, ou pas. Prix fixe, annoncé avant de commencer.";
 
 export const METHOD = [
-  { n: '1', d: '15 minutes', t: 'Appel découverte', p: "On parle de votre cabinet, de ce que fait déjà l'équipe avec l'IA, et de ce qui vous prend du temps. Je vous dis honnêtement si je peux vous aider." },
-  { n: '2', d: 'Environ 1 h 30', t: 'Diagnostic ou atelier', p: "Service A : atelier d'équipe sur les usages de l'IA. Service B : diagnostic pour choisir la tâche et mesurer son coût actuel." },
-  { n: '3', d: '2 à 3 semaines', t: 'Mise en place et suivi', p: 'Livraison à prix fixe, test sur un dossier, puis suivi en option. Votre équipe relit tout.' },
+  { n: '1', d: 'Par e-mail', t: 'Premier échange', p: "Vous nous écrivez en une ligne. Nous répondons avec les modalités et le prix fixe. Si vous préférez parler, une courte visio est possible, sur demande." },
+  { n: '2', d: '5 jours ouvrés ou 2 semaines (hypothèses)', t: 'Diagnostic et livraison à prix fixe', p: "Dossier facture électronique : un fichier fiabilisé, le contrôle de 3 modèles de factures et un rapport. Le Décodeur : questionnaire écrit, cartographie des tâches, recommandations et prototype." },
+  { n: '3', d: 'En option', t: 'Mise à niveau', p: "Un nouveau contrôle avant septembre 2027 pour le dossier, un ajustement du prototype après quelques semaines d'usage pour le Décodeur. Vous décidez." },
 ];
 
 export const FAQ = [
-  ['Est-ce une mise en conformité garantie ?', 'Non. Je ne délivre ni certification ni garantie de conformité. Vous repartez avec des règles écrites, une trace datée et un dossier à jour, que votre cabinet garde sous sa responsabilité.'],
-  ['Faut-il nous donner accès à nos données ?', "Pas pour commencer. L'atelier et le diagnostic peuvent se faire avec des exemples fictifs. Avant tout accès à des données réelles, nous signons un contrat de sous-traitance des données (article 28 du RGPD)."],
-  ['Remplacez-vous notre logiciel ?', 'Non. Vous gardez vos outils. Les automatisations se branchent dessus.'],
-  ['Combien de temps cela prend-il ?', 'Service A, formule Express : moins de 2 semaines. Service B : un diagnostic d\'environ 1 h 30, puis une mise en place de 2 à 3 semaines environ, testée sur un dossier avant généralisation.'],
-  ['Combien ça coûte ?', 'Le tarif est communiqué après l\'appel de découverte. La mise en place du service B se fait à prix fixe.'],
-  ['Que se passe-t-il après la mise en place ?', 'Vous pouvez choisir un suivi : un point annuel pour le service A, un suivi mensuel pour le service B. Les deux sont optionnels.'],
-  ['Travaillez-vous à distance ?', "Oui. L'atelier et le diagnostic se font en visio."],
+  ['Est-ce une mise en conformité garantie ?', "Non. Nous ne garantissons pas la conformité de votre entreprise, nous ne donnons ni conseil fiscal ni conseil juridique et nous ne promettons pas d'éviter une amende. Nous listons des points à corriger : la décision reste la vôtre."],
+  ['Quelles données vous faut-il, et que devient mon fichier ?', "Nous travaillons sur un export, sans accès à vos logiciels. Pour le dossier : une ligne par client ou fournisseur, sans noms de contacts. Si le fichier contient des entrepreneurs individuels (des personnes physiques), nous signons d'abord un contrat de sous-traitance des données (article 28 du RGPD). Vos fichiers sont supprimés après la livraison, avec confirmation par e-mail."],
+  ['Vendez-vous une plateforme agréée ?', "Non. Nous ne vendons aucune plateforme : nous sommes neutres. Le dossier vaut quelle que soit celle que vous choisirez."],
+  ['Combien ça coûte ?', "Le prix est fixe et annoncé avant de commencer, dans notre première réponse."],
+  ['Le Décodeur trouve-t-il toujours une solution ?', "Non, et nous préférons vous le dire. Il peut conclure qu'un outil existant suffit, ou que l'automatisation ne vaut pas le coup pour une tâche donnée. La cartographie l'indique alors clairement, et précise où une relecture humaine reste nécessaire."],
+  ['Combien de temps cela prend-il ?', "Délais indicatifs, à confirmer sur les premiers dossiers : environ 5 jours ouvrés pour le dossier facture électronique, à partir de l'export et de 3 de vos modèles de factures ; environ 2 semaines pour le Décodeur."],
+  ["Corrigez-vous nos données, installez-vous un logiciel ?", "Non. Pour le dossier, vous corrigez (ou votre prestataire) à partir du rapport. Pour le Décodeur, nous ne revendons aucun outil : vous achetez vous-même les outils éventuels, dont le coût figure dans la cartographie. Une mise en place de la solution retenue est possible en option, sur devis établi après le Décodeur."],
+  ['Travaillez-vous à distance ?', "Oui. Tout se fait par e-mail et sur des fichiers exportés. Une courte visio est possible si vous la souhaitez."],
 ];
 
-// Section « pont » : [souci du cabinet, bénéfice obtenu]. Pas de chiffre, uniquement ce que l'offre promet.
+// Section « pont » : [souci du dirigeant, bénéfice obtenu]. Pas de chiffre, uniquement ce que les offres promettent.
 export const BRIDGE = [
-  ["Votre équipe utilise déjà l'IA, sans règles écrites.", "Une charte simple, une équipe alignée et une attestation de formation pour chacun."],
-  ["Un client ou un confrère vous demande comment vous encadrez l'IA.", 'Un dossier de preuve daté et à jour, prêt à montrer.'],
-  ['La même ressaisie, chaque mois, sur les factures de vos clients.', 'Une tâche répétitive qui disparaît : les champs sont pré-remplis, votre équipe valide.'],
-  ["La facture électronique s'installe et les questions de vos clients arrivent.", 'Des factures préparées pour le nouveau format, sans changer de logiciel.'],
-  ['Peur de confier des données clients à un outil.', 'Vos données restent sous votre contrôle, et tout peut se faire sur des exemples fictifs.'],
+  ["Le SIREN et l'adresse de livraison de vos clients ne sont pas tous fiables dans votre fichier.", 'Un fichier fiabilisé : chaque ligne est marquée « vérifiée » ou « à trancher ».'],
+  ['Vous ne savez pas si vos modèles de factures portent les 4 nouvelles mentions.', 'Le contrôle de 3 de vos modèles et un rapport des points à corriger avant le 1er septembre 2027.'],
+  ["Vous voulez utiliser l'IA mais ne savez pas par où commencer.", 'Une cartographie de 3 à 5 tâches répétitives, avec une solution recommandée, son coût estimé et ses risques pour chacune.'],
+  ['Une tâche répétitive vous prend du temps chaque semaine.', 'Un prototype fonctionnel sur la tâche prioritaire : vous voyez la solution marcher avant de décider.'],
+  ["Vous hésitez à confier vos données.", "Un travail sur un export, sans accès à vos logiciels, et des fichiers supprimés après la livraison."],
 ];
-
-// Retour d'expérience. Tant que `fictif` est true, la section s'affiche comme « cas illustratif ».
-// Quand un vrai cabinet a donné son accord écrit : passer `fictif` à false, remplacer les textes
-// et renseigner `resultat`, `citation` et `accord`. N'inventez ni chiffre ni citation.
-export const CASE = {
-  fictif: true,
-  titre: "Supprimer la ressaisie des factures fournisseurs",
-  profil: 'Cabinet fictif de quelques personnes',
-  etapes: [
-    { k: 'Contexte', d: 'Au départ', t: 'Chaque mois, la même ressaisie', p: "Chaque mois, l'équipe retape à la main les factures fournisseurs de ses clients : fournisseur, date, montants. C'est long, répétitif, et une erreur de frappe passe vite." },
-    { k: 'Diagnostic', d: 'Environ 1 h 30 en visio', t: 'Une seule tâche choisie', p: "On choisit ensemble la ressaisie des factures, et on mesure avec l'équipe le temps qu'elle prend aujourd'hui. Le logiciel comptable reste en place." },
-    { k: 'Mise en place', d: '2 à 3 semaines environ', t: 'Un outil qui pré-remplit', p: "L'outil lit chaque facture, pré-remplit les champs et vérifie que HT + TVA = TTC. Il est testé sur un dossier avant d'être étendu aux autres." },
-    { k: 'Au quotidien', d: 'Ensuite', t: "L'équipe valide, ne ressaisit plus", p: "Chaque facture pré-remplie est relue par l'équipe, qui garde la responsabilité du dossier. Le gain de temps se compare à la mesure faite au diagnostic." },
-  ],
-  resultat: '', // résultat mesuré, à publier avec l'accord écrit du cabinet
-  citation: '', // propos du cabinet, avec accord écrit
-};
 
 // Facture fictive de la démo. Les totaux sont recalculés dans les contrôles.
 export const INVOICE = {
   fournisseur: 'Zorglub & Fils',
-  client: 'Cabinet Exemple',
+  client: 'Société Exemple',
+  siren: '123 456 789', // fictif
+  nature: 'Prestation de services',
   numero: 'F-2026-0417',
   date: '14/09/2026',
   echeance: '14/10/2026',

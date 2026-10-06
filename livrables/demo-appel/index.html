@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Équerre : démonstration facture électronique et reporting</title>
+<meta name="description" content="Démonstration sur données fictives : contrôle d'un fichier clients et fournisseurs, mentions des factures, reporting mensuel.">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="banner" id="banner" role="status">
+  <strong id="banner-main">Données fictives de démonstration</strong>
+  <span id="banner-extra" class="banner-extra"></span>
+</div>
+
+<header class="head">
+  <div class="wrap head-in">
+    <div>
+      <p class="brand">Équerre</p>
+      <h1>Votre fichier tiers et vos factures, avant la bascule de septembre 2027</h1>
+    </div>
+    <button type="button" class="btn btn-ghost" id="btn-print">Imprimer / enregistrer en PDF</button>
+  </div>
+</header>
+
+<p class="print-only print-head">Équerre : rapport de démonstration. Données fictives.</p>
+
+<main class="wrap">
+
+  <div class="tabs" role="tablist" aria-label="Sections de la démonstration">
+    <button type="button" role="tab" id="tab-tiers" aria-controls="panel-tiers" aria-selected="true" tabindex="0">Fichier clients et fournisseurs</button>
+    <button type="button" role="tab" id="tab-mentions" aria-controls="panel-mentions" aria-selected="false" tabindex="-1">Mentions des factures</button>
+    <button type="button" role="tab" id="tab-reporting" aria-controls="panel-reporting" aria-selected="false" tabindex="-1">Reporting mensuel</button>
+  </div>
+
+  <!-- ===== Fichier clients et fournisseurs ===== -->
+  <section role="tabpanel" id="panel-tiers" aria-labelledby="tab-tiers" tabindex="0">
+    <div class="panel-top">
+      <div>
+        <h2>Fichier clients et fournisseurs</h2>
+        <p class="lead">Une ligne par client ou fournisseur : la démo repère ce qui bloquerait ou fausserait vos factures (SIREN, TVA, adresses, doublons).</p>
+      </div>
+      <p class="source" id="tiers-source"></p>
+    </div>
+
+    <div class="toolbar no-print">
+      <input type="file" id="file-tiers" class="visually-hidden" accept=".csv,.txt,text/csv">
+      <label class="btn btn-primary" for="file-tiers">Charger votre propre fichier (CSV)</label>
+      <button type="button" class="btn" id="tpl-tiers">Télécharger le modèle CSV vide</button>
+      <button type="button" class="btn" id="export-tiers">Exporter les anomalies (CSV)</button>
+      <button type="button" class="btn btn-ghost" id="reset-tiers" hidden>Revenir aux données fictives</button>
+    </div>
+    <p class="privacy no-print">Le fichier reste dans votre navigateur, rien n'est envoyé. Séparateur point-virgule ou virgule, encodage UTF-8 ou Windows.</p>
+    <p class="notice" id="tiers-msg" role="status" hidden></p>
+
+    <div class="score-row">
+      <div class="card score">
+        <p class="label">Lignes sans anomalie (exemple fictif)</p>
+        <p class="score-val"><span id="tiers-score">0</span><span class="unit"> %</span></p>
+        <div class="bar" aria-hidden="true"><span id="tiers-bar"></span></div>
+        <p class="small" id="tiers-score-text"></p>
+      </div>
+      <div class="card filters-card">
+        <p class="label" id="filters-label">Filtrer par type d'anomalie</p>
+        <div class="chips" id="tiers-chips" role="group" aria-labelledby="filters-label"></div>
+        <p class="small">Le score est la part des lignes sans anomalie. Une adresse de livraison différente est une note, pas une anomalie.</p>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table class="table" id="tiers-table">
+        <caption class="visually-hidden">Lignes du fichier clients et fournisseurs avec leurs anomalies</caption>
+        <thead>
+          <tr><th scope="col">Ligne</th><th scope="col">Type</th><th scope="col">Nom</th><th scope="col" class="col-siren">SIREN</th><th scope="col">Anomalies</th><th scope="col"><span class="visually-hidden">Détail</span></th></tr>
+        </thead>
+        <tbody id="tiers-body"></tbody>
+      </table>
+    </div>
+    <p class="small" id="tiers-count" aria-live="polite"></p>
+    <p class="small">Ligne = numéro de ligne dans le fichier (l'en-tête est la ligne 1).</p>
+    <p class="note">Ici, « SIREN valide » veut dire : 9 chiffres et clé de contrôle correcte. Cela ne prouve pas que l'entreprise existe : la vérification au registre fait partie de la prestation, pas de cette démonstration.</p>
+  </section>
+
+  <!-- ===== Mentions des factures ===== -->
+  <section role="tabpanel" id="panel-mentions" aria-labelledby="tab-mentions" tabindex="0" hidden>
+    <div class="panel-top">
+      <div>
+        <h2>Mentions des factures</h2>
+        <p class="lead">Trois factures fictives passées au crible des 4 nouvelles mentions obligatoires depuis le 1er septembre 2026, puis d'une liste de mentions courantes.</p>
+      </div>
+      <p class="source">Source : factures fictives de démonstration</p>
+    </div>
+
+    <div class="inv-pick no-print" role="group" aria-label="Choisir une facture" id="inv-pick"></div>
+
+    <div class="inv-grid">
+      <article class="card invoice" id="inv-card" aria-label="Facture fictive"></article>
+      <div class="card check" id="inv-check"></div>
+    </div>
+  </section>
+
+  <!-- ===== Reporting mensuel ===== -->
+  <section role="tabpanel" id="panel-reporting" aria-labelledby="tab-reporting" tabindex="0" hidden>
+    <div class="panel-top">
+      <div>
+        <h2>Reporting mensuel</h2>
+        <p class="lead">À partir d'un simple export de factures : chiffre d'affaires, clients principaux, encours et retards de paiement.</p>
+      </div>
+      <p class="source" id="rep-source"></p>
+    </div>
+
+    <div class="toolbar no-print">
+      <input type="file" id="file-rep" class="visually-hidden" accept=".csv,.txt,text/csv">
+      <label class="btn btn-primary" for="file-rep">Charger votre propre fichier (CSV)</label>
+      <button type="button" class="btn" id="tpl-rep">Télécharger le modèle CSV vide</button>
+      <button type="button" class="btn btn-ghost" id="reset-rep" hidden>Revenir aux données fictives</button>
+      <label class="date-field" for="ref-date">Date de référence
+        <input type="date" id="ref-date">
+      </label>
+    </div>
+    <p class="privacy no-print">Le fichier reste dans votre navigateur, rien n'est envoyé.</p>
+    <p class="notice" id="rep-msg" role="status" hidden></p>
+
+    <div class="cards" id="rep-cards"></div>
+
+    <div class="card chart-card">
+      <h3 id="chart-title">Chiffre d'affaires hors taxe par mois</h3>
+      <div id="chart" class="chart"></div>
+      <details class="values">
+        <summary>Voir les valeurs du graphique</summary>
+        <table class="table small-table" id="chart-table"></table>
+      </details>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <h3>Cinq premiers clients</h3>
+        <div class="table-wrap"><table class="table" id="top-table"></table></div>
+      </div>
+      <div class="card">
+        <h3>Factures échues, par ancienneté</h3>
+        <div class="table-wrap"><table class="table" id="aging-table"></table></div>
+        <p class="small" id="aging-note"></p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p><strong>Démonstration, sans valeur de conseil.</strong> Cet outil illustre une méthode sur des données fictives : il ne constitue pas un conseil fiscal ni juridique et ne garantit aucune conformité. Aucun gain n'est promis. Les noms d'entreprises sont inventés (sauf si vous avez chargé votre propre fichier) ; les SIREN sont générés pour la démo et ne correspondent pas aux entreprises affichées.</p>
+    <p>Les calendriers et les mentions cités sont ceux de la facturation électronique en France (réception obligatoire depuis le 1er septembre 2026, émission pour les PME, TPE et micro-entreprises le 1er septembre 2027). Vérifiez votre situation avec votre expert-comptable.</p>
+  </div>
+</footer>
+
+<script src="logic.js"></script>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

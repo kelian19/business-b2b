@@ -42,17 +42,17 @@ export default function Hero() {
       <div className={reduced ? 'hero-stick static' : 'hero-stick'}>
         <motion.div className="hero-card" style={s}>
           <div className="hero-inner">
-            <p className="hero-tag" aria-hidden="true">{SITE.name} · IA pour cabinets comptables</p>
+            <p className="hero-tag" aria-hidden="true">{SITE.name} · Facture électronique et IA pour PME</p>
             <div className="hero-grid">
               <div>
                 <motion.div className="hero-title" style={t}>
-                  <h1 id="h1">Des règles claires pour l'IA de votre cabinet.</h1>
+                  <h1 id="h1"><span className="h1-l">Facture électronique : sachez quoi corriger.</span>{' '}<span className="h1-l">IA : sachez où elle sert.</span></h1>
                 </motion.div>
                 <motion.div style={sub}>
-                  <p className="sub">Votre équipe utilise déjà l'IA. Donnons-lui un cadre simple, et supprimons une tâche répétitive.</p>
+                  <p className="sub">Pour les dirigeants et DAF de PME : un dossier à prix fixe pour savoir quoi corriger dans vos fichiers et vos factures avant septembre 2027, et Le Décodeur pour savoir quelles tâches répétitives automatiser.</p>
                   <div className="cta">
-                    <a className="btn btn-cta" href="#appel">Réserver un appel de 15 min</a>
-                    <a className="btn btn-ghost" href="#demo">Voir la démo</a>
+                    <a className="btn btn-cta" href="#appel">Nous écrire</a>
+                    <a className="btn btn-ghost" href="#services">Voir les deux offres</a>
                   </div>
                 </motion.div>
               </div>

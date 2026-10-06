@@ -12,6 +12,7 @@ import Reveal from '@/components/Reveal';
 import Faq from '@/components/Faq';
 import Bridge from '@/components/Bridge';
 import CaseStudy from '@/components/CaseStudy';
+import Team from '@/components/Team';
 import GiantSlogan from '@/components/GiantSlogan';
 import { FAQ, SITE } from '@/lib/site';
 
@@ -30,19 +31,31 @@ export default function Page() {
           <Manifesto />
           <Bridge />
 
-          {/* Contexte */}
+          {/* Contexte : repères datés (sources vérifiées) */}
           <section aria-labelledby="ctx">
-            <span className="label" id="ctx">Ce qui change pour les cabinets</span>
-            <div className="dates">
+            <span className="label" id="ctx">Ce qui change pour les entreprises</span>
+            <div className="dates three">
               <Reveal tag="article" className="date">
-                  <time dateTime="2025-02-02">2 février 2025</time>
-                  <h3>IA au travail : former les équipes</h3>
-                  <p>Le règlement européen sur l'IA (article 4) demande aux entreprises qui utilisent l'IA de prendre des mesures pour favoriser un niveau suffisant de maîtrise de l'IA chez leur personnel. Aucune certification n'est exigée. Cette formulation a été assouplie par le règlement (UE) 2026/1744, en vigueur depuis le 27 juillet 2026.</p>
+                <time dateTime="2026-09-01">1<sup>er</sup> septembre 2026</time>
+                <h3>Factures électroniques : réception</h3>
+                <p>Depuis cette date, toutes les entreprises doivent pouvoir recevoir des factures électroniques. L'émission devient obligatoire pour les PME, TPE et micro-entreprises le 1<sup>er</sup> septembre 2027. Une amende est prévue par facture non émise sous forme électronique quand elle est obligatoire (article 1737 du CGI).</p>
               </Reveal>
               <Reveal tag="article" className="date" delay={0.14}>
-                  <time dateTime="2026-09-01">1<sup>er</sup> septembre 2026</time>
-                  <h3>Factures électroniques</h3>
-                  <p>Depuis cette date, toutes les entreprises doivent pouvoir recevoir des factures électroniques. L'émission devient obligatoire pour les PME, TPE et micro-entreprises le 1<sup>er</sup> septembre 2027.</p>
+                <time dateTime="2026-09-01">1<sup>er</sup> septembre 2026</time>
+                <h3>4 nouvelles mentions obligatoires</h3>
+                <p>Sur les factures entre entreprises assujetties :</p>
+                <ul>
+                  <li>le SIREN du client ;</li>
+                  <li>l'adresse de livraison, si elle diffère de l'adresse de facturation ;</li>
+                  <li>la nature de l'opération (biens, services ou les deux) ;</li>
+                  <li>l'option pour le paiement de la TVA d'après les débits.</li>
+                </ul>
+              </Reveal>
+              <Reveal tag="article" className="date" delay={0.28}>
+                <time dateTime="2026-07">Juillet 2026</time>
+                <h3>IA : 18 % des entreprises de 10 salariés ou plus l'utilisent</h3>
+                <p>Selon l'INSEE (données 2025, entreprises de 10 salariés ou plus), 18 % utilisent au moins une technologie d'IA. Parmi les autres, 54 % citent le manque d'expertise et 71 % n'en voient pas l'utilité.</p>
+                <p className="src">Source : <a href="https://www.insee.fr/fr/statistiques/9025878">INSEE Première n° 2120, juillet 2026</a>.</p>
               </Reveal>
             </div>
             <p className="note">Ces repères sont informatifs. Ce site ne constitue pas un conseil juridique.</p>
@@ -55,8 +68,8 @@ export default function Page() {
             <span className="label">Démo</span>
             <div className="tool">
               <div className="intro">
-                <SplitTitle id="dm" text="Une facture lue en deux secondes" />
-                <p>Démonstration simulée dans votre navigateur, sur une facture fictive. Sur vos documents, l'outil est adapté à votre cabinet et chaque résultat reste à valider par votre équipe.</p>
+                <SplitTitle id="dm" text="Une facture lue, ses mentions contrôlées" />
+                <p>Démonstration simulée dans votre navigateur, sur une facture fictive (SIREN fictif). Elle illustre le type de contrôle appliqué à un modèle de facture : présence du SIREN du client, nature de l'opération, cohérence des montants. Dans le dossier, le contrôle porte sur 3 de vos modèles et chaque point reste à valider par vous.</p>
               </div>
               <Reveal><InvoiceDemo /></Reveal>
             </div>
@@ -67,8 +80,8 @@ export default function Page() {
             <span className="label">Calculateur</span>
             <div className="tool">
               <div className="intro">
-                <SplitTitle id="cl" text="Combien de temps pourriez-vous récupérer ?" />
-                <p>Saisissez vos propres valeurs. Aucune valeur n'est préremplie, et aucun chiffre moyen n'est avancé.</p>
+                <SplitTitle id="cl" text="Combien de temps une tâche vous coûte-t-elle ?" />
+                <p>Pensez à une tâche répétitive de votre entreprise (saisie de factures, relances, rapprochements, rapports). Saisissez vos propres valeurs : aucune n'est préremplie, et aucun chiffre moyen n'est avancé. C'est une estimation de votre part, pas une promesse de gain : le Décodeur l'affine avec vous.</p>
               </div>
               <Reveal><Calculator /></Reveal>
             </div>
@@ -79,8 +92,8 @@ export default function Page() {
             <span className="label">Auto-diagnostic</span>
             <div className="tool">
               <div className="intro">
-                <SplitTitle id="dg" text="Votre cabinet et l'IA" />
-                <p>Cinq questions, aucune donnée envoyée. Le résultat oriente vers un service, il ne mesure pas la conformité de votre cabinet.</p>
+                <SplitTitle id="dg" text="Par quoi commencer ?" />
+                <p>Cinq questions, aucune donnée envoyée. Le résultat oriente vers une offre (ou vers « pas maintenant »), il ne mesure pas la conformité de votre entreprise.</p>
               </div>
               <Reveal><Diagnostic /></Reveal>
             </div>
@@ -94,46 +107,37 @@ export default function Page() {
             <div className="cols">
               <SplitTitle id="cf" text="Vos données restent les vôtres" />
               <Reveal className="body">
-                <p>Les données des clients du cabinet restent sous le contrôle du cabinet. <b>Aucune donnée client n'est placée dans un outil que le cabinet n'a pas validé.</b></p>
-                <p>Le diagnostic et l'atelier peuvent se faire uniquement avec des exemples fictifs.</p>
-                <p>Avant tout accès à des données réelles, un contrat de sous-traitance des données (article 28 du RGPD) est signé avec le cabinet.</p>
+                <p><b>Nous travaillons sur un export, sans accès à vos logiciels.</b> Pour le dossier facture électronique : une ligne par client ou fournisseur, sans noms de contacts.</p>
+                <p>Si le fichier contient des entrepreneurs individuels (des personnes physiques), nous signons d'abord un contrat de sous-traitance des données (article 28 du RGPD).</p>
+                <p>Vos fichiers sont supprimés après la livraison, avec confirmation par e-mail.</p>
+                <p>Pour Le Décodeur : le questionnaire ne demande aucune donnée personnelle, nous n'accédons à aucune donnée de votre entreprise sans contrat écrit conforme au RGPD, et le prototype s'appuie par défaut sur des exemples fictifs ou anonymisés.</p>
               </Reveal>
             </div>
           </section>
 
-          {/* Ce que je ne fais pas */}
+          {/* Limites communes aux deux offres */}
           <section aria-labelledby="nf">
             <span className="label">Limites</span>
             <div className="cols">
-              <SplitTitle id="nf" text="Ce que je ne fais pas" />
+              <SplitTitle id="nf" text="Ce que nous ne faisons pas" />
               <Reveal>
                 <ul className="plain">
-                  <li>Je ne délivre ni certification ni garantie de conformité.</li>
-                  <li>Je ne donne pas de conseil juridique ou fiscal.</li>
-                  <li>Je ne tiens pas la comptabilité et ne fais pas la saisie pour les clients du cabinet. Je fournis l'outil, le cabinet fait le travail comptable.</li>
-                  <li>Je ne remplace pas votre logiciel comptable.</li>
-                  <li>Je ne signe rien à la place du cabinet.</li>
+                  <li>Nous ne délivrons ni certification ni garantie de conformité.</li>
+                  <li>Nous ne donnons pas de conseil juridique ou fiscal.</li>
+                  <li>Nous ne promettons pas d'éviter une amende : nous listons des points à corriger.</li>
+                  <li>Nous ne vendons ni plateforme de facturation ni outil d'IA.</li>
+                  <li>Nous ne promettons aucun gain de temps chiffré avant d'avoir vu votre façon de travailler.</li>
                 </ul>
-                <p style={{ marginTop: 20, color: 'var(--mut)' }}>Les résultats sont toujours relus par l'équipe du cabinet, qui garde la responsabilité de ses dossiers.</p>
+                <p style={{ marginTop: 20, color: 'var(--mut)' }}>Les résultats sont des éléments de décision : la décision et la responsabilité restent les vôtres.</p>
               </Reveal>
             </div>
           </section>
 
-          {/* Retour d'expérience (cas illustratif tant qu'aucun cabinet n'a donné son accord) */}
+          {/* Premiers retours : aucun cas publié */}
           <CaseStudy />
 
-          {/* À propos */}
-          <section aria-labelledby="ap">
-            <span className="label">À propos</span>
-            <div className="cols">
-              <SplitTitle id="ap" text="Je travaille seul, et directement avec vous" />
-              <Reveal className="body">
-                <p>Je m'appelle Kélian Kaddouri. Je suis data scientist (master de l'ENSAE).</p>
-                <p>Mon métier : mettre en production des outils en Python qui automatisent des tâches répétitives, et expliquer simplement ce qu'ils font.</p>
-                <p>Je travaille seul pour l'instant. Les premiers cabinets bénéficient de conditions de lancement. Photo : <Todo /></p>
-              </Reveal>
-            </div>
-          </section>
+          {/* Équipe */}
+          <Team />
 
           {/* FAQ : les réponses restent dans le HTML même fermées */}
           <section id="faq" aria-labelledby="fq">
@@ -146,11 +150,9 @@ export default function Page() {
         {/* Appel final */}
         <section className="final" id="appel" aria-labelledby="ap2" style={{ paddingBlock: 72 }}>
           <div className="wrap">
-            <GiantSlogan id="ap2" lines={['Des règles claires,', 'et une tâche en moins.']} />
-            <p>Quinze minutes pour voir si je peux vous aider. Sans engagement.</p>
+            <GiantSlogan id="ap2" lines={['Sachez quoi corriger,', 'sachez quoi automatiser.']} />
+            <p>Un e-mail d'une ligne suffit pour commencer : nous répondons avec les modalités et le prix fixe. Une courte visio est possible si vous la préférez. Sans engagement.</p>
             <div className="contact">
-              <span>Lien de prise de rendez-vous : {SITE.bookingUrl ? <a href={SITE.bookingUrl} style={{ color: 'inherit' }}>{SITE.bookingUrl}</a> : <Todo />}</span>
-              <span>Téléphone : <a href={SITE.phoneHref} style={{ color: 'inherit' }}>{SITE.phone}</a></span>
               <span>E-mail : <a href={mail} style={{ color: 'inherit' }}>{SITE.email}</a></span>
             </div>
           </div>
@@ -159,14 +161,14 @@ export default function Page() {
 
       <footer className="wrap">
         <div className="grid">
-          <div><h3>{SITE.name}</h3><p>Cabinet de conseil indépendant pour experts-comptables.</p></div>
+          <div><h3>{SITE.name}</h3><p>Facture électronique et IA pour les PME : deux offres à prix fixe, par une équipe de deux.</p></div>
           <div>
             <h3>Mentions légales</h3>
             <dl>
-              <dt>Éditeur</dt><dd>Kélian Kaddouri, micro-entreprise en cours de création</dd>
+              <dt>Éditeur</dt><dd><Todo>À COMPLÉTER (identité et structure juridique de l'activité, à confirmer avec l'associé·e)</Todo></dd>
               <dt>SIRET</dt><dd><Todo /></dd>
               <dt>Adresse</dt><dd><Todo /></dd>
-              <dt>Contact</dt><dd>{SITE.phone} · e-mail <a href={mail} style={{ color: 'inherit' }}>{SITE.email}</a></dd>
+              <dt>Contact</dt><dd>E-mail : <a href={mail} style={{ color: 'inherit' }}>{SITE.email}</a></dd>
               <dt>Publication</dt><dd>Directeur : Kélian Kaddouri</dd>
               <dt>Hébergeur</dt><dd>Netlify, Inc. Adresse : <Todo /></dd>
             </dl>
@@ -179,7 +181,8 @@ export default function Page() {
           <div className="blocks">
             <div>
               <h3>Éditeur</h3>
-              <p>Kélian Kaddouri, entrepreneur individuel (micro-entrepreneur), sous le nom commercial « {SITE.name} ».</p>
+              <p>Éditeur (dénomination ou nom, statut) : <Todo /></p>
+              <p>Structure juridique de l'activité (deux associés) : <Todo /></p>
               <p>SIRET : <Todo /></p>
               <p>Adresse professionnelle : <Todo /></p>
               <p>E-mail : <a href={mail}>{SITE.email}</a></p>

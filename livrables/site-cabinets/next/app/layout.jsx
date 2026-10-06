@@ -10,8 +10,8 @@ const publicSans = Public_Sans({ subsets: ['latin'], weight: ['400', '500', '600
 const plex = IBM_Plex_Mono({ subsets: ['latin'], weight: ['400', '500', '600'], variable: '--f-plex', display: 'swap' });
 
 export const metadata = {
-  title: 'Équerre',
-  description: "Équerre : règles d'usage de l'IA et suppression d'une tâche répétitive pour les cabinets d'expertise comptable.",
+  title: 'Équerre : facture électronique et IA pour PME',
+  description: "Équerre : un dossier facture électronique (fichiers clients et modèles de factures contrôlés avant septembre 2027) et Le Décodeur (tâches répétitives à automatiser, avec prototype), pour les PME. Prix fixe annoncé avant de commencer.",
   robots: { index: false, follow: false }, // noindex tant que le lancement n'est pas validé
 };
 
