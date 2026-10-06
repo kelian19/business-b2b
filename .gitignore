@@ -34,3 +34,5 @@ prospection/outils/suivi-import.csv
 
 # Lien local Netlify
 .netlify/
+prospection/outils/suivi-import*.csv
+prospection/outils/domaines-*.csv
