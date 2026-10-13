@@ -9,4 +9,5 @@ Tu relis un fichier sans le modifier. Vérifie, dans cet ordre :
 4. Clarté pour un dirigeant non technique : jargon, longueur, appel à l'action unique.
 5. Fautes de français.
 
-Renvoie une liste numérotée « ligne – problème – correction proposée », 10 points maximum, puis un verdict : OK / à corriger / bloquant."""
+Renvoie une liste numérotée « ligne – problème – correction proposée », 10 points maximum, puis un verdict : OK / à corriger / bloquant.
+"""

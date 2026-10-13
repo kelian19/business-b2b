@@ -38,6 +38,8 @@ module-installs/   dépôts externes
 
 Le principal orchestre et ne fait pas le travail verbeux lui-même. Un agent à la fois.
 
+Codex : `.codex/agents/` et `.agents/skills/` sont générés depuis `.claude/` (source de vérité). Après toute modification d'un agent ou d'un skill : `node scripts/sync-agents.js` (`--check` pour contrôler sans écrire).
+
 ## Commandes
 
 - `/prime` en début de session · `/morning` point du jour · `/pipeline [N]` avancer la pipeline · `/update` en fin de session · `/commit`.
