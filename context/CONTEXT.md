@@ -2,6 +2,20 @@
 
 > Source de vérité. Mise à jour avec `/update`. Les champs « À compléter » ne sont pas encore décidés : ne pas les inventer.
 
+## Priorité actuelle — repère du 15 octobre 2026
+
+**Décision utilisateur la plus récente : deux idées de services retenues, Flow Inbox et préparation à la facturation électronique, avec l'automatisation comme compétence commune.** La [fiche offres et niches](../docs/OFFRES_ET_NICHES.md) précise les segments à qualifier et la suite proposée. Le choix des deux services est acquis ; l'ordre des tests, les niches exclusives et les prix restent à valider par les échanges commerciaux. Cette décision élargit le brief du 13 octobre décrit ci-dessous.
+
+Le brief initial du 13 octobre ciblait les agences marketing, communication et web françaises de 3 à 15 salariés, avec Flow Inbox, puis Insight Reports et Lead Assistant. La décision ci-dessus élargit cette orientation ; les agences restent une cible pour Flow Inbox. Objectif initial : 1 000 € effectivement encaissés ; disponibilité provisoire : 10 h/semaine.
+
+La stratégie, l’architecture connectée et le plan complet dans `docs/` restent des propositions. La demande de poursuivre après présentation de la tranche locale et clarification du coût vaut accord pour cette **démo locale uniquement**, désormais livrée. Aucun choix A/B d’intégration, nom définitif ou budget d’intégration n’est consigné. Supports : [fiche pilote](../livrables/offre/flow-inbox-pilote.md), [guide de découverte](../docs/GUIDE_DECOUVERTE_FLOW_INBOX.md) et [point d’avancement](../docs/AVANCEMENT_2026-10-15.md). Les résultats commerciaux récents sont non renseignés ; ne pas supposer des envois ou encaissements.
+
+À la demande suivante, centrée sur le site et des ressources GitHub : [sélection de design sourcée](../docs/SELECTION_DESIGN_SITE.md) et [maquette locale indépendante](../livrables/design/flow-inbox-concept/index.html) préparées. Direction crème/encre/orange proposée, nom générique de présentation, deux exemples fictifs préécrits. Le site Next.js historique n'est pas modifié, aucune ressource tierce installée et aucune publication réalisée. Le choix de marque et la refonte restent à valider.
+
+Dernière reprise : [démo locale Flow Inbox](../livrables/automatisations/flow-inbox/index.html) et [guide](../livrables/automatisations/flow-inbox/README.md) livrés. Sept exemples fictifs, logique partagée navigateur/commande, suivi en mémoire, brouillons texte et événements sortants fictifs. **62 tests locaux et 38 contrôles Chrome réussis** ; aucune intégration Gmail/n8n/IA réelle. Limites et couverture G01–G12 dans la [recette locale](../livrables/automatisations/flow-inbox/RECETTE_LOCALE.md). Pas de persistance, de restauration disque ni de corrélation Gmail prouvée. Conserver les autres validations avant comptes, coûts, activation ou refonte.
+
+Les rubriques suivantes décrivent l'historique jusqu'au 7 octobre. Leurs anciennes offres, cibles, montants, dates et affirmations réglementaires ne constituent pas les décisions actuelles et ne doivent pas être repris sans vérification.
+
 ## Porteur
 
 - Kélian Kaddouri, MSc actuariat ENSAE (promo 2025/2026), stagiaire cyber-risque jusqu'en novembre 2026 (employeur à ne jamais citer dans les livrables), disponible en février 2027.

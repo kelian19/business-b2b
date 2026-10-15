@@ -1,0 +1,11 @@
+{
+  "name": "flow-inbox-local-demo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Démonstration locale sur fixtures fictives, sans réseau ni fournisseur réel.",
+  "scripts": {
+    "demo": "node demo/run.js",
+    "test": "node tests/run-tests.js"
+  },
+  "engines": { "node": ">=20" }
+}

@@ -16,6 +16,7 @@ module-installs/*
 
 # Prospection : données d'entreprises tierces, ne pas versionner
 prospection/prospects.csv
+prospection/prive/
 prospection/messages/*
 !prospection/messages/.gitkeep
 

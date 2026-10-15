@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; script-src 'self'; img-src 'self' data:; connect-src 'none'; font-src 'self'; base-uri 'none'; form-action 'none'">
+  <title>Flow Inbox — démonstration locale</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23182923'/%3E%3Cpath d='M16 20h32v24H16zM16 20l16 13 16-13' stroke='%23d4e3a7' stroke-width='3' fill='none'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <script src="src/contracts.js" defer></script>
+  <script src="src/core.js" defer></script>
+  <script src="src/simulation.js" defer></script>
+  <script src="demo/fixtures.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#contenu">Aller au contenu</a>
+  <div class="demo-banner"><span class="signal" aria-hidden="true"></span> Démonstration locale · emails fictifs · extraction IA et fournisseurs simulés</div>
+  <header class="app-header"><a class="brand" href="#contenu"><span class="brand-mark" aria-hidden="true">F/</span><span>Flow Inbox<small>Du brief au brouillon.</small></span></a><div class="header-actions"><span class="offline"><span aria-hidden="true">●</span> Sans connexion</span><button type="button" class="button button-light" id="reset">Réinitialiser la session</button></div></header>
+  <main id="contenu">
+    <section class="intro" aria-labelledby="intro-title"><div><p class="eyebrow">LABORATOIRE / 01</p><h1 id="intro-title">Un suivi clair.<br><em>Le dernier mot reste humain.</em></h1></div><p>Traitez un exemple préparé, examinez les informations retenues, puis retouchez son brouillon. Aucun email réel n’est lu ou envoyé. Tout reste en mémoire et disparaît au rechargement.</p></section>
+    <noscript><p class="no-script">Cette démonstration nécessite JavaScript. Le guide README décrit également la commande de démonstration locale.</p></noscript>
+    <section class="metrics" aria-label="Bilan de cette session fictive"><div><span id="metric-requests">0</span><p>Demandes en mémoire</p></div><div><span id="metric-drafts">0</span><p>Créations de brouillons simulées</p></div><div><span id="metric-replies">0</span><p>Réponses fictives confirmées</p></div><div class="metrics-note">Aucun service connecté.<br>Tout est simulé localement.</div></section>
+    <div class="workbench">
+      <aside class="scenario-sidebar" aria-labelledby="examples-title"><p class="eyebrow">LES CAS À EXAMINER</p><h2 id="examples-title">Choisir un exemple</h2><div class="scenario-list" id="scenarios" role="group" aria-label="Exemples fictifs"></div><p class="sidebar-note">Les informations extraites sont des fixtures préécrites. Les validations, états et contrôles de rejeu sont calculés par la logique locale.</p></aside>
+      <section class="workspace" aria-labelledby="scenario-title"><div class="workspace-heading"><div><p class="eyebrow">EMAIL → SUIVI → BROUILLON</p><h2 id="scenario-title">Budget présent</h2></div><button type="button" class="button button-dark" id="process">Traiter cet exemple <span aria-hidden="true">↗</span></button></div><p class="scenario-description" id="scenario-description"></p><p class="feedback" id="feedback" role="status" aria-live="polite" aria-atomic="true">Choisissez un exemple puis lancez son traitement local.</p>
+        <div class="panels"><article class="panel incoming-panel" aria-labelledby="incoming-title"><div class="panel-heading"><span class="step">01</span><h3 id="incoming-title">La demande fictive</h3><span class="tag">ENTRÉE</span></div><dl class="message-meta"><div><dt>De</dt><dd id="sender"></dd></div><div><dt>Objet</dt><dd id="subject"></dd></div></dl><p class="mail-body" id="body"></p><div class="extraction-block"><p class="eyebrow">EXTRACTION SIMULÉE FOURNIE À LA LOGIQUE</p><dl id="extraction"></dl></div></article>
+        <article class="panel draft-panel" aria-labelledby="draft-title"><div class="panel-heading"><span class="step">02</span><h3 id="draft-title">Le brouillon local</h3><span class="tag tag-green" id="draft-badge">EN ATTENTE</span></div><p class="draft-explainer" id="draft-explainer">Une proposition de réponse apparaîtra après un traitement admissible.</p><label for="draft-text">Texte à relire et à ajuster</label><textarea id="draft-text" rows="10" maxlength="6000" spellcheck="false" disabled placeholder="Aucun brouillon confirmé pour cet exemple."></textarea><p class="draft-warning">Utilisez seulement du texte fictif. Ce champ n’est relié à aucune messagerie.</p><div class="draft-actions"><button class="button button-dark" type="button" id="save" disabled>Enregistrer la retouche locale</button><button class="button button-light" type="button" id="observe" disabled>Revoir l’état simulé</button></div><div class="simulation-actions"><span class="eyebrow">EXPÉRIENCES SUR LE FAUX FOURNISSEUR</span><div><button class="text-button" type="button" id="remove" disabled>Simuler la disparition</button><button class="text-button" type="button" id="confirm" disabled>Confirmer une réponse fictive</button></div></div></article></div>
+      </section>
+    </div>
+    <section class="tracking-section" aria-labelledby="tracking-title"><div class="section-heading"><div><p class="eyebrow">UNE LIGNE PAR DEMANDE</p><h2 id="tracking-title">Le suivi de cette session</h2></div><span class="table-note">En mémoire · pas de Google Sheet réel</span></div><p id="tracking-empty" class="empty-state">Aucune demande enregistrée. Commencez par traiter l’un des exemples.</p><div class="table-scroll" id="tracking-wrapper" hidden><table><caption class="sr-only">Demandes fictives et états locaux de traitement</caption><thead><tr><th scope="col">Demande</th><th scope="col">Traitement</th><th scope="col">À compléter</th><th scope="col">Brouillon</th><th scope="col">Réponse</th></tr></thead><tbody id="tracking"></tbody></table></div></section>
+    <details class="technical-details"><summary>Voir les preuves techniques locales <span aria-hidden="true">+</span></summary><div><p>Identifiants et événements du simulateur uniquement. La corrélation de création incertaine est fournie par le faux fournisseur ; son équivalent Gmail reste à concevoir et à recetter.</p><h3>Demande sélectionnée</h3><pre id="identity">Aucune demande sélectionnée.</pre><h3>Journal expurgé</h3><pre id="events">Aucun événement.</pre></div></details>
+  </main>
+  <footer><span>FLOW INBOX / 0.1 · DÉMO LOCALE</span><a href="README.md">Lire le guide et les limites ↗</a><span>Aucune preuve d’intégration Gmail/n8n.</span></footer>
+</body>
+</html>

@@ -1,6 +1,8 @@
-# Flow Inbox — architecture proposée, non implémentée
+# Flow Inbox — architecture d’intégration proposée
 
-Date : 13 octobre 2026. Statut : **à valider avant développement**. Aucun dossier applicatif Flow Inbox, schéma exécutable ou workflow n8n n'est créé par ce document.
+Date initiale : 13 octobre 2026. Statut : **intégration à valider**. La première tranche de [démo locale](../livrables/automatisations/flow-inbox/README.md) est réalisée le 15 octobre après accord sur la poursuite dans ce périmètre. Le plan complet, l’option A/B et l’intégration réelle ne sont pas validés. Aucun workflow n8n ou compte fournisseur connecté n’est livré.
+
+Complément du 15 octobre : [contrat Gmail, comparaison n8n et recette proposée](CONTRAT_GMAIL_FLOW_INBOX.md). Il distingue les identifiants du message entrant, du brouillon et de la réponse, ainsi que les absences et les effets incertains. Le statut des preuves locales est décrit dans la [recette du simulateur](../livrables/automatisations/flow-inbox/RECETTE_LOCALE.md).
 
 ## Choix à trancher
 
@@ -58,6 +60,8 @@ Le nœud Gmail natif documente `Draft / Create`, avec destinataire et fil config
 
 Trois frontières distinctes : entrée fournisseur, extraction IA, enregistrement métier. JSON Schema est la source du contrat ; validateur JavaScript local à choisir et épingler pendant l'implémentation, puis même contrat appliqué dans n8n. TypeScript facultatif pour du nouveau code si cela simplifie réellement ; aucune migration du dépôt existant.
 
+Dans la démo 0.1, les schémas et leur validateur sans dépendance sont regroupés dans `src/contracts.js`. Ils utilisent un sous-ensemble fermé de JSON Schema, documenté dans le guide de la démo. Ce choix local ne prouve pas une validation complète JSON Schema ou sa parité avec un futur nœud n8n.
+
 | Ensemble | Champs proposés | Validation |
 |---|---|---|
 | Entrée | `client_id`, `mailbox_id`, `message_id`, `thread_id`, `received_at`, `from`, `reply_to`, `subject`, `body_text` | IDs non vides, date valide, un expéditeur, limites de taille ; contexte client injecté par configuration |
@@ -73,7 +77,7 @@ Structured Outputs permet de contraindre la forme à un JSON Schema pris en char
 
 ## États, dédoublonnage et reprise
 
-Séparer `processing_state` (`reserved`, `extracted`, `recorded`, `draft_pending`, `draft_ready`, `manual_review`, `retryable_error`, `permanent_error`, `ignored`) du statut commercial (`new`, `awaiting_review`, `awaiting_details`, `answered`, `closed`). Les transitions autorisées sont testées. Un doublon est un résultat de traitement, pas un nouvel enregistrement.
+Séparer `processing_state` (`reserved`, `extracted`, `recorded`, `draft_pending`, `draft_ready`, `manual_review`, `retryable_error`, `permanent_error`, `ignored`) du statut commercial (`new`, `awaiting_review`, `awaiting_details`, `answered`, `closed`). La tranche locale teste un sous-ensemble de transitions avec fournisseurs simulés ; les transitions et reprises connectées restent à recetter. Un doublon est un résultat de traitement, pas un nouvel enregistrement.
 
 Option A : onglet technique protégé, clés jamais modifiées manuellement, un seul écrivain pour ingestion et suivi. Une lecture de Sheets en échec **ne signifie jamais** « clé absente ». Après résultat incertain d'une écriture, relire/réconcilier par clé avant tout nouvel ajout ; si plusieurs lignes existent, suspendre et signaler. Les modifications humaines passent par colonnes métier séparées ou sont relues avant mise à jour ciblée pour éviter l'écrasement.
 
@@ -145,7 +149,7 @@ livrables/automatisations/flow-inbox/
 
 ## Matrice de recette prévue — 36 scénarios
 
-**Aucun de ces tests Flow Inbox n'existe ni n'a été exécuté aujourd'hui.** Les scénarios décrivent le résultat attendu ; les fixtures doivent être fictives et reproductibles.
+**Cette matrice complète n’est pas recettée en intégration réelle.** La démo du 15 octobre dispose de tests locaux sur un sous-ensemble des règles, avec fixtures fictives et fournisseurs simulés ; voir sa recette pour les preuves exactes. La liste ci-dessous reste le résultat attendu au niveau approprié, pas une annonce de 36 tests connectés réussis.
 
 | ID | Scénario | Résultat attendu |
 |---|---|---|
