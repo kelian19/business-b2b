@@ -1,0 +1,41 @@
+/* Flow Inbox : aide (boutons « ? » contextuels, glossaire, raccourcis) et visite guidée. */
+.aide-btn {
+  display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; min-width: 44px; min-height: 44px; margin: -8px -8px -8px 0;
+  padding: 0; background: transparent; border: 0; cursor: pointer; color: var(--night); font: inherit; font-weight: 700;
+}
+.aide-btn span {
+  display: inline-flex; align-items: center; justify-content: center; width: 1.7rem; height: 1.7rem; border-radius: 50%; border: 2px solid var(--night);
+  background: var(--surface); line-height: 1; font-size: .9rem; transition: background var(--t-court), color var(--t-court);
+}
+.aide-btn:hover span, .aide-btn[aria-expanded="true"] span { background: var(--night); color: var(--paper); }
+.aide-panneau { border: 2px solid var(--night); border-radius: var(--r-2); background: var(--surface); padding: var(--sp-3) var(--sp-4); margin: 0 0 var(--sp-3); font-size: .92rem; }
+.aide-panneau p { margin: 0 0 var(--sp-1); }
+.aide-panneau-t { font-weight: 700; color: var(--night); }
+
+.glossaire { margin: 0 0 var(--sp-3); display: grid; gap: var(--sp-3); }
+.glossaire-item { padding-left: var(--sp-3); border-left: 4px solid var(--night); }
+.glossaire dt { font-family: var(--serif); font-weight: 700; color: var(--night); font-size: 1.05rem; }
+.glossaire dd { margin: var(--sp-1) 0 0; max-width: 90ch; }
+.table-raccourcis { max-width: 54rem; }
+.table-raccourcis th[scope="row"] { white-space: nowrap; width: 8rem; }
+
+/* Visite guidée : carte non modale en bas à droite */
+.visite {
+  position: fixed; right: var(--sp-4); bottom: var(--sp-4); z-index: 60; width: min(27rem, calc(100vw - 2 * var(--sp-4)));
+  background: var(--surface); color: var(--ink); border: 2px solid var(--night); border-radius: var(--r-3); box-shadow: var(--sh3); padding: var(--sp-4);
+  max-height: calc(100vh - 2 * var(--sp-4)); overflow: auto;
+}
+@media (prefers-reduced-motion: no-preference) { .visite { animation: apparaitre .25s ease-out both; } }
+.visite-tete { display: flex; justify-content: space-between; gap: var(--sp-3); align-items: flex-start; }
+.visite-num { margin: 0 0 2px; font-size: .8rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.visite h2 { margin: 0; font-size: 1.2rem; }
+.visite-points { display: flex; gap: 6px; margin: var(--sp-3) 0; }
+.visite-point { flex: 1 1 0; height: 6px; border-radius: 3px; background: var(--night-12); }
+.visite-point.fait { background: var(--night); }
+.visite-point.actuel { background: var(--orange); }
+.visite-texte { margin: 0 0 var(--sp-3); font-size: .95rem; }
+.visite-liens { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-bottom: var(--sp-3); }
+.visite-actions { display: flex; flex-wrap: wrap; gap: var(--sp-2); justify-content: space-between; }
+.visite-pied { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--sp-2); margin-top: var(--sp-3); padding-top: var(--sp-2); border-top: 1px solid var(--line); }
+body.visite-active #vue { padding-bottom: 14rem; }
+@media (max-width: 700px) { .visite { left: var(--sp-2); right: var(--sp-2); bottom: var(--sp-2); width: auto; } }

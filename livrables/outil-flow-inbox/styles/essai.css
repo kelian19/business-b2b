@@ -1,0 +1,64 @@
+/* Flow Inbox : écrans « Essayer avec un e-mail fictif » et « Comment ça marche ». */
+
+/* ---------- Essai ---------- */
+.avertissement-essai { display: flex; gap: var(--sp-2); align-items: flex-start; border: 2px solid var(--night); border-left-width: 8px; border-radius: var(--r-1); background: var(--verif); padding: var(--sp-3) var(--sp-4); margin: 0 0 var(--sp-3); font-size: 1.02rem; }
+.avertissement-essai .ic { margin-top: 3px; }
+.methode-essai { display: flex; gap: var(--sp-2); align-items: flex-start; border: 1px dashed var(--night); border-radius: var(--r-1); background: var(--surface); padding: var(--sp-2) var(--sp-4); margin: 0 0 var(--sp-3); font-weight: 600; }
+.methode-essai .ic { margin-top: 3px; }
+
+.essai-exemples { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--sp-3); margin-bottom: var(--sp-4); }
+@media (max-width: 900px) { .essai-exemples { grid-template-columns: minmax(0, 1fr); } }
+.exemple {
+  display: flex; flex-direction: column; gap: 2px; text-align: left; font: inherit; color: var(--ink); background: var(--surface); border: 2px solid var(--night);
+  border-radius: var(--r-2); padding: var(--sp-3) var(--sp-4); cursor: pointer; min-height: 44px;
+  transition: background var(--t-court), transform var(--t-court), box-shadow var(--t-court);
+}
+.exemple:hover { background: var(--white); box-shadow: var(--sh2); transform: translateY(-2px); }
+.exemple:active { transform: none; }
+.exemple-t { font-family: var(--serif); font-weight: 700; font-size: 1.05rem; color: var(--night); }
+.exemple-r { font-size: .88rem; color: var(--muted); }
+
+.grille-essai { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--sp-4); align-items: start; margin-bottom: var(--sp-4); }
+@media (max-width: 1000px) { .grille-essai { grid-template-columns: minmax(0, 1fr); } }
+.zone-essai { min-height: 16rem; font-size: .95rem; }
+.essai-compteur { margin: var(--sp-1) 0 0; }
+.essai-alertes .alert { margin: var(--sp-2) 0; }
+.essai-bilan { font-size: 1rem; margin: 0 0 var(--sp-3); }
+.essai-resultats .champs { margin-top: 0; }
+.champ-expl { font-size: .85rem; color: var(--ink); font-style: normal; border-left: 3px solid var(--orange); padding-left: var(--sp-2); }
+.essai-surligne .corps-wrap { max-height: 22rem; }
+.essai-brouillon .zone-brouillon { min-height: 18rem; }
+
+/* ---------- Comment ça marche ---------- */
+.schema-carte { overflow: hidden; }
+.schema { display: block; width: 100%; height: auto; margin: var(--sp-3) auto; }
+.schema-v { display: none; max-width: 460px; }
+@media (max-width: 1100px) { .schema-h { display: none; } .schema-v { display: block; } }
+.schema text { font-family: var(--sans); fill: var(--ink); }
+.sch-boite { fill: var(--surface); stroke: var(--night); stroke-width: 3; }
+.sch-boite.sch-personne { fill: var(--verif); stroke-dasharray: 9 6; }
+.sch-num-fond { fill: var(--night); }
+.sch-num-fond.sch-personne { fill: var(--orange); }
+.schema .sch-num { fill: var(--white); font-size: 16px; font-weight: 700; }
+.schema .sch-titre { font-size: 18px; font-weight: 700; fill: var(--night); }
+.schema .sch-etiquette { font-size: 15px; fill: var(--muted); }
+.sch-lien { stroke: var(--night); stroke-width: 3; fill: none; }
+.sch-pointe { fill: var(--night); }
+.sch-bandeau { stroke: var(--night); stroke-width: 4; fill: none; }
+.sch-bandeau-p { stroke: var(--orange); stroke-dasharray: 9 6; }
+.schema .sch-bandeau-t { font-size: 16px; font-weight: 700; fill: var(--night); }
+.schema-legende { list-style: none; margin: var(--sp-2) 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--sp-2) var(--sp-6); font-size: .9rem; }
+.leg-sw { display: inline-block; width: 1.6rem; height: .9rem; border: 3px solid var(--night); border-radius: 4px; vertical-align: -2px; background: var(--surface); }
+.leg-personne { border-style: dashed; background: var(--verif); }
+
+.etapes-liste { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-3); counter-reset: etape; }
+.etape-item { border-left: 5px solid var(--night); padding: var(--sp-1) 0 var(--sp-1) var(--sp-4); }
+.etape-item.etape-personne { border-left-style: dashed; border-left-color: var(--orange); }
+.etape-tete { display: flex; align-items: center; gap: var(--sp-3); flex-wrap: wrap; margin-bottom: 2px; }
+.etape-tete h3 { margin: 0; }
+.etape-num { display: inline-flex; align-items: center; justify-content: center; width: 1.9rem; height: 1.9rem; border-radius: 50%; background: var(--night); color: var(--white); font-weight: 700; font-size: .9rem; }
+.etape-personne .etape-num { background: var(--orange); }
+.etape-badge { font-size: .8rem; font-weight: 700; border: 1px solid var(--night); border-radius: 999px; padding: 0 var(--sp-2); background: var(--surface); }
+.etape-item p { margin: 0; max-width: 80ch; }
+.carte-demo { border-left: 8px solid var(--night); }
+.grille-deux .card { height: 100%; }

@@ -1,0 +1,37 @@
+/* Flow Inbox : mode présentation (partage d'écran, touche F). Le bandeau « données fictives », la navigation, les titres et les chiffres restent ;
+ * les éléments secondaires (introductions, notes, aides, pied de page long) sont masqués. La police racine gagne environ 12 % et les chiffres sont agrandis. */
+html.is-presentation { font-size: 112%; }
+@media (min-width: 1280px) { html.is-presentation { font-size: 126%; } }
+@media (min-width: 1700px) { html.is-presentation { font-size: 140%; } }
+
+body.presentation .secondaire,
+body.presentation .lead:not(.lead-garde),
+body.presentation .note-carte,
+body.presentation .note,
+body.presentation .aide-btn,
+body.presentation .aide-panneau,
+body.presentation .repere-aide,
+body.presentation .alt-tableau,
+body.presentation .legende-passages,
+body.presentation .foot { display: none !important; }
+
+/* Contraste renforcé : textes plus foncés, bordures plus nettes, pas d'ombres décoratives */
+body.presentation { --muted: #2F4038; --line: rgba(25, 61, 54, .45); }
+body.presentation .card, body.presentation .repere { box-shadow: none; border-width: 2px; border-color: var(--night); }
+body.presentation .repere-alerte { border-color: var(--alerte); }
+body.presentation .card, body.presentation .repere { padding: var(--sp-6); }
+body.presentation .repere-n { font-size: clamp(3.6rem, 6vw, 5rem); }
+body.presentation .repere-alerte .repere-n { font-size: clamp(4rem, 7vw, 5.6rem); }
+body.presentation .repere-sous, body.presentation .barre-lib, body.presentation .barre-val, body.presentation .colonne-lib, body.presentation .legende-lib, body.presentation .legende-val { font-size: 1rem; }
+body.presentation .barre-svg { height: 16px; }
+body.presentation .colonne-val { font-size: 1.9rem; }
+body.presentation .nav-num, body.presentation .agence-nom { display: none; }
+body.presentation .table { font-size: 1rem; }
+body.presentation .corps { font-size: 1.05rem; }
+body.presentation .btn-tete[aria-pressed="true"] { background: var(--orange); border-color: var(--orange); color: var(--white); }
+
+/* Pastille « Mode présentation · Échap pour quitter » */
+.pastille {
+  position: fixed; left: 50%; transform: translateX(-50%); bottom: var(--sp-6); z-index: 70; background: var(--night); color: var(--paper);
+  border: 2px solid var(--paper); border-radius: 999px; padding: var(--sp-2) var(--sp-6); font-weight: 700; box-shadow: var(--sh3); max-width: calc(100vw - 2 * var(--sp-4)); text-align: center;
+}

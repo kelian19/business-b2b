@@ -1,0 +1,58 @@
+/* Flow Inbox : jetons de conception. Identité crème, encre vert sombre, orange (reprise de la maquette et d'Équerre).
+ * Polices système uniquement, aucune ressource externe. Texte courant : 12 px au minimum. Contrastes calculés par tests/t-contraste.js (AA). */
+:root {
+  /* Couleurs de la charte */
+  --paper: #F7F4EC;
+  --night: #193D36;
+  --ink: #193D36;
+  --orange: #BD481E;
+  --orange-clair: #F58A58;
+  --white: #FFFFFF;
+  /* Dérivés */
+  --surface: #FFFEFA;
+  --night-90: #284D44;
+  --night-12: rgba(25, 61, 54, .12);
+  --night-06: rgba(25, 61, 54, .06);
+  --orange-tint: rgba(189, 72, 30, .09);
+  --muted: #4A5C54;
+  --line: rgba(25, 61, 54, .22);
+  --passage: #FBE1D1;
+  --passage-actif: #F6BFA0;
+  --verif: #FFF0C2;
+  /* Alerte (demandes sans réponse au-delà du délai) : rouge distinct de l'orange de la marque */
+  --alerte: #A32117;
+  --alerte-fond: #FBE9E6;
+  --ok-fond: #E1EFE6;
+  --ok: #14513F;
+
+  /* Espacements */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-12: 48px;
+
+  /* Rayons et ombres */
+  --r-1: 6px;
+  --r-2: 10px;
+  --r-3: 14px;
+  --sh1: 0 1px 2px rgba(25, 61, 54, .08);
+  --sh2: 0 6px 20px rgba(25, 61, 54, .10);
+  --sh3: 0 10px 28px rgba(25, 61, 54, .14);
+
+  --grid-max: 1320px;
+  --banner-h: 36px;
+
+  --serif: Georgia, "Iowan Old Style", Charter, "Times New Roman", serif;
+  --sans: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+
+  --t-court: 150ms;
+  --t-moyen: 250ms;
+  color-scheme: light;
+}
+
+html { font-size: 100%; }
+@media (min-width: 1280px) { html { font-size: 112.5%; } }
+@media (min-width: 1700px) { html { font-size: 125%; } }

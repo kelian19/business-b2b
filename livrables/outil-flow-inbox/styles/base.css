@@ -1,0 +1,92 @@
+/* Flow Inbox : base, coque (bandeau permanent, en-tête, navigation), accessibilité. */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+
+h1, h2, h3, h4 { font-family: var(--serif); color: var(--night); line-height: 1.2; margin: 0; letter-spacing: -.01em; }
+h1 { font-size: clamp(1.5rem, 2.8vw, 2rem); margin-bottom: var(--sp-2); overflow-wrap: anywhere; }
+h2 { font-size: clamp(1.15rem, 2vw, 1.35rem); margin-bottom: var(--sp-3); }
+h3 { font-size: 1.05rem; margin-bottom: var(--sp-2); }
+p { margin: 0 0 var(--sp-2); }
+a { color: var(--night); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+a:hover { color: var(--orange); text-decoration-thickness: 2px; }
+kbd { font: inherit; font-size: .88rem; font-weight: 700; border: 1px solid var(--night); border-bottom-width: 3px; border-radius: 5px; padding: 1px 7px; background: var(--surface); white-space: nowrap; }
+
+.wrap { max-width: var(--grid-max); margin: 0 auto; padding: 0 var(--sp-4); }
+@media (min-width: 700px) { .wrap { padding: 0 var(--sp-6); } }
+@media (min-width: 1700px) { .wrap { max-width: calc(var(--grid-max) * 1.25); } }
+
+.visually-hidden {
+  position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.sr-only-inline { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+[hidden] { display: none !important; }
+.copie-temp { position: fixed; left: -9999px; top: 0; opacity: 0; }
+.defs-graph { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+/* Focus : anneau de 3 px bien visible partout ; anneau clair sur fond sombre */
+:focus-visible { outline: 3px solid var(--orange); outline-offset: 2px; }
+.head :focus-visible, .tableur thead :focus-visible, .visite :focus-visible { outline-color: var(--paper); box-shadow: 0 0 0 5px var(--night); }
+.visite :focus-visible { outline-color: var(--orange); box-shadow: none; }
+main:focus, h1:focus, [tabindex="-1"]:focus { outline: none; }
+
+.skip { position: absolute; left: var(--sp-4); top: -80px; z-index: 100; background: var(--night); color: var(--paper); padding: var(--sp-3) var(--sp-4); border-radius: var(--r-1); text-decoration: none; font-weight: 600; }
+.skip:focus { top: calc(var(--banner-h) + var(--sp-2)); }
+
+/* Bandeau permanent, visible sur tous les écrans (y compris en mode présentation) */
+.banner {
+  position: sticky; top: 0; z-index: 50; min-height: var(--banner-h); display: flex; align-items: center; justify-content: center;
+  background: var(--orange); color: var(--white); padding: var(--sp-1) var(--sp-4); text-align: center; font-size: .88rem; line-height: 1.25;
+}
+.banner strong { font-weight: 700; letter-spacing: .01em; }
+@media (max-width: 700px) { .banner { position: static; font-size: .82rem; } }
+
+/* En-tête : marque et outils, puis navigation */
+.head { background: var(--night); color: var(--paper); }
+.head-in { display: flex; align-items: center; gap: var(--sp-3) var(--sp-6); flex-wrap: wrap; padding-top: var(--sp-3); padding-bottom: var(--sp-2); }
+.brand { display: flex; align-items: center; gap: 10px; font-size: 1.6rem; letter-spacing: -.045em; margin: 0; font-weight: 650; line-height: 1; color: var(--paper); }
+.brand-mark { flex-shrink: 0; color: var(--paper); }
+.brand-sous { font-size: .78rem; text-transform: uppercase; letter-spacing: .1em; font-weight: 500; border-left: 1px solid rgba(247, 244, 236, .5); padding-left: 10px; }
+.agence-nom { margin: 0; font-size: .88rem; color: #D9E3DC; }
+
+.head-actions { display: flex; gap: var(--sp-2); margin-left: auto; flex-wrap: wrap; }
+.btn-tete {
+  display: inline-flex; align-items: center; gap: var(--sp-2); min-height: 44px; padding: var(--sp-1) var(--sp-3); font: inherit; font-size: .88rem; font-weight: 600;
+  color: var(--paper); background: transparent; border: 2px solid rgba(247, 244, 236, .45); border-radius: var(--r-1); cursor: pointer;
+  transition: background var(--t-court), border-color var(--t-court);
+}
+.btn-tete:hover { background: rgba(247, 244, 236, .16); border-color: var(--paper); }
+.btn-tete[aria-pressed="true"] { background: var(--paper); color: var(--night); border-color: var(--paper); }
+
+.head-nav { border-top: 1px solid rgba(247, 244, 236, .16); }
+.nav { display: flex; flex-wrap: wrap; gap: var(--sp-1); padding: var(--sp-2) 0 var(--sp-3); }
+.nav-lien {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: var(--sp-1) 10px;
+  color: var(--paper); text-decoration: none; font-weight: 600; font-size: .88rem; border: 2px solid transparent; border-radius: var(--r-1);
+  transition: background var(--t-court), border-color var(--t-court);
+}
+.nav-lien:hover { background: rgba(247, 244, 236, .14); color: var(--paper); border-color: rgba(247, 244, 236, .4); }
+.nav-lien[aria-current="page"], .nav-lien[aria-current="page"]:hover { background: var(--paper); color: var(--night); border-color: var(--paper); }
+.nav-num { font-size: .78rem; opacity: .9; border: 1px solid currentColor; border-radius: 4px; padding: 0 5px; line-height: 1.4; }
+.nav-badge { background: var(--orange); color: var(--white); border-radius: 999px; font-size: .78rem; font-weight: 700; padding: 0 var(--sp-2); min-width: 1.5rem; text-align: center; line-height: 1.5; }
+.nav-lien[aria-current="page"] .nav-badge { background: var(--alerte); }
+@media (max-width: 1700px) { .nav-num { display: none; } }
+@media (max-width: 700px) {
+  .head-actions { margin-left: 0; width: 100%; }
+  .btn-tete { flex: 1 1 auto; justify-content: center; }
+  .nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .nav-lien { justify-content: center; }
+}
+
+#vue { padding: var(--sp-6) 0 var(--sp-4); min-width: 0; }
+.lead { max-width: 80ch; color: var(--muted); margin-bottom: var(--sp-4); font-size: 1.02rem; }
+
+.foot { background: var(--night); color: var(--paper); padding: var(--sp-4) 0 var(--sp-6); font-size: .85rem; margin-top: var(--sp-8); }
+.foot p { max-width: 110ch; }
+
+/* Mouvement : transitions sobres, supprimées si l'utilisateur demande moins de mouvement */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}
