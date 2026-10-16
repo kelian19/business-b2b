@@ -53,7 +53,7 @@
   display: inline-flex; align-items: center; gap: 4px; background: transparent; border: 0; color: inherit; font: inherit; font-weight: 600;
   cursor: pointer; min-height: 44px; padding: 0 4px; border-radius: var(--r-1);
 }
-.th-tri:hover { background: rgba(233, 229, 216, .16); }
+.th-tri:hover { background: rgba(247, 244, 236, .16); }
 .table thead :focus-visible { outline-color: var(--paper); }
 .th-tri .ic-tri { width: .9em; height: .9em; opacity: .45; transform: rotate(90deg); }
 th[aria-sort="ascending"] .ic-tri { opacity: 1; transform: rotate(-90deg); }

@@ -16,7 +16,7 @@
 .r-pied-print { display: none; }
 
 .r-entete { display: flex; justify-content: space-between; gap: 8mm; border-bottom: 1px solid var(--night); padding-bottom: 2mm; margin-bottom: 5mm; font-size: 8.5pt; color: var(--muted); }
-.r-marque-p { font-family: var(--serif); letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--night); }
+.r-marque-p { font-family: var(--sans); letter-spacing: -.045em; font-weight: 700; color: var(--night); }
 .r-h { font-size: 17pt; margin-bottom: 4mm; }
 .r-h2 { font-size: 12.5pt; margin: 5mm 0 2mm; }
 .r-h3 { font-size: 10.5pt; margin: 4mm 0 1.5mm; }
@@ -26,7 +26,7 @@
 
 /* Page 1 : couverture */
 .feuille-couverture .feuille-corps { display: flex; flex-direction: column; }
-.r-marque { font-family: var(--serif); font-size: 15pt; letter-spacing: .22em; text-transform: uppercase; font-weight: 700; color: var(--night); margin: 0 0 4mm; padding-bottom: 3mm; border-bottom: 3px solid var(--night); }
+.r-marque { font-family: var(--sans); font-size: 24pt; letter-spacing: -.045em; font-weight: 700; color: var(--night); margin: 0 0 4mm; padding-bottom: 3mm; border-bottom: 3px solid var(--night); }
 .r-centre { flex: 1 1 auto; display: flex; flex-direction: column; justify-content: center; gap: 6mm; padding: 10mm 0; }
 .r-logo { max-width: 52mm; max-height: 26mm; object-fit: contain; align-self: flex-start; }
 .r-titre { font-size: 32pt; line-height: 1.08; color: var(--night); }

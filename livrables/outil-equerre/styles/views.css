@@ -35,7 +35,7 @@
 .chart svg { display: block; width: 100%; height: auto; }
 .chart text { font-family: var(--sans); fill: var(--ink); }
 .chart .axis { stroke: var(--ink); stroke-width: 1; }
-.chart .grid { stroke: rgba(17, 17, 17, .18); stroke-width: 1; }
+.chart .grid { stroke: rgba(25, 61, 54, .18); stroke-width: 1; }
 .chart .bar-r { fill: var(--night); }
 .chart .bar-r:hover { fill: var(--red); }
 .values { margin-top: var(--sp-3); }

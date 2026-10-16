@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; font-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>flow · Atelier de l’agence</title>
+  <link rel="stylesheet" href="styles.css"><script src="logic.js" defer></script><script src="app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Aller aux outils</a>
+<header><a class="brand" href="#commercial" aria-label="flow, accueil de l’atelier"><img src="mark.svg" alt="" width="34" height="34"> flow</a><span class="header-label">ATELIER DE L’AGENCE</span><span class="local">100 % local · aucun envoi</span></header>
+<main id="main">
+  <div class="intro"><div><p class="eyebrow">VENDRE / CADRER / AVANCER</p><h1>Du premier échange<br>au projet <em>bien cadré.</em></h1></div><p>Deux outils pour décider de la prochaine action<br>et préparer une mission rentable.</p></div>
+  <nav class="tools" aria-label="Outils de l’agence"><a href="#commercial" id="link-commercial">01 <span>Suivi commercial</span></a><a href="#chiffrage" id="link-chiffrage">02 <span>Chiffrage de mission</span></a></nav>
+  <p id="status" role="status" aria-live="polite"></p>
+  <section id="commercial" aria-labelledby="commercial-title">
+    <div class="section-head"><div><p class="eyebrow">01 / GARDER LE FIL</p><h2 id="commercial-title">Chaque opportunité,<br>une prochaine action.</h2></div><div class="toolbar"><button id="demo" class="secondary">Explorer un exemple fictif</button><button id="new" class="secondary">Nouveau suivi vide</button></div></div>
+    <div class="notice" id="mode">Suivi vide · données conservées uniquement dans cet onglet.</div>
+    <div id="metrics" class="metrics"></div>
+    <p class="muted">Montants HT, suivis séparément. Les propositions ne sont pas des ventes. L’objectif de 1 000 € porte ici sur les encaissements HT renseignés, pas sur le bénéfice.</p>
+    <div class="workspace">
+      <section class="card editor" aria-labelledby="record-title"><h3 id="record-title">Ajouter une opportunité</h3>
+        <form id="record-form"><input type="hidden" name="id">
+          <label>Entreprise ou alias<input name="company" required maxlength="100" placeholder="Ex. : Agence Exemple"></label>
+          <div class="pair"><label>Offre<select name="offer" id="offer"></select></label><label>Étape<select name="stage" id="stage"></select></label></div>
+          <label>Prochaine action<input name="next" maxlength="300" placeholder="Ex. : proposer deux créneaux de démo"></label>
+          <label>Date de l’action<input name="due" type="date"></label>
+          <div class="pair"><label>Proposé HT (€)<input name="proposed" type="number" min="0" max="1000000" step="0.01" value="0" required></label><label>Signé HT (€)<input name="signed" type="number" min="0" max="1000000" step="0.01" value="0" required></label><label>Facturé HT (€)<input name="invoiced" type="number" min="0" max="1000000" step="0.01" value="0" required></label><label>Encaissé HT (€)<input name="collected" type="number" min="0" max="1000000" step="0.01" value="0" required></label></div>
+          <label>Besoin et éléments de qualification<textarea name="note" maxlength="1500" rows="3" placeholder="Besoin, volume, outils, décideur, point à vérifier…"></textarea></label>
+          <div class="toolbar"><button type="submit">Enregistrer la fiche</button><button type="button" id="cancel" class="secondary">Annuler l’édition</button></div>
+          <p id="record-error" class="error" role="alert"></p>
+        </form>
+      </section>
+      <section class="list-area" aria-label="Opportunités"><div class="list-toolbar"><label>Rechercher<input id="search" type="search" placeholder="Entreprise, besoin, action…"></label><label>Filtrer l’offre<select id="filter"><option value="">Toutes les offres</option></select></label></div><p id="list-count" class="muted"></p><div id="records"></div></section>
+    </div>
+    <div class="save-bar"><div><h3>Votre suivi reste chez vous.</h3><p id="save-state">Sauvegardez avant de fermer cet onglet.</p><p class="muted">Le fichier contient vos saisies en clair. Conservez-le hors du dépôt Git, dans votre espace privé.</p></div><div class="toolbar"><button id="export">Télécharger la sauvegarde</button><label class="file-button">Restaurer une sauvegarde<input type="file" id="import" accept=".json,application/json"></label></div></div>
+  </section>
+  <section id="chiffrage" aria-labelledby="quote-title" hidden>
+    <div class="section-head"><div><p class="eyebrow">02 / CHIFFRER AVANT DE PROMETTRE</p><h2 id="quote-title">Un prix expliqué.<br>Une marge <em>visible.</em></h2></div><p class="muted">Simulation interne · montants HT<br>Hypothèses à remplacer par vos estimations.</p></div>
+    <div class="workspace quote-workspace"><section class="card"><h3>Votre hypothèse de mission</h3><form id="quote-form">
+      <label>Mission<input name="mission" maxlength="150" value="Pilote Flow Inbox — hypothèse"></label>
+      <label>Périmètre à valider<textarea name="scope" rows="3" maxlength="2000">Une boîte de réception, champs convenus, suivi des demandes et brouillons relus par une personne. Accès et critères de recette à confirmer.</textarea></label>
+      <div class="pair"><label>Prix proposé HT (€)<input name="price" type="number" min="0" max="1000000" step="0.01" value="790" required></label><label>Temps estimé (h)<input name="hours" type="number" min="0" max="10000" step="0.25" value="10" required></label><label>Coût du temps (€/h)<input name="rate" type="number" min="0" max="1000000" step="0.01" value="35" required></label><label>Coûts externes HT (€)<input name="external" type="number" min="0" max="1000000" step="0.01" value="40" required></label><label>Réserve de temps (%)<input name="buffer" type="number" min="0" max="200" step="1" value="20" required></label><label>Marge cible sur prix (%)<input name="target" type="number" min="0" max="95" step="1" value="30" required></label></div>
+      <button type="submit">Recalculer</button><p id="quote-error" class="error" role="alert"></p>
+    </form></section><section class="quote-results" aria-label="Résultat du chiffrage"><div id="quote-output" aria-live="polite"></div><div class="card explanation"><h3>Ce que mesure ce calcul</h3><p>Coût estimé = heures avec réserve × coût horaire + coûts externes. Marge estimée = prix − coût estimé.</p><p>Prix cible = coût estimé ÷ (1 − marge cible). Le coût de votre temps est une valorisation interne, pas forcément une sortie de trésorerie.</p><p>Ce calcul ne représente pas un bénéfice net : impôts, cotisations et frais généraux non saisis sont exclus. Les abonnements futurs ne sont pas inclus.</p></div></section></div>
+    <section class="card scenarios"><h3>Si le temps de travail change…</h3><p>Chaque scénario conserve la réserve et les coûts externes saisis.</p><div class="table-scroll"><table><thead><tr><th>Scénario</th><th>Heures avec réserve</th><th>Coût estimé</th><th>Marge estimée</th></tr></thead><tbody id="scenarios"></tbody></table></div></section>
+    <div class="save-bar"><p>Le récapitulatif est une note interne de cadrage, pas un devis contractuel.<br>Le chiffrage n’est pas inclus dans la sauvegarde du suivi commercial.</p><div class="toolbar"><button id="quote-export">Télécharger la note de cadrage</button><button id="print" class="secondary">Imprimer le chiffrage</button></div></div>
+  </section>
+  <footer><span>flow · Outils internes de l’agence</span><a href="../outil-equerre/index.html">Ouvrir la préparation e-facture ↗</a><span>Aucun compte, aucune connexion externe.</span></footer>
+</main><noscript>Activez JavaScript pour utiliser les outils. Aucun fichier ni montant n’est traité sans JavaScript.</noscript>
+</body></html>

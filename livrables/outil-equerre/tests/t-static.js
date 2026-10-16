@@ -207,10 +207,10 @@ function contraste(a, b) {
 
 test('palette : couleurs de la charte exactes dans tokens.css', function () {
   var j = jetons();
-  assert.strictEqual(j.paper.toUpperCase(), '#E9E5D8');
-  assert.strictEqual(j.night.toUpperCase(), '#0F1E3D');
-  assert.strictEqual(j.ink.toUpperCase(), '#111111');
-  assert.strictEqual(j.red.toUpperCase(), '#C8200E');
+  assert.strictEqual(j.paper.toUpperCase(), '#F7F4EC');
+  assert.strictEqual(j.night.toUpperCase(), '#193D36');
+  assert.strictEqual(j.ink.toUpperCase(), '#193D36');
+  assert.strictEqual(j.red.toUpperCase(), '#BD481E');
   ['--sp-1', '--sp-2', '--sp-3', '--sp-4', '--sp-6', '--sp-8', '--sp-12', '--r-1', '--r-2', '--r-3', '--sh1', '--sh2', '--grid-max', '--serif', '--sans'].forEach(function (k) {
     assert.ok(j[k.slice(2)] !== undefined, k);
   });
@@ -219,8 +219,8 @@ test('palette : couleurs de la charte exactes dans tokens.css', function () {
 });
 
 test('palette : aucune couleur hors charte et dérivés dans les feuilles de style', function () {
-  var ok = ['#E9E5D8', '#0F1E3D', '#111111', '#111', '#C8200E', '#FFFFFF', '#FFF', '#000', '#000000', '#F6F3EA', '#FBF9F3', '#1F3158', '#3F4552'];
-  var rgbaOk = [[15, 30, 61], [200, 32, 14], [17, 17, 17], [233, 229, 216], [255, 255, 255]];
+  var ok = ['#F7F4EC', '#193D36', '#193D36', '#111', '#BD481E', '#FFFFFF', '#FFF', '#000', '#000000', '#FFFEFA', '#FFFEFA', '#284D44', '#53655D', '#F8FAFC', '#20252B', '#DDE2E7', '#5C6570'];
+  var rgbaOk = [[25, 61, 54], [189, 72, 30], [25, 61, 54], [247, 244, 236], [255, 255, 255]];
   CSS.forEach(function (f) {
     var t = H.lire(f);
     (t.match(/#[0-9a-fA-F]{3,8}\b/g) || []).forEach(function (c) { assert.ok(ok.indexOf(c.toUpperCase()) >= 0 || ok.indexOf(c) >= 0, f + ' : ' + c); });

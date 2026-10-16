@@ -40,8 +40,8 @@
   /** Pied de page répété sur chaque page imprimée. mode : 'demo' | 'client'. */
   function piedDePage(mode, dossier) {
     var base = mode === 'demo'
-      ? TEXTES.demo + ' · Équerre · ' + TEXTES.conseil
-      : TEXTES.clientBandeau + ' · Équerre · ' + TEXTES.conseil;
+      ? TEXTES.demo + ' · flow · ' + TEXTES.conseil
+      : TEXTES.clientBandeau + ' · flow · ' + TEXTES.conseil;
     return { texte: base, version: versionDossier(dossier).court, complet: base + ' · ' + versionDossier(dossier).court };
   }
 

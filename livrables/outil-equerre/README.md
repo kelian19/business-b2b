@@ -1,4 +1,28 @@
-# Équerre : outil local facture électronique et reporting
+# flow : préparation e-facture et reporting (outil Équerre)
+
+## Adaptation visuelle du 16 octobre 2026
+
+### Direction retenue après le retour utilisateur
+
+La passe éditoriale décrite ci-dessous a été rejetée par l'utilisateur comme trop générique. Elle est remplacée par une interface de gestion : fond neutre, surfaces blanches, en-tête compact, navigation latérale sur ordinateur, action « Nouveau dossier », suppression du grand slogan et des italiques décoratifs. `styles/flow.css` contient cette nouvelle présentation. Le parcours et les calculs existants sont réutilisés. Les références et critères de revue du designer sont consignés dans [les règles de design produit](../design/REGLES_DESIGN_PRODUITS.md).
+
+Validation de cette passe : **384 tests réussis** ; neuf routes × six tailles contrôlées, sans débordement de page ; navigation clavier verticale/horizontale, aide, création de dossier, mode présentation et média print vérifiés. Les couleurs neutres autorisées ont été ajoutées au contrôle de palette. Le détail et les limites figurent dans le guide ci-dessus. La nouvelle navigation reste visible sur les écrans de gestion ; haut/bas complète gauche/droite lorsque les onglets sont verticaux.
+
+### Modernisation de l'interface client
+
+Une seconde passe, demandée par l'utilisateur pour rapprocher e-facture de la présentation flow, ajoute `styles/flow.css` : en-tête clair avec nom du produit visible, introduction éditoriale, typographie sans sérif et accent italique, navigation à cartes, champs et tableaux allégés, indicateurs plus aérés. La navigation mobile défile horizontalement avec les libellés visibles. Les identifiants de composants et les interactions métier sont conservés.
+
+Cette couche s'applique à l'écran. L'introduction est masquée en mode présentation et à l'impression ; le gabarit A4 et les calculs ne changent pas. Aucun prix, engagement commercial ou fait réglementaire n'a été ajouté ou revalidé par cette passe.
+
+Contrôles de cette seconde passe : **384 tests réussis** avec `node livrables/outil-equerre/tests/run-tests.js`. Playwright sur serveur local : neuf routes (cinq étapes, dossier, mise à niveau, cabinet, aide) à six largeurs (320, 390, 768, 1 024, 1 440 et 1 920 px), soit **54 combinaisons sans débordement de page**, avec un seul titre principal et aucune exception JavaScript relevée. Navigation des onglets au clavier, mode présentation, réduction des mouvements et média d'impression vérifiés. Captures du tableau de bord inspectées à 390 et 1 440 px. Pas d'impression physique ni d'export PDF exécutés. Serveur de recette arrêté après vérification.
+
+### Première adaptation de la palette et de la signature
+
+À la demande de l'utilisateur, l'outil reprend l'identité de travail « flow » de `livrables/design/flow-inbox-concept/` : crème, vert sombre, orange, signature en minuscules et pictogramme. Cette adaptation concerne l'en-tête, les titres du navigateur, la palette des écrans et les rapports imprimables. Elle ne constitue pas une vérification de disponibilité du nom.
+
+Les fonctions de facturation électronique, les calculs, les imports et les données sont conservés. Le dossier technique `outil-equerre`, l'espace de noms JavaScript et le format `.equerre.json` gardent leurs noms pour préserver la compatibilité. Les messages qui désignent ce format historique peuvent encore mentionner Équerre. Aucun paquet ajouté, aucune connexion externe, aucun déploiement.
+
+Validation : `node livrables/outil-equerre/tests/run-tests.js` — **384 tests réussis**, dont les contrastes et les contrôles du format des dossiers. Les attentes de palette et de signature des rapports ont été actualisées. Recette Playwright sur serveur local : cinq étapes × cinq largeurs (320, 390, 768, 1 024 et 1 440 px), aucun débordement horizontal de page ; titres et marque corrects, couverture et pied de rapport actualisés, aucune erreur JavaScript relevée. Aperçu écran du rapport inspecté ; impression physique et export PDF non exécutés. `git diff --check` réussi.
 
 Application web 100 % locale. Elle s'ouvre par double-clic sur `index.html` : aucun serveur, aucune requête réseau, polices système, hors ligne. Rien n'est envoyé : tout reste dans le navigateur. L'outil ne contient aucune tarification : le prix n'est pas affiché dans l'outil.
 
@@ -6,7 +30,7 @@ Elle a été copiée de `livrables/demo-appel/` (qui n'est jamais modifiée). Po
 
 ## Deux modes, jamais mélangés
 
-- **Démo** : données fictives (bandeau rouge « Données fictives de démonstration »). C'est le mode d'ouverture. Les zones d'import y sont remplacées par un renvoi vers la création d'un dossier client.
+- **Démo** : données fictives (bandeau orange « Données fictives de démonstration »). C'est le mode d'ouverture. Les zones d'import y sont remplacées par un renvoi vers la création d'un dossier client.
 - **Dossier client** : données réelles importées (bandeau « Dossier client : données confidentielles, traitées uniquement dans ce navigateur »).
 
 ## Le parcours en 5 étapes

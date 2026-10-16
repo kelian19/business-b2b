@@ -21,8 +21,8 @@
 .btn-danger { border-color: var(--red); color: var(--red); }
 .btn-danger:hover { background: var(--red-tint); }
 .btn-petit { min-height: 44px; padding: var(--sp-1) var(--sp-3); font-size: .88rem; }
-.btn-nav { color: var(--paper); border-color: rgba(233, 229, 216, .55); font-size: .88rem; padding: var(--sp-1) var(--sp-3); }
-.btn-nav:hover { background: rgba(233, 229, 216, .16); }
+.btn-nav { color: var(--paper); border-color: rgba(247, 244, 236, .55); font-size: .88rem; padding: var(--sp-1) var(--sp-3); }
+.btn-nav:hover { background: rgba(247, 244, 236, .16); }
 .btn-nav[aria-pressed="true"], .btn-nav[aria-current="page"] { background: var(--paper); color: var(--night); }
 
 /* Badges de statut : icône + texte, jamais la couleur seule */
@@ -138,7 +138,7 @@ kbd { font-family: var(--sans); font-size: .85rem; font-weight: 700; border: 1px
 /* Dialogues natifs */
 .dlg { border: 2px solid var(--night); border-radius: var(--r-3); background: var(--surface); color: var(--ink); padding: var(--sp-6); width: min(36rem, calc(100vw - 2 * var(--sp-4))); max-height: calc(100vh - 2 * var(--sp-4)); box-shadow: var(--sh2); }
 .dlg-large { width: min(46rem, calc(100vw - 2 * var(--sp-4))); }
-.dlg::backdrop { background: rgba(15, 30, 61, .55); }
+.dlg::backdrop { background: rgba(25, 61, 54, .55); }
 .dlg h2 { margin-bottom: var(--sp-3); }
 .dlg-corps { margin-bottom: var(--sp-4); }
 .dlg-pied { display: flex; gap: var(--sp-2); justify-content: flex-end; flex-wrap: wrap; }

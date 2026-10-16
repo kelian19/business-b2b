@@ -28,7 +28,7 @@ test('rapport : titre et textes imposés', function () {
 
 test('rapport : pied de page de la démonstration', function () {
   var p = L.piedDePage('demo', L.dossierDemo(D, { maintenant: T0 }));
-  assert.strictEqual(p.texte, 'Données fictives de démonstration · Équerre · ne constitue pas un conseil fiscal');
+  assert.strictEqual(p.texte, 'Données fictives de démonstration · flow · ne constitue pas un conseil fiscal');
   assert.strictEqual(p.version, 'Version courante');
 });
 
@@ -37,7 +37,7 @@ test('rapport : pied de page du dossier client, avec la version', function () {
   d.versions.push({ id: 'v1', numero: 1, libelle: 'Avant correction', creeLe: T0, note: '', resume: {} });
   d.versions.push({ id: 'v2', numero: 2, libelle: 'Après correction', creeLe: T0, note: '', resume: {} });
   var p = L.piedDePage('client', d);
-  assert.strictEqual(p.texte, 'Dossier client : données confidentielles · Équerre · ne constitue pas un conseil fiscal');
+  assert.strictEqual(p.texte, 'Dossier client : données confidentielles · flow · ne constitue pas un conseil fiscal');
   assert.strictEqual(p.version, 'Version 2');
   assert.ok(/Version 2$/.test(p.complet));
   assert.ok(!/fictives/.test(p.texte));

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="connect-src 'none'; img-src data: blob:; font-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; form-action 'none'; base-uri 'none'">
-<title>Équerre : facture électronique et reporting</title>
+<title>flow · Préparation e-facture</title>
 <meta name="description" content="Outil local de préparation à la facture électronique et de reporting : fichier tiers, mentions, trésorerie. Rien n'est envoyé.">
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="styles/tokens.css">
@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="styles/report.css">
 <link rel="stylesheet" href="styles/cabinet.css">
 <link rel="stylesheet" href="styles/aide.css">
+<link rel="stylesheet" href="styles/flow.css">
 <link rel="stylesheet" href="styles/presentation.css">
 <link rel="stylesheet" href="styles/print.css" media="print">
 </head>
@@ -60,8 +61,8 @@
 <header class="head">
   <div class="wrap head-in">
     <div class="marque">
-      <p class="brand">Équerre</p>
-      <h1 class="titre-court">Dossier facture électronique</h1>
+      <p class="brand"><svg class="brand-mark" width="32" height="32" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="11" fill="currentColor"/><path d="M10 13h20M10 20h14M10 27h8" fill="none" stroke="var(--paper)" stroke-width="3" stroke-linecap="round"/><circle cx="29" cy="27" r="3" fill="var(--red)"/></svg>flow</p>
+      <h1 class="titre-court">Préparation e-facture</h1>
     </div>
     <div class="ent">
       <label for="nom-entreprise" class="visually-hidden">Nom de l'entreprise</label>
@@ -69,16 +70,15 @@
       <span id="etat-sale" class="chip-sale" hidden>Non enregistré</span>
     </div>
     <div class="head-actions">
-      <button type="button" class="btn btn-nav" id="btn-dossier"><svg class="ic" aria-hidden="true" focusable="false"><use href="#ic-dossier"/></svg><span>Dossier</span></button>
-      <button type="button" class="btn btn-nav" id="btn-upgrade"><svg class="ic" aria-hidden="true" focusable="false"><use href="#ic-historique"/></svg><span>Mise à niveau</span></button>
-      <button type="button" class="btn btn-nav" id="btn-cabinet"><svg class="ic" aria-hidden="true" focusable="false"><use href="#ic-utilisateurs"/></svg><span>Cabinet</span></button>
+      <a class="btn btn-primary flow-start" href="#accueil"><svg class="ic" aria-hidden="true"><use href="#ic-plus"/></svg>Nouveau dossier</a>
       <button type="button" class="btn btn-nav" id="btn-presentation" aria-pressed="false"><svg class="ic" aria-hidden="true" focusable="false"><use href="#ic-ecran"/></svg><span>Mode présentation</span></button>
       <button type="button" class="btn btn-nav" id="btn-rapport"><svg class="ic" aria-hidden="true" focusable="false"><use href="#ic-imprimante"/></svg><span>Rapport</span></button>
-      <button type="button" class="btn btn-nav" id="btn-aide"><svg class="ic" aria-hidden="true" focusable="false"><use href="#ic-aide"/></svg><span>Aide</span></button>
     </div>
   </div>
 </header>
 
+<aside class="flow-sidebar" aria-label="Navigation de l’espace de travail">
+<p class="sidebar-label">Dossier de préparation</p>
 <nav class="steps" id="steps" aria-label="Parcours du dossier">
   <div class="wrap">
     <div class="tabs" role="tablist" aria-label="Parcours du dossier">
@@ -91,6 +91,15 @@
     <div class="progress" aria-hidden="true"><span id="progress-in"></span></div>
   </div>
 </nav>
+<div class="sidebar-tools">
+  <p class="sidebar-label">Gestion des dossiers</p>
+  <button type="button" class="btn btn-nav" id="btn-dossier"><svg class="ic" aria-hidden="true"><use href="#ic-dossier"/></svg><span>Ouvrir / enregistrer</span></button>
+  <button type="button" class="btn btn-nav" id="btn-upgrade"><svg class="ic" aria-hidden="true"><use href="#ic-historique"/></svg><span>Comparer les versions</span></button>
+  <button type="button" class="btn btn-nav" id="btn-cabinet"><svg class="ic" aria-hidden="true"><use href="#ic-utilisateurs"/></svg><span>Portefeuille</span></button>
+  <button type="button" class="btn btn-nav" id="btn-aide"><svg class="ic" aria-hidden="true"><use href="#ic-aide"/></svg><span>Aide et méthode</span></button>
+</div>
+<p class="sidebar-local"><svg class="ic" aria-hidden="true"><use href="#ic-bouclier"/></svg> Fichiers traités localement<br><span>Aucune donnée envoyée</span></p>
+</aside>
 
 <main class="wrap" id="contenu" tabindex="-1">
 

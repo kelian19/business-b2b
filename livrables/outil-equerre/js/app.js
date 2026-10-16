@@ -20,7 +20,7 @@
     { id: 'reporting', hash: 'reporting', libelle: 'Trésorerie et reporting', vue: 'reporting' },
     { id: 'report', hash: 'rapport', libelle: 'Rapport', vue: 'report' }
   ];
-  var TITRE = 'Équerre : facture électronique et reporting';
+  var TITRE = 'flow · Préparation e-facture';
   var BANDEAU_DEMO = 'Données fictives de démonstration';
   var BANDEAU_CLIENT = 'Dossier client : données confidentielles, traitées uniquement dans ce navigateur';
   var PIED_DEMO = 'En démonstration, les noms d\'entreprises sont inventés et les SIREN sont générés : ils ne correspondent pas aux entreprises affichées.';
@@ -134,7 +134,10 @@
     var ec = ECRANS[route.ecran] || null;
     Object.keys(ECRANS).forEach(function (k) { $(ECRANS[k].sec).hidden = k !== route.ecran; });
     $('parcours').hidden = !!ec;
-    $('steps').hidden = !!ec;
+    $('steps').hidden = false;
+    if (ec) ETAPES.forEach(function (e) {
+      $('tab-' + e.id).setAttribute('aria-selected', 'false');
+    });
     S.setUi({ route: ec ? route.ecran : ETAPES[route.etape].hash, etape: ec ? -1 : route.etape });
     if (E.ui.tooltip) E.ui.tooltip.masquer();
     if (ec) {
@@ -198,14 +201,18 @@
   /* ---------- Onglets : motif ARIA (flèches, Début, Fin, tabindex itinérant) ---------- */
 
   function initOnglets() {
+    var tablist = document.querySelector('.tabs');
+    function orientation() { tablist.setAttribute('aria-orientation', root.innerWidth >= 1100 ? 'vertical' : 'horizontal'); }
+    orientation();
+    root.addEventListener('resize', orientation);
     ETAPES.forEach(function (e, i) {
       var tab = $('tab-' + e.id);
       tab.addEventListener('click', function () { allerEtape(i, { focus: false }); });
       tab.addEventListener('keydown', function (ev) {
         if (ev.ctrlKey || ev.altKey || ev.metaKey) return;
         var j = null;
-        if (ev.key === 'ArrowRight') j = (i + 1) % ETAPES.length;
-        else if (ev.key === 'ArrowLeft') j = (i + ETAPES.length - 1) % ETAPES.length;
+        if (ev.key === 'ArrowRight' || (ev.key === 'ArrowDown' && tablist.getAttribute('aria-orientation') === 'vertical')) j = (i + 1) % ETAPES.length;
+        else if (ev.key === 'ArrowLeft' || (ev.key === 'ArrowUp' && tablist.getAttribute('aria-orientation') === 'vertical')) j = (i + ETAPES.length - 1) % ETAPES.length;
         else if (ev.key === 'Home') j = 0;
         else if (ev.key === 'End') j = ETAPES.length - 1;
         if (j !== null) { ev.preventDefault(); allerEtape(j, { focusTab: true }); }

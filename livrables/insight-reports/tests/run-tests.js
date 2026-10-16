@@ -1,0 +1,28 @@
+'use strict';
+const assert=require('node:assert/strict'),L=require('../logic');
+let n=0;function test(label,fn){fn();n++;console.log('OK '+label);}
+const base='EX-1;Exemple;2026-09-01;2026-09-30;100;120;non_payee;';
+const csv=line=>L.headers.join(';')+'\n'+line;
+const opts={du:'2026-08-01',au:'2026-10-16',ref:'2026-10-16',client:''};
+test('Exemple normalisé sans perte',()=>assert.equal(L.parse(L.demo()).invoices.length,5));
+test('Indicateurs de référence',()=>{const r=L.report(L.parse(L.demo()).invoices,opts);assert.equal(r.caHT,5800);assert.equal(r.regleTTC,2760);assert.equal(r.encours,4200);assert.equal(r.echues.total,1800);assert.equal(r.nbClients,3);});
+test('État historique rétabli avant règlement',()=>{const r=L.report(L.parse(L.demo()).invoices,{...opts,au:'2026-08-15',ref:'2026-08-15'});assert.equal(r.regleTTC,0);assert.equal(r.encours,1200);assert.equal(r.future,4);});
+test('Filtre client et dates inclusives',()=>{const r=L.report(L.parse(L.demo()).invoices,{...opts,du:'2026-09-10',au:'2026-09-10',client:'Agence Exemple'});assert.equal(r.nbFactures,1);assert.equal(r.caHT,800);});
+test('Échéance du jour non échue',()=>assert.equal(L.report(L.parse(csv(base)).invoices,{...opts,au:'2026-09-30',ref:'2026-09-30'}).echues.total,0));
+test('Période vide : valeurs nulles ou nulles en montant',()=>{const r=L.report(L.parse(csv(base)).invoices,{...opts,du:'2026-10-01'});assert.equal(r.nbFactures,0);assert.equal(r.caHT,0);assert.equal(r.delaiMoyenPaiement,null);});
+test('Montants décimaux exacts au centime',()=>{const data=L.parse(csv(base.replace('100;120','0,10;0,12')+'\n'+base.replace('EX-1','EX-2').replace('100;120','0,20;0,24')));assert.equal(L.report(data.invoices,opts).caHT,.3);});
+test('Montants négatifs ou ambigus refusés',()=>{for(const v of ['-100','1.234','1 000','NaN'])assert.equal(L.parse(csv(base.replace('100;120',v+';120'))).ok,false);});
+test('Pas d’import partiel ni de doublons',()=>{const r=L.parse(csv(base+'\n'+base));assert.equal(r.ok,false);assert.equal(r.invoices,undefined);assert.equal(r.errors.length,1);});
+test('Colonnes manquantes et en-têtes doubles refusés',()=>{assert.throws(()=>L.parse('client\nExemple'));assert.throws(()=>L.parse(csv(base).replace('numero;client','client;client')));});
+test('Dates impossibles et dates inversées refusées',()=>{assert.equal(L.parse(csv(base.replace('2026-09-01','2026-02-30'))).ok,false);assert.throws(()=>L.report([],{...opts,du:'2026-11-01'}));assert.throws(()=>L.report([],{...opts,ref:'2026-01-01'}));});
+test('Paiements partiels et statuts inconnus refusés',()=>{for(const status of ['partiel','inconnu'])assert.equal(L.parse(csv(base.replace('non_payee',status))).ok,false);});
+test('Règlement sans date refusé',()=>assert.equal(L.parse(csv(base.replace('non_payee','payee'))).ok,false));
+test('Champs incohérents refusés',()=>{assert.equal(L.parse(csv(base.replace('100;120','100;90'))).ok,false);assert.equal(L.parse(csv(base+'2026-10-01')).ok,false);});
+test('Clés objet réservées refusées avant le moteur historique',()=>{for(const name of ['__proto__','constructor','toString'])assert.equal(L.parse(csv(base.replace('Exemple',name))).ok,false);});
+test('CSV multi-ligne entre guillemets',()=>assert.equal(L.parse(csv(base.replace('Exemple','"Exemple\nFictif"'))).invoices[0].client,'Exemple\nFictif'));
+test('Colonnes supplémentaires refusées pour éviter un solde ou une devise ignorés',()=>assert.throws(()=>L.parse(csv(base).replace('date_paiement\n','date_paiement;devise\n')+';USD')));
+test('Export neutralise les formules',()=>{const data=L.parse(csv(base.replace('Exemple','=1+1')));const out=L.exportSummary(L.report(data.invoices,opts),opts,'=1+1','Fictif');assert.ok(out.includes("'=1+1"));});
+test('Fichier vide refusé',()=>assert.throws(()=>L.parse(L.headers.join(';'))));
+test('Bornes du format de date',()=>{assert.equal(L.iso('2024-02-29'),true);assert.equal(L.iso('1999-01-01'),false);assert.equal(L.iso('2100-01-01'),false);});
+test('Pas de réseau, stockage implicite ou HTML injecté dans la nouvelle application',()=>{const fs=require('node:fs'),path=require('node:path');for(const f of ['app.js','logic.js','index.html','styles.css']){const text=fs.readFileSync(path.join(__dirname,'..',f),'utf8');assert.doesNotMatch(text,/\bfetch\s*\(|XMLHttpRequest|innerHTML|outerHTML|insertAdjacentHTML|localStorage|sessionStorage|https:\/\//);} });
+console.log(n+' tests réussis.');

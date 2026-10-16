@@ -48,7 +48,7 @@
     });
     return h('div', { class: 'panel-top dash-top' }, [
       h('div', null, [
-        h('h2', { text: 'Tableau de bord de direction' }),
+        h('h2', { text: 'Vue d’ensemble' }),
         h('p', { class: 'dash-sous', text: 'Situation au ' + U.fmtDate(ref) + ' · ' + d.entreprise.nom })
       ]),
       h('div', { class: 'dash-top-d' }, [

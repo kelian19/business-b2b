@@ -49,7 +49,7 @@
 
   function enteteFeuille(d, ref) {
     return h('div', { class: 'r-entete' }, [
-      h('span', { class: 'r-marque-p', text: 'Équerre' }),
+      h('span', { class: 'r-marque-p', text: 'flow' }),
       h('span', { class: 'r-entete-nom' }, [spanNom(), ' · Situation au ' + U.fmtDate(ref)])
     ]);
   }
@@ -80,7 +80,7 @@
       ])
       : h('div', { class: 'r-cadre r-cadre-client', role: 'note' }, [h('strong', { text: T.clientBandeau }), h('span', { text: T.confidentialite.replace(T.clientBandeau + '. ', '') })]);
     return feuille('rapport-couverture', 'feuille-couverture', 'r-titre', [
-      h('p', { class: 'r-marque', text: 'Équerre' }),
+      h('p', { class: 'r-marque', text: 'flow' }),
       h('div', { class: 'r-centre' }, [
         logo,
         h('h3', { id: 'r-titre', class: 'r-titre', text: T.titre }),
@@ -441,7 +441,7 @@
     // Texte constant du pied de page : guillemets, barres obliques inverses et retours à la ligne sont remplacés par des espaces.
     var echappe = String(texte).split(String.fromCharCode(34)).join(' ').split(String.fromCharCode(92)).join(' ').split(String.fromCharCode(10)).join(' ');
     var police = 'font: 8pt "Segoe UI", system-ui, Arial, sans-serif; color: #111111; vertical-align: top; padding-top: 3mm;';
-    style.textContent = '@page { @bottom-left { content: "' + echappe + '"; ' + police + ' width: 80%; text-align: left; border-top: .3mm solid #0F1E3D; margin-top: 2mm; }' +
+    style.textContent = '@page { @bottom-left { content: "' + echappe + '"; ' + police + ' width: 80%; text-align: left; border-top: .3mm solid #193D36; margin-top: 2mm; }' +
       ' @bottom-right { content: "Page " counter(page) " sur " counter(pages); ' + police + ' width: 20%; text-align: right; } }';
   }
 

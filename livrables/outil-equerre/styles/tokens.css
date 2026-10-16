@@ -1,21 +1,21 @@
-/* Équerre : jetons de conception. Couleurs de la charte (papier, bleu nuit, encre, rouge) et dérivés autorisés.
+/* flow : jetons de conception. Couleurs de la charte (crème, vert sombre, orange) et dérivés autorisés.
  * Polices système uniquement, aucune ressource externe. */
 :root {
   /* Couleurs de la charte */
-  --paper: #E9E5D8;
-  --night: #0F1E3D;
-  --ink: #111111;
-  --red: #C8200E;
+  --paper: #F7F4EC;
+  --night: #193D36;
+  --ink: #193D36;
+  --red: #BD481E;
   --white: #FFFFFF;
   /* Dérivés autorisés */
-  --surface: #F6F3EA;
-  --surface-2: #FBF9F3;
-  --night-90: #1F3158;
-  --night-12: rgba(15, 30, 61, .12);
-  --night-06: rgba(15, 30, 61, .06);
-  --red-tint: rgba(200, 32, 14, .08);
-  --muted: #3F4552;
-  --line: rgba(17, 17, 17, .22);
+  --surface: #FFFEFA;
+  --surface-2: #FFFEFA;
+  --night-90: #284D44;
+  --night-12: rgba(25, 61, 54, .12);
+  --night-06: rgba(25, 61, 54, .06);
+  --red-tint: rgba(189, 72, 30, .08);
+  --muted: #53655D;
+  --line: rgba(25, 61, 54, .22);
 
   /* Espacements (échelle 4 à 48) */
   --sp-1: 4px;
@@ -30,8 +30,8 @@
   --r-1: 6px;
   --r-2: 10px;
   --r-3: 14px;
-  --sh1: 0 1px 2px rgba(15, 30, 61, .08);
-  --sh2: 0 6px 20px rgba(15, 30, 61, .10);
+  --sh1: 0 1px 2px rgba(25, 61, 54, .08);
+  --sh2: 0 6px 20px rgba(25, 61, 54, .10);
 
   /* Grille : 12 colonnes, gouttière 24 px, largeur maximale 1320 px */
   --grid-max: 1320px;

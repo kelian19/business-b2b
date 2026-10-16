@@ -53,11 +53,13 @@ main:focus, [role="tabpanel"]:focus { outline: none; }
 .head-in { display: flex; align-items: center; gap: var(--sp-4); min-height: var(--head-h); flex-wrap: wrap; padding-top: var(--sp-1); padding-bottom: var(--sp-1); }
 @media (min-width: 1100px) { .head-in { height: var(--head-h); flex-wrap: nowrap; padding-top: 0; padding-bottom: 0; } }
 .marque { display: flex; align-items: baseline; gap: var(--sp-3); flex: 0 0 auto; }
-.brand { font-family: var(--serif); font-size: 1rem; letter-spacing: .14em; text-transform: uppercase; margin: 0; color: var(--paper); font-weight: 700; }
+.brand { display: flex; align-items: center; gap: 10px; font-family: var(--sans); font-size: 1.65rem; letter-spacing: -.045em; margin: 0; color: var(--paper); font-weight: 650; line-height: 1; }
+.brand-mark { flex-shrink: 0; color: var(--paper); }
+.brand-mark path { stroke: var(--night); }
 .titre-court { color: var(--paper); font-weight: 400; white-space: nowrap; }
 .ent { display: flex; align-items: center; gap: var(--sp-2); flex: 1 1 18rem; min-width: 14rem; }
-.champ-ent { width: 100%; max-width: 360px; background: rgba(233, 229, 216, .08); color: var(--paper); border-color: rgba(233, 229, 216, .55); font-weight: 600; }
-.champ-ent:hover { background: rgba(233, 229, 216, .14); }
+.champ-ent { width: 100%; max-width: 360px; background: rgba(247, 244, 236, .08); color: var(--paper); border-color: rgba(247, 244, 236, .55); font-weight: 600; }
+.champ-ent:hover { background: rgba(247, 244, 236, .14); }
 .chip-sale { font-size: .75rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--night); background: var(--paper); border-radius: 999px; padding: 2px var(--sp-2); white-space: nowrap; }
 .head-actions { display: flex; gap: var(--sp-1); flex: 0 0 auto; margin-left: auto; flex-wrap: wrap; }
 .head-actions .btn-nav { padding: var(--sp-1) var(--sp-2); font-size: .82rem; gap: var(--sp-1); }
