@@ -13,11 +13,16 @@ Tout le reste (objet, offre, question, identité, refus) est figé. Aucun modèl
 
 Les champs d'identité, de rendez-vous et de suivi ne sont jamais choisis par le modèle. `{prenom_nom}` vaut une espace suivie du nom vérifié, ou une chaîne vide : le résultat est alors « Bonjour, ». Un champ inconnu ne doit pas être deviné.
 
+## Identité d'expéditeur retenue (décision de Kélian, 17 octobre 2026)
+- **Entrepreneur individuel en micro-entreprise**, signature en nom propre : `{expediteur}` = « Kélian Kaddouri, entrepreneur individuel — automatisation B2B ».
+- **Boîte d'envoi** : adresse Gmail dédiée à l'activité (`{adresse_reponse}`), séparée de la boîte personnelle. Acceptable pour une vague manuelle de quelques messages ; à remplacer par un domaine propre (SPF, DKIM, DMARC) avant tout envoi en volume ou automatisé.
+- Pas de nom de marque dans les messages. Ne pas mettre « Équerre » tant que INPI et domaine ne sont pas vérifiés.
+
 ## À compléter avant tout envoi (marqueurs `À COMPLÉTER`)
-- `{expediteur}` : nom légal ou raison sociale, et nom d'usage.
-- `{adresse_postale}` et `{identifiant_legal}` (SIRET ou équivalent) : à décider avec la structure juridique, non arrêtée à ce jour.
-- `{adresse_reponse}` : boîte dédiée de réponse et de refus, non créée.
-- Nom de marque : non choisi. Ne pas mettre « Équerre » tant que INPI et domaine ne sont pas vérifiés.
+- `{identifiant_legal}` : **SIRET de la micro-entreprise** — À COMPLÉTER (immatriculation à faire ou à confirmer par Kélian).
+- `{adresse_postale}` : adresse professionnelle déclarée — À COMPLÉTER (la domiciliation à son domicile est un choix à vérifier).
+- `{adresse_reponse}` : l'adresse Gmail dédiée, une fois créée — À COMPLÉTER.
+- Le projet à deux associés n'est pas couvert par une micro-entreprise : à revoir avant de facturer à deux.
 
 ## Modèle 1 — Flow Inbox
 **Objet** : Un point sur vos demandes commerciales

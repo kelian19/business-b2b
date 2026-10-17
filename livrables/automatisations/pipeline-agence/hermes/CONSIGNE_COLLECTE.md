@@ -6,9 +6,9 @@
 
 > Tâche : compléter la liste de test, rien d'autre. N'envoie aucun message, ne rédige aucun e-mail, n'utilise aucun outil de messagerie.
 >
-> Trouve 10 NOUVELLES entreprises françaises de négoce ou de distribution B2B (fournitures industrielles, matériaux, pièces, emballage), de taille a priori moyenne. Exclus les groupes très grands. Exclus ces entreprises déjà vues : DISTRIDIAM, E-SIS, THOMÉ, AFIL Services, MIDI PYRENEES MANUTENTION. Utilise seulement la recherche web et des pages publiques d'entreprises. Pas de LinkedIn, pas de réseau social, pas d'annuaire payant.
+> Trouve 10 NOUVELLES entreprises françaises de négoce ou de distribution B2B (fournitures industrielles, matériaux, pièces, emballage), de taille a priori moyenne. Exclus les groupes très grands. Exclus ces entreprises déjà vues : DISTRIDIAM, E-SIS, THOMÉ, AFIL Services, MIDI PYRENEES MANUTENTION, SYNOTEC INDUSTRIE, UNIMATE, Bayard Matériaux, RBK Roulements, DESROLEST, Techniques Nouvelles de Transmissions, LFI LEBBRECHT FOURNITURES INDUSTRIELLES, BOUHIRON EMBALLAGES ET IMPRIMES, PFI DISTRIBUTION, CI2P, MOGRA, Dimatrap, SNIMOP, GENCO. Utilise seulement la recherche web et des pages publiques d'entreprises. Pas de LinkedIn, pas de réseau social, pas d'annuaire payant.
 >
-> Écris le résultat dans `prospects-lot2.csv` de ton dossier de travail : UTF-8, séparateur point-virgule, une ligne par entreprise, ces colonnes exactement, dans cet ordre :
+> Écris le résultat dans `prospects-lot3.csv` de ton dossier de travail : UTF-8, séparateur point-virgule, une ligne par entreprise, ces colonnes exactement, dans cet ordre :
 > raison_sociale ; url_source_nom ; site ; ville ; url_source_ville ; activite_observee ; url_source_activite ; email_publie ; url_source_email ; effectif_declare ; url_source_effectif ; date_collecte
 >
 > Règles de forme, strictes :
@@ -26,3 +26,9 @@
 1. Ouvrir le fichier et contrôler chaque ligne sur sa source. Cible : au moins 8 lignes sur 10 exactes.
 2. Retirer les doublons avec les listes déjà préparées et avec l'historique d'envois et d'oppositions.
 3. Ne rien envoyer avant l'identité d'expéditeur (voir [MODELES_MESSAGES.md](MODELES_MESSAGES.md)).
+
+## Variante piste A (Flow Inbox : agences et formation) — à utiliser à la place de la phrase « Trouve 10 NOUVELLES entreprises… »
+
+> Trouve 10 NOUVELLES petites entreprises françaises de l'un de ces types : agences de marketing, de communication ou web, organismes de formation B2B, cabinets de conseil. Taille a priori petite (quelques personnes à une quinzaine). Exclus les entreprises déjà vues : ACTYVEA, Bewizyu Formation, Insuffle Académie, CARTESA, Factorielles, ainsi que toutes celles de la liste précédente. Mêmes colonnes et mêmes règles que ci-dessus. Pour `activite_observee`, copie UNE phrase du site qui décrit comment elles reçoivent les demandes de clients (formulaire de devis, contact, prise de brief) quand elle existe, sinon une phrase décrivant leur activité.
+
+Nommer le fichier `prospects-lot3-agences.csv`. Une seule piste par lot : ne pas mélanger agences et distribution dans le même fichier.
