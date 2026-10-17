@@ -1,0 +1,242 @@
+{
+  "name": "Agence 02 — bilan quotidien — APERÇU",
+  "nodes": [
+    {
+      "id": "9f529cc1-1953-5d8f-bb9a-5ce04f83f992",
+      "name": "Bilan manuel",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "230f591a-0abe-51d1-b844-8fc98ba1ab7e",
+      "name": "Chaque soir à 20h — désactivé",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        200
+      ],
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 20 * * *"
+            }
+          ]
+        }
+      },
+      "disabled": true
+    },
+    {
+      "id": "f4f2e7ab-0288-5ae1-b4df-e4d72773238c",
+      "name": "Configuration bilan",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        250,
+        80
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "return [{json:{send_telegram:false,chat_id:''}}];"
+      }
+    },
+    {
+      "id": "52f82865-f8a9-5f2c-9594-0b77ee15457d",
+      "name": "Lire les agrégats et exporter pour Hermes",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        500,
+        80
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "http://127.0.0.1:8791/v1/report",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "A_CONFIGURER_BRIDGE",
+          "name": "Agence — pont local"
+        }
+      },
+      "retryOnFail": false
+    },
+    {
+      "id": "859b7a46-e764-54e4-8a59-4aa0e79dfe4e",
+      "name": "Livraison Telegram autorisée ?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        750,
+        80
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "test",
+              "leftValue": "={{ $('Configuration bilan').item.json.send_telegram }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "0e854a7f-818d-5b0f-87bf-c84d59aa9e76",
+      "name": "Telegram — bilan privé",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1020,
+        -30
+      ],
+      "parameters": {
+        "resource": "message",
+        "operation": "sendMessage",
+        "chatId": "={{ $('Configuration bilan').item.json.chat_id }}",
+        "text": "={{ $json.text }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "credentials": {
+        "telegramApi": {
+          "id": "A_CONFIGURER_TELEGRAM",
+          "name": "Agence — Telegram bilan"
+        }
+      }
+    },
+    {
+      "id": "f267b82a-8ceb-56ed-8aa6-37ca437652c8",
+      "name": "Aperçu seulement — aucune livraison",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1020,
+        200
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "return [{json:{...$input.first().json,delivery:'not_sent',hermes:'Lire uniquement les fichiers agrégés du dossier de rapports explicitement sélectionné.'}}];"
+      }
+    },
+    {
+      "id": "bf64cd16-da21-533f-b480-01621ab61cc1",
+      "name": "Bilan : mode aperçu",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        180,
+        -250
+      ],
+      "parameters": {
+        "content": "Europe/Paris. Workflow et planification inactifs. send_telegram=false.\nLe pont écrit les agrégats s’il est lancé avec --report-dir. Hermes n’est pas invoqué automatiquement : il lit ces seuls agrégats dans un environnement séparé.\nPour livrer sur Telegram, sélectionner credentials et chat privé, puis tester sur données fictives avant activation.",
+        "height": 220,
+        "width": 550
+      }
+    }
+  ],
+  "connections": {
+    "Bilan manuel": {
+      "main": [
+        [
+          {
+            "node": "Configuration bilan",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chaque soir à 20h — désactivé": {
+      "main": [
+        [
+          {
+            "node": "Configuration bilan",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Configuration bilan": {
+      "main": [
+        [
+          {
+            "node": "Lire les agrégats et exporter pour Hermes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lire les agrégats et exporter pour Hermes": {
+      "main": [
+        [
+          {
+            "node": "Livraison Telegram autorisée ?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Livraison Telegram autorisée ?": {
+      "main": [
+        [
+          {
+            "node": "Telegram — bilan privé",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Aperçu seulement — aucune livraison",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Europe/Paris",
+    "saveDataErrorExecution": "none",
+    "saveDataSuccessExecution": "none",
+    "saveManualExecutions": false,
+    "saveExecutionProgress": false,
+    "executionTimeout": 300
+  },
+  "versionId": "8dfec7b3-6f03-5018-a210-52489810d145",
+  "tags": []
+}

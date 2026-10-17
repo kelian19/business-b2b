@@ -1,5 +1,7 @@
 # Pipeline commerciale
 
+> Complément du 17 octobre : [pipeline agence n8n + Claude + supervision Hermes](../livrables/automatisations/pipeline-agence/README.md) construite localement à la demande de l'utilisateur. Registre, préparation de brouillons locaux et agrégats testables ; exports n8n inactifs, sans recette n8n ni fournisseurs connectés. Ce livrable ne fait pas passer les étapes commerciales historiques à « fait » et ne crée aucun envoi.
+
 > Dernière décision du 15 octobre : deux services retenus, Flow Inbox et préparation e-facture. Voir les [offres et niches](../docs/OFFRES_ET_NICHES.md) et le [guide de découverte e-facture](../docs/GUIDE_DECOUVERTE_EFACTURE.md). Le repère agences ci-dessous correspond à l'étape précédente ; les statuts historiques ne valident pas les deux offres actuelles.
 
 > Repère du 15 octobre 2026 : le tableau ci-dessous décrit la pipeline historique des cabinets comptables. Pour la cible actuelle des agences et Flow Inbox, consulter le [point d'avancement](../docs/AVANCEMENT_2026-10-15.md) et le [plan proposé](../docs/PLAN_30_JOURS.md). Les anciennes étapes « fait » ne valident pas la nouvelle offre ; les rôles et commandes cités ne constituent pas une autorisation de délégation ou d'action. Développement et refonte restent soumis aux validations de `AGENTS.md`.

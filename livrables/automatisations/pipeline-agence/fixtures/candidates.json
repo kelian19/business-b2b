@@ -1,0 +1,29 @@
+[
+  {
+    "company": "Formation Exemple Fictive",
+    "email": "contact@formation-exemple.invalid",
+    "offer": "flow_inbox",
+    "fact": "Des formations de management sont proposées en intra-entreprise.",
+    "source_fact": "https://formation-exemple.invalid/formations",
+    "source_contact": "https://formation-exemple.invalid/contact",
+    "approved": true
+  },
+  {
+    "company": "Distribution Démonstration Fictive",
+    "email": "contact@distribution-demo.invalid",
+    "offer": "efacture",
+    "fact": "Un catalogue de fournitures industrielles est présenté aux professionnels.",
+    "source_fact": "https://distribution-demo.invalid/catalogue",
+    "source_contact": "https://distribution-demo.invalid/contact",
+    "approved": true
+  },
+  {
+    "company": "Cabinet Exemple Non Qualifié",
+    "email": "contact@conseil-demo.invalid",
+    "offer": "flow_inbox",
+    "fact": "Une activité de conseil aux entreprises est présentée sur ce site fictif.",
+    "source_fact": "https://conseil-demo.invalid/",
+    "source_contact": "https://conseil-demo.invalid/contact",
+    "approved": false
+  }
+]

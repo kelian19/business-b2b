@@ -4,6 +4,10 @@
 
 ## Priorité actuelle — repère du 15 octobre 2026
 
+Le 17 octobre, à la demande « fais la pipeline avec n8n, claude, hermes », [pipeline interne d'agence](../livrables/automatisations/pipeline-agence/README.md) préparée : registre local SQLite, pont HTTP authentifié sur loopback, génération de deux workflows n8n désactivés, mode demo par défaut, futur appel API Claude et bilan Telegram à configurer. Hermes dispose d'instructions de lecture des seuls agrégats ; ni installé ni exécuté. Brouillons locaux uniquement, aucun envoi ou brouillon Gmail, aucun import réel de prospects ni appel fournisseur dans cette livraison. La [recette](../livrables/automatisations/pipeline-agence/RECETTE.md) distingue contrôles locaux et intégrations restantes.
+
+Complément du 17 octobre : [services et avatars clients](../livrables/offre/services-et-avatars-clients.md) rédigés à la demande de l'utilisateur. Six profils hypothétiques pour les deux offres, plus un profil exploratoire pour la préparation de prospection automatisée. Aucun entretien, prix accepté ou besoin commercial prouvé n'est déduit de ces portraits.
+
 **Décision utilisateur la plus récente : deux idées de services retenues, Flow Inbox et préparation à la facturation électronique, avec l'automatisation comme compétence commune.** La [fiche offres et niches](../docs/OFFRES_ET_NICHES.md) précise les segments à qualifier et la suite proposée. Le choix des deux services est acquis ; l'ordre des tests, les niches exclusives et les prix restent à valider par les échanges commerciaux. Cette décision élargit le brief du 13 octobre décrit ci-dessous.
 
 Le brief initial du 13 octobre ciblait les agences marketing, communication et web françaises de 3 à 15 salariés, avec Flow Inbox, puis Insight Reports et Lead Assistant. La décision ci-dessus élargit cette orientation ; les agences restent une cible pour Flow Inbox. Objectif initial : 1 000 € effectivement encaissés ; disponibilité provisoire : 10 h/semaine.

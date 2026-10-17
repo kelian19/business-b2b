@@ -1,0 +1,391 @@
+{
+  "name": "Agence 01 — préparation commerciale — DEMO",
+  "nodes": [
+    {
+      "id": "a2af3a9d-1d06-598a-9750-7fb71161e8fc",
+      "name": "Démarrage manuel",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        100
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "eaccf177-e074-5caa-9767-4fc5353dc79d",
+      "name": "Configuration préparation",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        230,
+        100
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "return [{json:{mode:'demo',limit:5,model:'CLAUDE_MODEL_A_CONFIGURER'}}];"
+      }
+    },
+    {
+      "id": "b6868c5d-b156-5c2f-b72e-8bcd48f797dd",
+      "name": "Réserver les tâches",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        470,
+        100
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:8791/v1/claim",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "timeout": 30000
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({mode:$json.mode,limit:$json.limit,model:$json.model}) }}"
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "A_CONFIGURER_BRIDGE",
+          "name": "Agence — pont local"
+        }
+      },
+      "retryOnFail": false
+    },
+    {
+      "id": "720cef4b-a8aa-5f12-9604-dd03d333b5a1",
+      "name": "Répartir les tâches",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        710,
+        100
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const data=$input.first().json; if(!Array.isArray(data.jobs)) throw new Error('Contrat du pont invalide'); return data.jobs.map(job=>({json:job,pairedItem:{item:0}}));"
+      }
+    },
+    {
+      "id": "dff0c520-8b42-5a1f-a9ce-f9db73469690",
+      "name": "Mode live explicite ?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        950,
+        100
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "test",
+              "leftValue": "={{ $json.mode }}",
+              "rightValue": "live",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "faafa457-63df-5e5b-b4b5-86443bd02cf0",
+      "name": "Autoriser un appel unique",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1190,
+        -50
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:8791/v1/authorize-api-call",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "timeout": 30000
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({job_id:$json.job_id}) }}"
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "A_CONFIGURER_BRIDGE",
+          "name": "Agence — pont local"
+        }
+      },
+      "retryOnFail": false
+    },
+    {
+      "id": "b6a3ce8b-5cbe-5312-8c4c-1e0299715270",
+      "name": "Claude — API Messages",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1430,
+        -50
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($('Répartir les tâches').item.json.anthropic_request) }}",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "A_CONFIGURER_CLAUDE",
+          "name": "Agence — Anthropic API"
+        }
+      },
+      "retryOnFail": false
+    },
+    {
+      "id": "2f8793c8-175e-5125-ab8a-09557d8f8c8f",
+      "name": "Rattacher la réponse au job",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1670,
+        -50
+      ],
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const job=$('Répartir les tâches').item.json; return {json:{job_id:job.job_id,response:$json}};"
+      }
+    },
+    {
+      "id": "b6b50cab-3ea8-5754-9509-6031a6489ad2",
+      "name": "Claude simulé — aucun appel",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1430,
+        260
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "return $input.all().map((item,index)=>({json:{job_id:item.json.job_id,response:{stop_reason:'end_turn',content:[{type:'text',text:JSON.stringify({opening:'Votre présentation mentionne cette activité : '+item.json.fact,fact_quote:item.json.fact})}]}},pairedItem:{item:index}}));"
+      }
+    },
+    {
+      "id": "84cf690b-b9a8-572a-b94b-826dc638e3d6",
+      "name": "Valider et enregistrer le brouillon local",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1930,
+        100
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:8791/v1/complete",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "timeout": 30000
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({job_id:$json.job_id,response:$json.response}) }}"
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "A_CONFIGURER_BRIDGE",
+          "name": "Agence — pont local"
+        }
+      },
+      "retryOnFail": false
+    },
+    {
+      "id": "dd8fb976-8ce5-52ea-8322-c556ade21cd3",
+      "name": "Relecture humaine — aucun envoi",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2170,
+        100
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "return $input.all().map(item=>({json:{...item.json,next_step:'Consulter la queue locale, relire puis envoyer manuellement. Aucun brouillon Gmail créé par ce workflow.'}}));"
+      }
+    },
+    {
+      "id": "c7cdcf63-e5d4-58f6-a42e-9959210bd3c0",
+      "name": "Lire avant import",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        40,
+        -320
+      ],
+      "parameters": {
+        "content": "V0.1 — EXPORT NON EXÉCUTÉ DANS N8N\nMode demo par défaut. Le pont local doit être lancé. Deux credentials Header Auth à sélectionner : Authorization/Bearer pour le pont ; x-api-key pour Anthropic.\nLe mode live nécessite aussi --enable-live-api côté pont et un modèle accessible. Aucun nœud Gmail/Send. Un timeout reste à réconcilier humainement. Ne pas rejouer directement le nœud API.",
+        "height": 250,
+        "width": 600
+      }
+    }
+  ],
+  "connections": {
+    "Démarrage manuel": {
+      "main": [
+        [
+          {
+            "node": "Configuration préparation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Configuration préparation": {
+      "main": [
+        [
+          {
+            "node": "Réserver les tâches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Réserver les tâches": {
+      "main": [
+        [
+          {
+            "node": "Répartir les tâches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Répartir les tâches": {
+      "main": [
+        [
+          {
+            "node": "Mode live explicite ?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mode live explicite ?": {
+      "main": [
+        [
+          {
+            "node": "Autoriser un appel unique",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Claude simulé — aucun appel",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Autoriser un appel unique": {
+      "main": [
+        [
+          {
+            "node": "Claude — API Messages",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude — API Messages": {
+      "main": [
+        [
+          {
+            "node": "Rattacher la réponse au job",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rattacher la réponse au job": {
+      "main": [
+        [
+          {
+            "node": "Valider et enregistrer le brouillon local",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude simulé — aucun appel": {
+      "main": [
+        [
+          {
+            "node": "Valider et enregistrer le brouillon local",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Valider et enregistrer le brouillon local": {
+      "main": [
+        [
+          {
+            "node": "Relecture humaine — aucun envoi",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Europe/Paris",
+    "saveDataErrorExecution": "none",
+    "saveDataSuccessExecution": "none",
+    "saveManualExecutions": false,
+    "saveExecutionProgress": false,
+    "executionTimeout": 300
+  },
+  "versionId": "cd9bc33b-83d4-5e88-a986-4d0249dff09b",
+  "tags": []
+}

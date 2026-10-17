@@ -2,6 +2,8 @@
 
 Document interne de référence. L'utilisateur retient deux idées de services : Flow Inbox et préparation à la facturation électronique. L'automatisation est la compétence commune ; une mission supplémentaire reste à cadrer sur un besoin précis. Ce choix ne valide ni les prix ni une demande commerciale mesurée.
 
+Complément du 17 octobre : [services et avatars clients](../livrables/offre/services-et-avatars-clients.md), avec douleurs et envies hypothétiques, décideurs, motifs de paiement, objections et questions de validation. La prospection automatisée y figure comme piste distincte à explorer, pas comme troisième offre déjà validée.
+
 ## Positionnement proposé
 
 « Nous aidons les petites entreprises B2B à organiser leurs demandes commerciales et à fiabiliser leurs données de facturation, avec des automatisations adaptées à leurs outils. »
