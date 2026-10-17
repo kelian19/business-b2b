@@ -25,6 +25,8 @@ flowchart LR
 
 Ce livrable concerne la **prospection interne de l'agence**, pour les deux services. Il ne remplace pas le produit Flow Inbox ni son contrat Gmail.
 
+Kit de rédaction : [charte Hermes](hermes/CHARTE_REDACTION.md), [textes de prospection, réponses et bilan](hermes/MODELES_MESSAGES.md), [prompt d'ouverture](hermes/PROMPT_OUVERTURE.txt). Le prompt est chargé directement par le registre ; les corps enrichis restent des modèles à relire et à intégrer au rendu avant utilisation. Aucun texte de ce kit n'active un envoi ou une relance.
+
 ## Fichiers livrés
 
 | Fichier | Usage |

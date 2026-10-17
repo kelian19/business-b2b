@@ -4,6 +4,8 @@
 
 ## Priorité actuelle — repère du 15 octobre 2026
 
+Kit de rédaction Hermes du 17 octobre : [charte](../livrables/automatisations/pipeline-agence/hermes/CHARTE_REDACTION.md), [modèles de messages](../livrables/automatisations/pipeline-agence/hermes/MODELES_MESSAGES.md) et prompt d'ouverture unique relié à `pipeline.py`. Objectif : rendez-vous qualifiés pour les deux offres. Premiers contacts, relance unique, réponses proposées pour Kélian, confirmation de rendez-vous et bilan préparés. Les corps enrichis ne sont pas encore rendus par la pipeline ; aucune activation. Rendez-vous pris non suivis par le registre actuel, distincts des entretiens tenus.
+
 Le 17 octobre, à la demande « fais la pipeline avec n8n, claude, hermes », [pipeline interne d'agence](../livrables/automatisations/pipeline-agence/README.md) préparée : registre local SQLite, pont HTTP authentifié sur loopback, génération de deux workflows n8n désactivés, mode demo par défaut, futur appel API Claude et bilan Telegram à configurer. Hermes dispose d'instructions de lecture des seuls agrégats ; ni installé ni exécuté. Brouillons locaux uniquement, aucun envoi ou brouillon Gmail, aucun import réel de prospects ni appel fournisseur dans cette livraison. La [recette](../livrables/automatisations/pipeline-agence/RECETTE.md) distingue contrôles locaux et intégrations restantes.
 
 Complément du 17 octobre : [services et avatars clients](../livrables/offre/services-et-avatars-clients.md) rédigés à la demande de l'utilisateur. Six profils hypothétiques pour les deux offres, plus un profil exploratoire pour la préparation de prospection automatisée. Aucun entretien, prix accepté ou besoin commercial prouvé n'est déduit de ces portraits.

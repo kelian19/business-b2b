@@ -2,6 +2,8 @@
 
 17 octobre 2026. Décision de Kélian : Hermes scrape, remplit le registre SQLite, envoie et fait un récapitulatif Telegram. **Ce fichier est un cahier des charges, rien n'est activé.** Il remplace la limite « Hermes n'envoie pas » de [INSTRUCTIONS.md](INSTRUCTIONS.md) uniquement une fois les prérequis ci-dessous cochés par Kélian.
 
+Références de rédaction : [charte Hermes](CHARTE_REDACTION.md), [modèles de messages](MODELES_MESSAGES.md) et [prompt unique d'ouverture](PROMPT_OUVERTURE.txt). Ces textes visent les rendez-vous qualifiés ; ils ne remplacent pas les contrôles techniques ni les conditions d'activation de cette campagne.
+
 ## Prérequis (à faire par Kélian, jamais par l'assistant)
 - [ ] Fournisseur de modèle configuré dans Hermes.
 - [ ] Boîte d'envoi connectée à Hermes (identifiants saisis dans Hermes, hors dépôt).

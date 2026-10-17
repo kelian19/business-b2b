@@ -2,6 +2,8 @@
 
 Journal daté des décisions et des faits. Une ligne par élément, la plus récente en haut. Alimenté par `/update`.
 
+- 2026-10-17 : à la demande de templates à respecter par Hermes, modèles Claude existants complétés dans pipeline-agence/hermes/MODELES_MESSAGES.md (premiers contacts, relance, intérêt, prix, déjà équipé, confirmation rendez-vous, refus, bilan). Charte de rédaction créée et prompt d'ouverture sorti en fichier unique chargé par pipeline.py, contrat JSON inchangé. Source et identité obligatoires, aucune douleur, disponibilité ou preuve inventée ; réponses humaines laissées à Kélian. Aucun envoi, modèle réel, relance ou réservation exécuté.
+
 - 2026-10-17 : demande de pipeline n8n/Claude/Hermes exécutée en préparation locale dans livrables/automatisations/pipeline-agence : registre SQLite, pont HTTP authentifié, exports n8n inactifs de préparation commerciale et bilan quotidien, modèle Claude à configurer, instructions Hermes lecture seule. Démo fictive de deux brouillons préparés et un prospect non approuvé, sans envoi. Aucun import/exécution n8n, installation Hermes, appel API réel, connexion compte ou envoi Telegram. La recette connectée reste à effectuer.
 
 - 2026-10-17 : à la demande de rédaction des services et avatars, création de livrables/offre/services-et-avatars-clients.md : deux offres retenues, six profils hypothétiques (agences, formation B2B, conseil, négoce/distribution, fabrication, cabinets comptables), douleurs, envies, décideurs, motifs d'achat, objections et questions de découverte. Prospection automatisée distinguée comme piste non validée, sans ajout d'une troisième offre acquise. Aucun entretien, envoi, devis ou encaissement établi par cette rédaction.
