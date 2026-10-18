@@ -25,7 +25,25 @@ flowchart LR
 
 Ce livrable concerne la **prospection interne de l'agence**, pour les deux services. Il ne remplace pas le produit Flow Inbox ni son contrat Gmail.
 
-Kit de rédaction : [charte Hermes](hermes/CHARTE_REDACTION.md), [textes de prospection, réponses et bilan](hermes/MODELES_MESSAGES.md), [prompt d'ouverture](hermes/PROMPT_OUVERTURE.txt). Le prompt est chargé directement par le registre ; les corps enrichis restent des modèles à relire et à intégrer au rendu avant utilisation. Aucun texte de ce kit n'active un envoi ou une relance.
+Kit de rédaction : [charte Hermes](hermes/CHARTE_REDACTION.md), [textes de prospection, réponses et bilan](hermes/MODELES_MESSAGES.md), [prompt d'ouverture](hermes/PROMPT_OUVERTURE.txt). Depuis le 18 octobre, les deux premiers contacts sont rendus depuis les [modèles texte](hermes/messages/), dont la concordance avec la référence rédactionnelle est testée. Seule l'ouverture vient du modèle IA. Les réponses, relances et confirmations restent des supports manuels. Aucun texte de ce kit n'active un envoi ou une relance.
+
+## Identité et brouillons incomplets
+
+Kélian a confirmé le 18 octobre que le SIRET et les coordonnées d'expéditeur ne sont pas encore prêts : poursuivre la préparation locale. Sans configuration d'identité, les **nouveaux** brouillons affichent `BROUILLON INCOMPLET — NON ENVOYABLE`, les quatre variables manquantes et `review_status: identity_incomplete` dans la queue.
+
+Quand les informations seront vérifiées, copier [sender.example.json](config/sender.example.json) dans un dossier privé ignoré par Git, puis remplir ses quatre champs. Ne pas saisir de données réelles dans le modèle versionné. Le SIRET doit contenir 14 chiffres ; le programme n'en vérifie ni l'existence ni l'attribution. Adresse et statut restent à vérifier humainement.
+
+L'option globale `--sender-file CHEMIN_PRIVE.json` est disponible dans `pipeline.py` et `bridge.py`. Elle doit précéder la sous-commande de `pipeline.py`. Exemple de lecture de la queue :
+
+```text
+python pipeline.py --sender-file CHEMIN_PRIVE.json queue
+```
+
+Cette option configure le rendu des futurs brouillons uniquement. Une identité complète conserve le statut `human_review_required` : ce n'est pas une autorisation de campagne. Le programme refuse un JSON incomplet ou avec des marqueurs, et refuse les chemins `.env` avant lecture. L'identité n'est transmise ni à Claude ni aux agrégats Hermes.
+
+Les brouillons déjà enregistrés restent inchangés, même après configuration d'identité ou rejeu. Les anciens textes doivent être contrôlés et complétés manuellement avant usage ; ne pas refaire un appel modèle pour les remplacer. Un statut de revue ne garantit pas l'exactitude commerciale ou juridique du message.
+
+[Voir les deux brouillons fictifs issus de la démo CLI](EXEMPLES_BROUILLONS_FICTIFS.md).
 
 ## Fichiers livrés
 

@@ -1,0 +1,16 @@
+Un point sur vos demandes commerciales
+
+Bonjour,
+
+{ouverture}
+
+Je prépare Flow Inbox pour organiser les demandes commerciales reçues par e-mail, suivre les informations manquantes et préparer les réponses. Une personne relit et envoie chaque message.
+
+L'idée est de rendre visibles les informations à compléter et les demandes qui attendent une action.
+
+Seriez-vous disponible pour un échange de 15 minutes afin de voir comment vous traitez ces demandes aujourd'hui ?
+
+{expediteur}
+{adresse_postale} · {identifiant_legal}
+Votre adresse a été relevée sur {source_contact}, à titre professionnel.
+Si ce message ne vous concerne pas, répondez « non merci » à {adresse_reponse} : vous ne recevrez plus rien de ma part.

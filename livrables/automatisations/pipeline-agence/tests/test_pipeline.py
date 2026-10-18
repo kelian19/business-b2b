@@ -12,7 +12,7 @@ from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from pipeline import Ledger, PipelineError, day_of, demo_response, report_text, timestamp
+from pipeline import Ledger, PipelineError, day_of, demo_response, report_text, timestamp, load_sender
 from bridge import handler_for
 from generate_workflows import preparation, daily_report
 
@@ -23,6 +23,26 @@ def candidate(index=0, approved=True, live=False):
             'offer': 'flow_inbox', 'fact': 'Des formations de management sont proposées aux entreprises.',
             'source_fact': 'https://' + host + '/formations', 'source_contact': 'https://' + host + '/contact',
             'approved': approved}
+
+
+def fictitious_sender():
+    return {'expediteur': 'Camille Exemple — entreprise fictive',
+            'adresse_postale': '1 rue Fictive, 00000 Ville fictive',
+            'identifiant_legal': '00000000000000', 'adresse_reponse': 'reponse@expediteur.invalid'}
+
+
+class MessageTemplatesTests(unittest.TestCase):
+    def test_initial_templates_match_editorial_reference(self):
+        reference = (ROOT / 'hermes/MODELES_MESSAGES.md').read_text(encoding='utf-8')
+        for number, offer in [(1, 'flow_inbox'), (2, 'efacture')]:
+            with self.subTest(offer=offer):
+                section = reference.split(f'## Modèle {number} — ', 1)[1].split('\n## ', 1)[0]
+                subject = section.split('**Objet** : ', 1)[1].split('\n', 1)[0]
+                body = '\n'.join(line[2:] if line.startswith('> ') else ''
+                                 for line in section.splitlines() if line.startswith('>'))
+                body = body.replace('{prenom_nom}', '')
+                template = (ROOT / 'hermes/messages' / (offer + '.txt')).read_text(encoding='utf-8').strip()
+                self.assertEqual(template, subject + '\n\n' + body)
 
 
 class LedgerTests(unittest.TestCase):
@@ -100,6 +120,72 @@ class LedgerTests(unittest.TestCase):
         self.assertTrue(result['replayed'])
         self.assertEqual(len(self.ledger.queue()), 1)
         self.assertEqual(self.ledger.report()['confirmed_events']['sent'], 0)
+
+    def test_missing_identity_explicitly_marks_draft_incomplete(self):
+        self.prepared()
+        draft = self.ledger.queue()[0]
+        self.assertEqual(draft['review_status'], 'identity_incomplete')
+        self.assertIn('NON ENVOYABLE', draft['body'])
+        for field in ('expediteur', 'adresse_postale', 'identifiant_legal', 'adresse_reponse'):
+            self.assertIn('{' + field + '}', draft['body'])
+
+    def test_both_templates_render_verified_identity_and_source(self):
+        ledger = Ledger(self.path, sender=fictitious_sender())
+        rows = [candidate(0), candidate(1)]
+        rows[1]['offer'] = 'efacture'
+        ledger.ingest(rows)
+        for job in ledger.claim(model='simulation')['jobs']:
+            ledger.complete(job['job_id'], demo_response(job))
+        drafts = {row['offer']: row for row in ledger.queue()}
+        self.assertEqual(drafts['flow_inbox']['subject'], 'Un point sur vos demandes commerciales')
+        self.assertIn('Une personne relit et envoie chaque message.', drafts['flow_inbox']['body'])
+        self.assertEqual(drafts['efacture']['subject'], 'Fiabiliser vos fichiers clients et fournisseurs')
+        self.assertIn("Aucun fichier n'est nécessaire", drafts['efacture']['body'])
+        for draft in drafts.values():
+            self.assertEqual(draft['review_status'], 'human_review_required')
+            self.assertNotIn('{', draft['body'])
+            self.assertIn(draft['source_contact'], draft['body'])
+            self.assertIn('« non merci » à reponse@expediteur.invalid', draft['body'])
+        self.assertEqual(ledger.report()['confirmed_events']['sent'], 0)
+
+    def test_sender_never_enters_model_request_or_report(self):
+        sender = fictitious_sender()
+        ledger = Ledger(self.path, sender=sender)
+        ledger.ingest([candidate()])
+        job = ledger.claim(model='simulation')['jobs'][0]
+        ledger.complete(job['job_id'], demo_response(job))
+        public = json.dumps([job['anthropic_request'], ledger.report()])
+        for value in sender.values():
+            self.assertNotIn(value, public)
+
+    def test_invalid_or_placeholder_identity_is_rejected(self):
+        for key, value in [('expediteur', 'À COMPLÉTER'), ('adresse_postale', '{adresse}'),
+                           ('adresse_reponse', 'reponse@exemple.invalid\nBCC:autre@x.invalid'),
+                           ('identifiant_legal', 'à vérifier')]:
+            sender = fictitious_sender(); sender[key] = value
+            with self.subTest(field=key), self.assertRaises(PipelineError):
+                Ledger(self.path, sender=sender)
+        with self.assertRaises(PipelineError):
+            Ledger(self.path, sender={})
+
+    def test_sender_file_is_explicit_json_and_env_is_never_read(self):
+        path = Path(self.folder.name) / 'sender.json'
+        path.write_text(json.dumps(fictitious_sender()), encoding='utf-8')
+        self.assertEqual(load_sender(path), fictitious_sender())
+        self.assertIsNone(load_sender(None))
+        with self.assertRaises(PipelineError):
+            load_sender(Path(self.folder.name) / '.env.must-not-exist')
+        path.write_text('not json', encoding='utf-8')
+        with self.assertRaises(PipelineError):
+            load_sender(path)
+
+    def test_sender_configuration_does_not_rewrite_existing_draft(self):
+        job, _ = self.prepared()
+        before = self.ledger.queue()[0]['body']
+        ledger = Ledger(self.path, sender=fictitious_sender())
+        self.assertTrue(ledger.complete(job['job_id'], demo_response(job))['replayed'])
+        self.assertEqual(ledger.queue()[0]['body'], before)
+        self.assertEqual(ledger.queue()[0]['review_status'], 'identity_incomplete')
 
     def test_existing_draft_is_not_overwritten(self):
         job, _ = self.prepared()

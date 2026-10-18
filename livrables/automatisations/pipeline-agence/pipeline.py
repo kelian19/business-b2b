@@ -31,6 +31,8 @@ OFFERS = {
 }
 EVENTS = {'sent', 'replied', 'meeting_held', 'proposal_sent', 'signed', 'invoiced', 'payment_received', 'opposed', 'bounced'}
 SYSTEM_PROMPT = (Path(__file__).parent / 'hermes/PROMPT_OUVERTURE.txt').read_text(encoding='utf-8')
+SENDER_FIELDS = {'expediteur', 'adresse_postale', 'identifiant_legal', 'adresse_reponse'}
+INCOMPLETE_NOTICE = '[BROUILLON INCOMPLET — NON ENVOYABLE : identité expéditeur à compléter]'
 
 
 class PipelineError(ValueError):
@@ -88,6 +90,42 @@ def public_url(value):
     raise PipelineError('Adresse IP interdite comme source')
 
 
+def validate_sender(sender):
+    if not isinstance(sender, dict) or set(sender) != SENDER_FIELDS:
+        raise PipelineError('Identité expéditeur : quatre champs requis, sans champ supplémentaire')
+    clean = {key: bounded(sender[key], 3, 254, key) for key in SENDER_FIELDS}
+    if any(re.search(r'[{}]|à\s*compléter|a\s*completer', value, re.I) for value in clean.values()):
+        raise PipelineError('Identité expéditeur incomplète')
+    clean['adresse_reponse'] = email_value(clean['adresse_reponse'])
+    if not re.fullmatch(r'[0-9]{14}', clean['identifiant_legal']):
+        raise PipelineError('SIRET attendu : 14 chiffres ; sa validité reste à vérifier humainement')
+    return clean
+
+
+def load_sender(path):
+    if path is None:
+        return None
+    # Fichier JSON privé choisi explicitement ; aucun fichier .env n'est lu.
+    if Path(path).name.startswith('.env'):
+        raise PipelineError('Utiliser un JSON privé dédié, jamais un fichier .env')
+    try:
+        return validate_sender(json.loads(Path(path).read_text(encoding='utf-8')))
+    except json.JSONDecodeError as exc:
+        raise PipelineError('JSON identité expéditeur invalide') from exc
+
+
+def render_initial_message(offer, opening, source_contact, sender=None):
+    if offer not in OFFERS:
+        raise PipelineError('Offre inconnue')
+    template = (Path(__file__).parent / 'hermes/messages' / (offer + '.txt')).read_text(encoding='utf-8')
+    subject, body = template.strip().split('\n\n', 1)
+    identity = validate_sender(sender) if sender is not None else {key: '{' + key + '}' for key in SENDER_FIELDS}
+    body = body.format(ouverture=opening, source_contact=source_contact, **identity)
+    if sender is None:
+        body = INCOMPLETE_NOTICE + '\n\n' + body
+    return subject, body
+
+
 def validate_candidate(row, mode):
     if not isinstance(row, dict):
         raise PipelineError('Objet prospect attendu')
@@ -110,9 +148,10 @@ def validate_candidate(row, mode):
 
 
 class Ledger:
-    def __init__(self, path, mode='demo', daily_limit=5):
+    def __init__(self, path, mode='demo', daily_limit=5, *, sender=None):
         if mode not in {'demo', 'live'} or type(daily_limit) is not int or not 1 <= daily_limit <= 20:
             raise PipelineError('Mode ou limite invalide')
+        self.sender = validate_sender(sender) if sender is not None else None
         self.path = Path(path)
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self.mode, self.daily_limit = mode, daily_limit
@@ -273,13 +312,7 @@ class Ledger:
                 return {'job_id': job_id, 'candidate_id': row['id'], 'status': 'prepared', 'replayed': True}
             if row['state'] != ('reserved' if self.mode == 'demo' else 'api_started'):
                 raise PipelineError('Job non finalisable')
-            offer = OFFERS[row['offer']]
-            subject = 'Premier échange — ' + offer['name']
-            body = ('Bonjour,\n\n' + opening + '\n\nJe prépare un service : ' + offer['description'] + '\n\n'
-                    + offer['question'] + '\n\nUn échange de 15 minutes serait-il pertinent avec la personne concernée ?\n\n'
-                    + 'Kélian Kaddouri — automatisation B2B\n'
-                    + 'Contact public relevé sur : ' + row['source_contact'] + '\n'
-                    + 'Si ce sujet ne vous concerne pas, dites-le-moi et je ne vous relancerai pas.')
+            subject, body = render_initial_message(row['offer'], opening, row['source_contact'], self.sender)
             db.execute('INSERT INTO drafts VALUES (?,?,?,?,?)', (job_id, row['id'], subject, body, timestamp()))
             db.execute('UPDATE jobs SET state=?,result_hash=?,input_tokens=?,output_tokens=? WHERE id=?',
                        ('prepared', digest, usage.get('input_tokens'), usage.get('output_tokens'), job_id))
@@ -345,11 +378,14 @@ class Ledger:
 
     def queue(self):
         with self.connect() as db:
-            return [dict(row) for row in db.execute('''SELECT d.*,c.company,c.email,c.offer,c.source_fact,c.source_contact
+            rows = [dict(row) for row in db.execute('''SELECT d.*,c.company,c.email,c.offer,c.source_fact,c.source_contact
                 FROM drafts d JOIN candidates c ON c.id=d.candidate_id
                 WHERE NOT EXISTS(SELECT 1 FROM suppressions s WHERE s.email=c.email)
                 AND NOT EXISTS(SELECT 1 FROM events e WHERE e.candidate_id=c.id AND e.kind='sent')
                 ORDER BY d.prepared_at''').fetchall()]
+        for row in rows:
+            row['review_status'] = 'identity_incomplete' if row['body'].startswith(INCOMPLETE_NOTICE) else 'human_review_required'
+        return rows
 
 
 def report_text(report):
@@ -377,6 +413,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--db', default=str(Path(__file__).parent / 'runtime/demo.sqlite'))
     parser.add_argument('--mode', choices=['demo', 'live'], default='demo')
+    parser.add_argument('--sender-file', help='JSON privé d’identité expéditeur, hors Git ; jamais un .env')
     sub = parser.add_subparsers(dest='command', required=True)
     sub.add_parser('demo')
     sub.add_parser('seed-demo')
@@ -406,7 +443,7 @@ def main():
     event.add_argument('--amount-cents', type=int, default=0)
     event.add_argument('--confirmed-by-human', action='store_true')
     args = parser.parse_args()
-    ledger = Ledger(args.db, args.mode)
+    ledger = Ledger(args.db, args.mode, sender=load_sender(args.sender_file))
     if args.command in {'demo', 'seed-demo'}:
         if args.mode != 'demo':
             raise PipelineError('Commande demo interdite sur un registre live')

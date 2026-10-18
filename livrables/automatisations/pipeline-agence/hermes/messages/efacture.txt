@@ -1,0 +1,16 @@
+Fiabiliser vos fichiers clients et fournisseurs
+
+Bonjour,
+
+{ouverture}
+
+Je prépare une prestation de revue de vos fichiers clients et fournisseurs : informations manquantes, incohérences et doublons possibles, avec une liste de corrections proposées et de cas à faire valider.
+
+Le premier échange permet de vérifier ce que votre logiciel ou votre accompagnement comptable prend déjà en charge.
+
+Pourrions-nous en parler 15 minutes avec la personne responsable de la facturation ? Aucun fichier n'est nécessaire pour cet échange.
+
+{expediteur}
+{adresse_postale} · {identifiant_legal}
+Votre adresse a été relevée sur {source_contact}, à titre professionnel.
+Si ce message ne vous concerne pas, répondez « non merci » à {adresse_reponse} : vous ne recevrez plus rien de ma part.

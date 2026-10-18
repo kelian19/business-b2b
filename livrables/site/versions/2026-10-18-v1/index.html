@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Kélian Kaddouri — automatisation pour les petites entreprises B2B</title>
+<meta name="description" content="Organiser les demandes commerciales reçues par e-mail et préparer les données de facturation, avec les outils que vous utilisez déjà.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="lien-evitement" href="#contenu">Aller au contenu</a>
+
+<header class="entete">
+  <div class="conteneur">
+    <h1>Kélian Kaddouri — automatisation pour les petites entreprises B2B</h1>
+    <p>J’aide à organiser les demandes commerciales reçues par e-mail et à préparer les données de facturation, avec des outils adaptés à ceux que vous utilisez déjà.</p>
+    <p class="identite">Entrepreneur individuel · SIRET : <span class="todo">À COMPLÉTER</span></p>
+    <div class="actions">
+      <!-- À COMPLÉTER : ajouter l'adresse e-mail dédiée après « mailto: » avant publication -->
+      <a class="bouton" href="mailto:?subject=%C3%89change%20de%2015%20minutes">Écrire</a>
+      <span>Adresse e-mail : <span class="todo">À COMPLÉTER</span></span>
+    </div>
+    <nav class="navigation" aria-label="Sections de la page">
+      <ul>
+        <li><a href="#flow-inbox">Flow Inbox</a></li>
+        <li><a href="#facture-electronique">Facture électronique</a></li>
+        <li><a href="#deroulement">Comment ça se passe</a></li>
+        <li><a href="#qui">Qui je suis</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="contenu">
+
+<section class="bande" id="flow-inbox" aria-labelledby="t-flow">
+  <div class="conteneur">
+    <h2 id="t-flow">Flow Inbox : vos demandes commerciales, suivies jusqu’à la prochaine action</h2>
+    <p class="public">Pour les agences marketing, communication et web qui traitent leurs demandes par e-mail.</p>
+
+    <div class="colonnes">
+      <div>
+        <h3>Le problème</h3>
+        <p>Un prospect décrit son projet, mais il manque le budget ou l’échéance. Une autre demande attend une réponse. Le pilote Flow Inbox vise à réunir les informations utiles dans un suivi et à préparer les réponses à relire.</p>
+      </div>
+      <div>
+        <h3>Ce qui est mis en place</h3>
+        <ul>
+          <li>Une fiche par demande : besoin exprimé, budget et délai lorsqu’ils sont présents, informations à demander et prochaine action.</li>
+          <li>Un tableau Google Sheets pour retrouver les demandes et leur état de traitement.</li>
+          <li>Pour les demandes claires, un brouillon de réponse dans Gmail, à corriger et envoyer par votre équipe. Les autres sont signalées « à revoir ».</li>
+          <li>Le repérage dans le tableau des demandes sans réponse au-delà du délai convenu.</li>
+        </ul>
+        <p>Les informations absentes ne sont pas inventées. Les situations ambiguës restent à examiner par une personne.</p>
+      </div>
+    </div>
+
+    <div class="extrait">
+      <div class="extrait-entete">
+        <h3>Ce que vous voyez : le tableau de suivi et un brouillon</h3>
+        <span class="fictif">Exemple fictif</span>
+      </div>
+      <div class="extrait-corps">
+        <div class="defile" role="region" aria-label="Tableau de suivi, exemple fictif (défilement horizontal possible)" tabindex="0">
+          <table class="t-flow">
+            <caption>Onglet « Suivi » (extrait, 5 demandes fictives)</caption>
+            <thead>
+              <tr>
+                <th scope="col">Reçu le</th>
+                <th scope="col">Expéditeur</th>
+                <th scope="col">Service</th>
+                <th scope="col">Budget relevé</th>
+                <th scope="col">Délai relevé</th>
+                <th scope="col">À demander</th>
+                <th scope="col">Statut</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>16/10/2026</td>
+                <td>contact@atelier-nord.example</td>
+                <td>Site web</td>
+                <td class="vide">non précisé</td>
+                <td>« fin janvier »</td>
+                <td>Budget</td>
+                <td><span class="statut ok">Brouillon prêt</span></td>
+              </tr>
+              <tr>
+                <td>16/10/2026</td>
+                <td>direction@boulangerie-exemple.example</td>
+                <td>Identité visuelle</td>
+                <td class="vide">non précisé</td>
+                <td class="vide">non précisé</td>
+                <td>Budget, échéance</td>
+                <td><span class="statut ok">Brouillon prêt</span></td>
+              </tr>
+              <tr>
+                <td>15/10/2026</td>
+                <td>achats@cabinet-demo.example</td>
+                <td>Plusieurs services reconnus</td>
+                <td>« entre 3 et 5 k€ »</td>
+                <td class="vide">non précisé</td>
+                <td class="vide">—</td>
+                <td><span class="statut revoir">À revoir</span></td>
+              </tr>
+              <tr>
+                <td>15/10/2026</td>
+                <td>candidat@messagerie.example</td>
+                <td class="vide">—</td>
+                <td class="vide">—</td>
+                <td class="vide">—</td>
+                <td class="vide">—</td>
+                <td><span class="statut">Hors périmètre</span></td>
+              </tr>
+              <tr>
+                <td>13/10/2026</td>
+                <td>marketing@atelier-sud.example</td>
+                <td>Newsletter</td>
+                <td>« 1 200 € »</td>
+                <td>« sous deux semaines »</td>
+                <td class="vide">—</td>
+                <td><span class="statut clos">Répondu</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">Le budget et le délai sont recopiés tels qu’écrits dans le message. Le tableau réel compte d’autres colonnes (objet, points à revoir, prochaine action, lien vers le message). Adresses en .example : aucune donnée réelle.</p>
+
+        <div class="brouillon">
+          <dl class="brouillon-entete">
+            <div><dt>À :</dt><dd>contact@atelier-nord.example</dd></div>
+            <div><dt>Objet :</dt><dd>Re : Refonte de notre site</dd></div>
+          </dl>
+          <div class="brouillon-corps">
+            <p>Bonjour,</p>
+            <p>Merci pour votre message au sujet de votre projet de site. Pour préparer une proposition adaptée, pourriez-vous nous préciser l’enveloppe budgétaire envisagée ?</p>
+            <p>Bien cordialement,<br>La signature de votre équipe</p>
+          </div>
+          <p class="brouillon-pied">Brouillon dans Gmail (première ligne du tableau). Il n’est pas envoyé : votre équipe le relit, le corrige et l’envoie.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="colonnes">
+      <div>
+        <h3>Un premier périmètre limité</h3>
+        <p>Une boîte Gmail, un tableau dédié, des e-mails en français et une liste de services convenue ensemble. Les pièces jointes, la migration d’un CRM, plusieurs boîtes et les envois automatiques demandent un autre cadrage et sont exclus du pilote.</p>
+        <p>Le livrable prévu comprend la configuration convenue, le tableau, les règles de traitement, les essais de bout en bout et une prise en main. Le volume admissible et les conditions d’assistance seront écrits au devis.</p>
+      </div>
+      <div>
+        <h3>Vos données et vos envois</h3>
+        <ul>
+          <li><strong>Vos données restent dans votre compte Google.</strong> L’outil s’installe dans votre propre compte : votre boîte Gmail et un tableau dans votre Drive. Je n’ajoute aucun service tiers ni abonnement.</li>
+          <li><strong>Brouillons relus et envoyés par vous, aucun envoi automatique.</strong></li>
+          <li>L’autorisation Google donne au script un accès à votre boîte, mais il ne lit que les messages portant le libellé convenu. Vous pouvez retirer cet accès à tout moment.</li>
+          <li>La lecture se fait par règles convenues ensemble, pas par une IA : une demande inhabituelle est signalée « à revoir » plutôt que mal interprétée.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prix">
+      <h3>Budget indicatif du pilote : 790&nbsp;€&nbsp;HT</h3>
+      <p>À confirmer après un échange de 15 minutes et une vérification technique. L’outil n’ajoute aucun service payant ; d’éventuels frais d’outils seraient chiffrés séparément avant engagement. Aucun abonnement de maintenance obligatoire n’est proposé dans cette première offre. Calendrier et modalités de paiement sont fixés au devis.</p>
+      <p class="note">Proposition de prix, pas un devis. Aucun gain de temps n’est garanti sans mesure du processus actuel.</p>
+    </div>
+
+    <div class="etat">
+      <p><strong>Où en est l’outil.</strong> Démonstration disponible sur des exemples fictifs. L’outil installable est construit et testé en simulation ; chaque installation est vérifiée dans votre compte, avec des messages de test, avant d’être activée.</p>
+    </div>
+  </div>
+</section>
+
+<section class="bande neutre" id="facture-electronique" aria-labelledby="t-facture">
+  <div class="conteneur">
+    <h2 id="t-facture">Préparation à la facture électronique : vos fichiers clients et vos factures, revus avant septembre 2027</h2>
+    <p class="public">Pour les PME B2B (négoce, distribution, fabrication) dont la facturation repose sur un fichier clients et fournisseurs.</p>
+    <p>Les nouvelles règles de facturation s’appuient sur des données que vos factures reprennent telles quelles : SIREN du client, adresse de livraison, nature de l’opération. Une erreur dans le fichier clients se retrouve sur chaque facture émise. Je relis ces données pour vous dire ce qui est à corriger avant la bascule.</p>
+
+    <h3>Ce qui change pour vous</h3>
+    <ul>
+      <li><strong>Depuis le 1<sup>er</sup> septembre 2026</strong>, toutes les entreprises doivent pouvoir recevoir des factures électroniques, et 4 nouvelles mentions sont obligatoires sur les factures entre entreprises assujetties, dont le SIREN du client.</li>
+      <li><strong>Le 1<sup>er</sup> septembre 2027</strong>, l’émission des factures sous forme électronique devient obligatoire pour les PME, TPE et micro-entreprises. Amende prévue : 50&nbsp;€ par facture non émise sous forme électronique quand c’est obligatoire, plafonnée à 15&nbsp;000&nbsp;€ par année civile.</li>
+    </ul>
+    <p class="note">Sources, pages consultées le 6 octobre 2026 :
+      <a href="https://www.economie.gouv.fr/tout-savoir-sur-la-facturation-electronique-pour-les-entreprises" rel="noopener">economie.gouv.fr, la facturation électronique pour les entreprises</a> ;
+      <a href="https://www.impots.gouv.fr/sites/default/files/media/1_metier/2_professionnel/EV/2_gestion/290_facturation_electronique/fiche-1_que-va-t-il-se-passer-pour-mon-entreprise.pdf" rel="noopener">impots.gouv.fr, fiche 1 (mise à jour de juin 2026)</a> ;
+      <a href="https://www.economie.gouv.fr/entreprises/gerer-son-entreprise-au-quotidien/gerer-sa-comptabilite-et-ses-demarches/mentions-obligatoires-dune-facture-tout-savoir" rel="noopener">economie.gouv.fr, mentions obligatoires d’une facture</a> ;
+      <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000046869201" rel="noopener">Légifrance, article 1737 du CGI</a>.</p>
+
+    <h3>Ce que je vous remets</h3>
+    <p>À partir d’un <strong>export CSV</strong> (un fichier Excel s’enregistre en CSV en deux clics) de votre fichier clients et fournisseurs (une ligne par client ou fournisseur, sans noms de contacts) et de <strong>jusqu’à 3 de vos modèles de factures</strong> :</p>
+    <ol>
+      <li><strong>Un fichier de corrections proposées</strong> : pour chaque anomalie, la valeur actuelle, la correction proposée et un statut. « Calculée » : la correction se déduit de la ligne elle-même. « À vérifier » : à confirmer auprès de votre client ou de votre équipe.</li>
+      <li><strong>Un journal des corrections</strong> : ce qui a été relevé, proposé, accepté ou refusé.</li>
+      <li><strong>Le contrôle de présence des 4 nouvelles mentions</strong> sur vos modèles de factures : SIREN du client, adresse de livraison si elle diffère de l’adresse de facturation, nature de l’opération (biens, services ou les deux), option pour le paiement de la TVA d’après les débits.</li>
+      <li><strong>Un rapport des points à corriger</strong>, à traiter avant le 1<sup>er</sup> septembre 2027.</li>
+    </ol>
+
+    <div class="extrait">
+      <div class="extrait-entete">
+        <h3>Ce que vous recevez : le fichier de corrections proposées</h3>
+        <span class="fictif">Exemple fictif</span>
+      </div>
+      <div class="extrait-corps">
+        <div class="defile" role="region" aria-label="Corrections proposées, exemple fictif (défilement horizontal possible)" tabindex="0">
+          <table class="t-facture">
+            <caption>Corrections proposées (extrait, 3 lignes fictives)</caption>
+            <thead>
+              <tr>
+                <th scope="col">Tiers</th>
+                <th scope="col">Champ</th>
+                <th scope="col">Valeur actuelle</th>
+                <th scope="col">Correction proposée</th>
+                <th scope="col">Statut</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Client exemple A</td>
+                <td>TVA intracommunautaire</td>
+                <td class="mono">FR40123456782</td>
+                <td class="mono">FR11123456782</td>
+                <td><span class="statut ok">Calculée</span></td>
+              </tr>
+              <tr>
+                <td>Client exemple B</td>
+                <td>Code postal</td>
+                <td class="mono">6000</td>
+                <td class="mono">06000</td>
+                <td><span class="statut ok">Calculée</span></td>
+              </tr>
+              <tr>
+                <td>Client exemple C</td>
+                <td>SIREN</td>
+                <td class="mono">123 456 789</td>
+                <td>Aucun SIREN déduit : à vérifier au registre ou auprès du client</td>
+                <td><span class="statut revoir">À vérifier</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">Données inventées pour l’exemple. Seules les corrections « Calculées » se déduisent de la ligne elle-même ; je n’invente jamais un SIREN.</p>
+      </div>
+    </div>
+
+    <p>Vous (ou votre prestataire) appliquez les corrections dans votre logiciel : je n’y ai pas accès et je n’y modifie rien. Un identifiant bien formé ne prouve pas qu’il appartient au bon client : ces rapprochements restent à valider par vous. Avec votre accord, je peux comparer les SIREN au registre public des entreprises ; seuls les numéros SIREN sont envoyés, avec l’adresse IP de mon poste, jamais de noms ni d’adresses.</p>
+    <p>Je ne vends aucune plateforme de facturation : la revue vaut quelle que soit celle que vous choisirez.</p>
+
+    <div class="colonnes">
+      <div>
+        <h3>Ce que je ne fais pas</h3>
+        <ul>
+          <li>Je ne donne ni conseil fiscal ni conseil juridique.</li>
+          <li>Je ne garantis ni la conformité de votre entreprise ni l’absence d’amende : je liste des points à corriger, la décision reste la vôtre.</li>
+          <li>Je ne modifie pas votre logiciel et je ne transmets aucune facture à votre place.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Vos données</h3>
+        <p>Je travaille sur un export, sans accès à votre logiciel et sans noms de contacts, téléphones ni e-mails. Si le fichier contient des entrepreneurs individuels (des personnes physiques), nous signons d’abord un contrat de sous-traitance des données (article 28 du RGPD). Vos fichiers sont supprimés après la livraison, avec confirmation par e-mail.</p>
+      </div>
+    </div>
+
+    <h3>Formules et prix proposés (offre de lancement)</h3>
+    <div class="defile" role="region" aria-label="Formules et prix (défilement horizontal possible)" tabindex="0">
+      <table class="t-prix">
+        <caption>Prix hors taxes, proposés et à confirmer au devis</caption>
+        <thead>
+          <tr>
+            <td></td>
+            <th scope="col">Diagnostic</th>
+            <th scope="col">Dossier</th>
+            <th scope="col">Revue mise à jour (option)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Contenu</th>
+            <td>50 lignes, mini-rapport</td>
+            <td>jusqu’à 1&nbsp;500 lignes, 3 modèles de factures, rapport</td>
+            <td>nouvelle revue avant septembre 2027 (corrections mises à jour, modèles tels que paramétrés)</td>
+          </tr>
+          <tr>
+            <th scope="row">Prix HT</th>
+            <td><strong>gratuit</strong> (offre de lancement)</td>
+            <td><strong>490&nbsp;€</strong></td>
+            <td><strong>150&nbsp;€</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Délai visé : 5 jours ouvrés après réception d’un export conforme. Le devis précise le montant applicable, y compris le régime de TVA qui me concerne. Ces prix et délais sont des propositions, non validés par une vente ; cette page ne vaut pas devis.</p>
+  </div>
+</section>
+
+<section class="bande" id="deroulement" aria-labelledby="t-deroulement">
+  <div class="conteneur">
+    <h2 id="t-deroulement">Comment ça se passe</h2>
+    <ol class="etapes">
+      <li><strong>Un échange de 15 minutes</strong>, sans données réelles. Nous regardons votre fonctionnement actuel et si les outils déjà en place suffisent.</li>
+      <li><strong>Une proposition écrite et un devis</strong>, avec le périmètre et ses limites.</li>
+      <li><strong>La mise en place</strong> (Flow Inbox) ou <strong>le dossier</strong> (facture électronique).</li>
+      <li><strong>La prise en main</strong> : je vous explique comment lire et utiliser ce qui est remis.</li>
+    </ol>
+    <p>Pour la facture électronique, le délai visé est de 5 jours ouvrés après réception d’un export conforme. Je ne promets pas d’autre délai avant d’avoir vu votre cas.</p>
+  </div>
+</section>
+
+<section class="bande neutre" id="qui" aria-labelledby="t-qui">
+  <div class="conteneur">
+    <h2 id="t-qui">Qui je suis</h2>
+    <p>Kélian Kaddouri, entrepreneur individuel, data scientist (Python, automatisation), formé à l’ENSAE Paris. SIRET : <span class="todo">À COMPLÉTER</span>.</p>
+    <p>Je démarre : je cherche mes premiers clients et je n’ai pas de client de référence à citer. C’est pourquoi je propose un échange de 15 minutes sans données réelles et, pour la facture électronique, un diagnostic gratuit sur 50 lignes : vous jugez sur pièces avant de vous engager.</p>
+    <div class="actions">
+      <a class="bouton" href="mailto:?subject=%C3%89change%20de%2015%20minutes">Écrire</a>
+      <span>Adresse e-mail : <span class="todo">À COMPLÉTER</span></span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="pied">
+  <div class="conteneur">
+    <p>Kélian Kaddouri, entrepreneur individuel · Contact : <span class="todo">À COMPLÉTER</span></p>
+    <ul>
+      <li><a href="mentions-legales.html">Mentions légales</a></li>
+    </ul>
+    <p>Aucun cookie, aucun outil de mesure d’audience.</p>
+  </div>
+</footer>
+</body>
+</html>

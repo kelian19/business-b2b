@@ -1,6 +1,6 @@
 # Modèles de messages — à valider par Kélian
 
-17 octobre 2026. **Proposition, rien n'est envoyé.** Objectif : obtenir un rendez-vous de découverte pertinent pour vendre nos deux services, sans inventer un besoin. Lire la [charte Hermes](CHARTE_REDACTION.md). Le texte commercial est fixe : seule `{ouverture}` est rédigée par l'IA ; les autres variables viennent de données vérifiées. Ces modèles prolongent la structure de `pipeline.py`, mais leur corps enrichi n'est pas encore rendu automatiquement par ce code. Le [prompt d'ouverture](PROMPT_OUVERTURE.txt), lui, y est chargé directement.
+17 octobre 2026, rendu des premiers contacts intégré le 18 octobre. **Proposition, rien n'est envoyé.** Objectif : obtenir un rendez-vous de découverte pertinent pour vendre nos deux services, sans inventer un besoin. Lire la [charte Hermes](CHARTE_REDACTION.md). Le texte commercial est fixe : seule `{ouverture}` est rédigée par l'IA ; les autres variables viennent de données vérifiées. `pipeline.py` charge les deux [modèles texte](messages/), contrôlés par un test de concordance avec les deux premiers contacts ci-dessous, ainsi que le [prompt d'ouverture](PROMPT_OUVERTURE.txt). L'identité manquante produit un brouillon explicitement incomplet ; voir la [configuration](../README.md). Le rendu conserve « Bonjour, » : aucun nom de personne n'est ajouté.
 
 ## Ce que Hermes ou un modèle peut modifier
 | Champ | Origine | Contrôle |

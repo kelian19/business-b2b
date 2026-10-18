@@ -4,6 +4,16 @@
 
 Résultats exécutés : **33 tests Python réussis**, incluant des échanges HTTP réels sur loopback ; **15 blocs/expressions JavaScript compilés** et simulations de configuration, lot, sortie Claude fictive et rattachement au job réussies. Démo CLI : trois fiches fictives importées, deux brouillons locaux préparés, troisième fiche non approuvée ignorée ; au rejeu, aucune nouvelle fiche ni brouillon. Aucun fournisseur externe appelé.
 
+## Complément du 18 octobre — rendu des premiers contacts
+
+**40 tests Python réussis** avec `/usr/bin/python3` (Python 3.9 de l'environnement macOS), commande `python3 -m unittest discover -s livrables/automatisations/pipeline-agence/tests -v`. Premier passage dans le bac à sable : 34 réussites, cinq erreurs d'ouverture de port local (`PermissionError`). Après autorisation d'exécution hors bac à sable, les cinq tests HTTP sur `127.0.0.1` passent aussi ; dernier passage complet : 40/40.
+
+Les sept contrôles ajoutés couvrent la concordance des deux modèles texte avec la référence rédactionnelle, le marquage incomplet sans identité, le rendu des deux offres avec identité fictive, l'absence d'identité dans les requêtes modèle et les agrégats, le rejet des champs invalides, la lecture explicite du JSON et le refus d'un chemin `.env` avant lecture, et la conservation d'un brouillon après changement de configuration.
+
+Démo CLI exécutée deux fois sur une base temporaire : deux brouillons fictifs, mêmes textes et identifiants après rejeu, tous deux `identity_incomplete`. [Aperçu produit par cette exécution](EXEMPLES_BROUILLONS_FICTIFS.md). `git diff --check` réussi. Les contrôles JavaScript ne sont pas réexécutés dans cette session : Node absent du PATH ; aucun workflow ni générateur modifié. Les tests Python vérifient toujours la concordance des exports avec le générateur et leur état inactif.
+
+Le SIRET fictif de test à 14 zéros vérifie uniquement le format attendu ; aucune validité administrative n'est déduite. Les modèles restent à valider avant campagne. Aucun test n8n, Claude, Telegram ou Hermes réel n'a été réalisé le 18 octobre.
+
 ## Commandes de vérification
 
 Depuis la racine du dépôt :

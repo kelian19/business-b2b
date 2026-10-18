@@ -8,7 +8,7 @@ import threading
 from pathlib import Path
 from urllib.parse import parse_qs, urlsplit
 
-from pipeline import Ledger, PipelineError, report_text
+from pipeline import Ledger, PipelineError, load_sender, report_text
 
 
 def handler_for(ledger, token, enable_live_api=False, report_dir=None):
@@ -98,6 +98,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--db', default=str(Path(__file__).parent / 'runtime/demo.sqlite'))
     parser.add_argument('--mode', choices=['demo', 'live'], default='demo')
+    parser.add_argument('--sender-file', help='JSON privé d’identité expéditeur, hors Git ; jamais un .env')
     parser.add_argument('--port', type=int, default=8791)
     parser.add_argument('--enable-live-api', action='store_true')
     parser.add_argument('--report-dir', help='Dossier privé d’agrégats séparé des coordonnées')
@@ -105,7 +106,7 @@ def main():
     token = os.environ.get('AGENCY_BRIDGE_TOKEN', '')
     if len(token) < 24 or '\n' in token or '\r' in token:
         raise SystemExit('Définir AGENCY_BRIDGE_TOKEN (24 caractères minimum) dans le gestionnaire de secrets ; ne pas le versionner.')
-    ledger = Ledger(args.db, args.mode)
+    ledger = Ledger(args.db, args.mode, sender=load_sender(args.sender_file))
     server = ThreadingHTTPServer(('127.0.0.1', args.port), handler_for(
         ledger, token, args.enable_live_api, Path(args.report_dir) if args.report_dir else None))
     print(f'Pont agence local : http://127.0.0.1:{server.server_port} · mode {args.mode} · aucun fournisseur appelé par ce service')
