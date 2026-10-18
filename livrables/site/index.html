@@ -1,172 +1,79 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="fr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Kélian Kaddouri — automatisation pour PME B2B</title>
-<meta name="description" content="Suivi des demandes commerciales reçues par e-mail et préparation des fichiers de facturation, dans les outils que vous utilisez déjà.">
+<title>Kélian Kaddouri — des outils qui travaillent pour vous</title>
+<meta name="description" content="Automatisation pour PME B2B : suivi des demandes dans Gmail et préparation des fichiers de facturation, dans vos outils actuels.">
 <link rel="stylesheet" href="styles.css">
+<script src="site.js" defer></script>
 </head>
 <body>
 <a class="evitement" href="#contenu">Aller au contenu</a>
-
-<header class="barre">
-  <div class="cadre barre-int">
-    <a class="marque" href="#haut" aria-label="Kélian Kaddouri, accueil">
-      <span class="marque-k" aria-hidden="true">KK</span>
-      <span>Kélian Kaddouri</span>
-    </a>
-    <nav aria-label="Navigation principale">
-      <a href="#offres">Offres</a>
-      <a href="#deroulement">Déroulé</a>
-      <a class="bouton bouton-petit" href="mailto:?subject=%C3%89change%20de%2015%20minutes">Écrire</a>
-    </nav>
-  </div>
-</header>
-
+<header class="barre"><div class="cadre barre-int">
+  <a class="marque" href="#haut" aria-label="Kélian Kaddouri, accueil"><svg class="symbole" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 3v26M3 16h26M6.8 6.8l18.4 18.4M6.8 25.2 25.2 6.8" stroke="currentColor" stroke-width="3.5"/></svg><span>Kélian Kaddouri<span class="marque-detail">Données & automatisation</span></span></a>
+  <nav aria-label="Navigation principale"><a href="#offres">Les services</a><a href="#deroulement">La méthode</a><a class="nav-contact" href="#contact">Parlons de votre projet <span aria-hidden="true">↗</span></a></nav>
+</div></header>
 <main id="contenu">
-
-<section class="hero" id="haut">
-  <div class="cadre">
-    <div class="hero-texte">
-      <p class="surtitre">Automatisation pour PME B2B</p>
-      <h1>Vos demandes clients suivies.<br>Vos fichiers de facturation propres.</h1>
-      <p class="chapeau">J’installe des automatisations simples dans les outils que vous utilisez déjà : Gmail, Google Sheets, vos exports.</p>
-      <div class="actions">
-        <a class="bouton" href="mailto:?subject=%C3%89change%20de%2015%20minutes">Prendre 15 minutes</a>
-        <a class="bouton bouton-second" href="#offres">Voir les deux offres</a>
-      </div>
-    </div>
-
-    <figure class="ecran" aria-labelledby="ecran-legende">
-      <div class="fenetre">
-        <div class="fenetre-barre" aria-hidden="true">
-          <span></span><span></span><span></span>
-          <p>Flow Inbox — suivi</p>
-        </div>
-        <div class="defile" role="region" aria-label="Tableau de suivi, exemple fictif" tabindex="0">
-          <table class="suivi">
-            <caption class="visuel-cache">Tableau de suivi des demandes, exemple fictif</caption>
-            <thead>
-              <tr><th scope="col">Reçu</th><th scope="col">Expéditeur</th><th scope="col" class="col-opt">Service</th><th scope="col">Budget</th><th scope="col" class="col-opt">Délai</th><th scope="col">Statut</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>16/10</td><td>contact@atelier-nord.example</td><td class="col-opt">Site web</td><td class="vide">à demander</td><td class="col-opt">fin janvier</td><td><span class="pastille ok">Brouillon prêt</span></td></tr>
-              <tr><td>16/10</td><td>direction@boulangerie.example</td><td class="col-opt">Identité visuelle</td><td>2 000 €</td><td class="col-opt">mars</td><td><span class="pastille ok">Brouillon prêt</span></td></tr>
-              <tr><td>15/10</td><td>achats@cabinet-demo.example</td><td class="col-opt">Plusieurs</td><td>3 à 5 k€</td><td class="col-opt vide">—</td><td><span class="pastille revoir">À revoir</span></td></tr>
-              <tr><td>14/10</td><td>marketing@atelier-sud.example</td><td class="col-opt">Newsletter</td><td>1 200 €</td><td class="col-opt">2 semaines</td><td><span class="pastille fait">Répondu</span></td></tr>
-              <tr><td>14/10</td><td>candidat@messagerie.example</td><td class="col-opt vide">—</td><td class="vide">—</td><td class="col-opt vide">—</td><td><span class="pastille neutre">Hors périmètre</span></td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="brouillon" aria-label="Brouillon de réponse, exemple fictif">
-        <p class="brouillon-tete"><span class="pastille ok">Brouillon</span> Re : Refonte de notre site</p>
-        <p>Bonjour,<br>Merci pour votre message au sujet de votre projet de site. Pourriez-vous nous préciser l’enveloppe budgétaire envisagée ?</p>
-        <p class="brouillon-pied">Relu et envoyé par votre équipe</p>
-      </div>
-      <figcaption id="ecran-legende">Exemple fictif. Le budget et le délai sont recopiés tels qu’écrits, jamais devinés.</figcaption>
-    </figure>
+<section class="hero cadre" id="haut" aria-labelledby="hero-titre">
+  <div class="hero-texte">
+    <p class="surtitre"><span class="petit-trait" aria-hidden="true"></span> Automatisation pour PME B2B</p>
+    <h1 id="hero-titre">Moins de tâches.<br> Plus de place<br> pour <em>vos clients.</em></h1>
+    <p class="chapeau">Les demandes qui s’accumulent. Les fichiers à reprendre. Je vous aide à mettre de l’ordre, dans les outils que vous utilisez déjà.</p>
+    <div class="actions"><a class="bouton" href="#offres">Découvrir les deux services <span aria-hidden="true">↗</span></a><a class="lien-simple" href="#deroulement">Comment ça se passe <span aria-hidden="true">↓</span></a></div>
+    <p class="hero-note">Gmail, Google Sheets, vos exports. <br> On part de votre quotidien.</p>
+  </div>
+  <div class="atelier" aria-label="Aperçu des deux services, données fictives">
+    <div class="atelier-entete"><span class="surtitre">Un aperçu concret</span><span class="fictif">Démo fictive</span></div>
+    <div class="onglets" role="tablist" aria-label="Choisir un aperçu"><button id="tab-flow" role="tab" aria-selected="true" aria-controls="panel-flow" tabindex="0">01 <span>Flow Inbox</span></button><button id="tab-facture" role="tab" aria-selected="false" aria-controls="panel-facture" tabindex="-1">02 <span>Préparation e-facture</span></button></div>
+    <section class="demo-panel" id="panel-flow" role="tabpanel" aria-labelledby="tab-flow" tabindex="0">
+      <div class="demo-legende"><span class="point" aria-hidden="true"></span> Du premier message au suivi</div>
+      <div class="mail-exemple"><div class="mail-identite"><span class="initiales">AN</span><div><strong>Atelier Nord</strong><span>À votre équipe · exemple fictif</span></div><span class="icone-mail" aria-hidden="true">↙</span></div><h2>Un projet de site à vous confier</h2><p>Bonjour, nous aimerions refaire notre site d’ici fin janvier. Pouvez-vous nous en dire plus ?</p></div>
+      <div class="liaison"><span aria-hidden="true">↓</span><span>Les informations utiles sont relevées</span></div>
+      <div class="fiche-suivi"><div class="fiche-titre"><span class="icone-feuille" aria-hidden="true">≡</span><strong>Suivi des demandes</strong><span class="etiquette">1 demande</span></div><div class="fiche-colonnes"><span>Projet</span><span>Budget</span><span>Statut</span></div><div class="fiche-valeurs"><strong>Refonte de site</strong><span class="manquant">À demander</span><span class="pastille">À relire</span></div></div>
+      <div class="reponse-exemple"><span class="icone-brouillon" aria-hidden="true">↳</span><div><span class="micro-label">Brouillon préparé</span><p>« Pourriez-vous préciser l’enveloppe budgétaire envisagée ? »</p></div></div>
+      <p class="demo-pied"><span aria-hidden="true">✓</span> Votre équipe relit. Votre équipe envoie.</p>
+    </section>
+    <section class="demo-panel" id="panel-facture" role="tabpanel" aria-labelledby="tab-facture" tabindex="0" hidden>
+      <div class="demo-legende"><span class="point" aria-hidden="true"></span> D’un export brut à un fichier à vérifier</div>
+      <div class="export-exemple"><span class="icone-feuille" aria-hidden="true">≡</span><div><strong>clients-demo.csv</strong><span>Exemple fictif · fichier de départ</span></div><span aria-hidden="true">↙</span></div>
+      <div class="liaison"><span aria-hidden="true">↓</span><span>Des anomalies identifiées, des corrections proposées</span></div>
+      <div class="corrections"><div class="correction"><span class="micro-label">Code postal</span><div><s>6000</s><span aria-hidden="true">→</span><strong>06000</strong><span class="pastille">Calculée</span></div></div><div class="correction"><span class="micro-label">SIREN</span><div><strong>123 456 789</strong><span class="pastille pastille-orange">À vérifier</span></div><p>La valeur source est conservée pour votre revue.</p></div></div>
+      <div class="reponse-exemple"><span class="icone-brouillon" aria-hidden="true">↳</span><div><span class="micro-label">Livrable</span><p>Le fichier d’origine, les anomalies et les propositions de correction.</p></div></div>
+      <p class="demo-pied"><span aria-hidden="true">✓</span> Vous validez les corrections avant utilisation.</p>
+    </section>
+    <p class="atelier-note">Une maquette pour illustrer le service, sans connexion à vos données.</p>
   </div>
 </section>
-
-<section class="section" id="offres" aria-labelledby="offres-titre">
-  <div class="cadre">
-    <h2 id="offres-titre">Deux offres, un prix annoncé avant de commencer</h2>
-    <div class="offres">
-
-      <article class="offre" id="flow-inbox">
-        <p class="offre-cible">Agences marketing, communication, web</p>
-        <h3>Flow Inbox</h3>
-        <p class="offre-promesse">Chaque demande reçue par e-mail devient une ligne de suivi et, si elle est claire, un brouillon de réponse.</p>
-        <ul class="points">
-          <li>Budget, délai et infos manquantes relevés</li>
-          <li>Demandes sans réponse signalées</li>
-          <li>Rien n’est envoyé sans vous</li>
-          <li>Vos données restent dans votre compte Google</li>
-        </ul>
-        <p class="prix"><strong>790 € HT</strong> l’installation <span>indicatif, confirmé au devis</span></p>
-        <a class="lien-fleche" href="mailto:?subject=Flow%20Inbox%20%E2%80%94%20%C3%A9change%20de%2015%20minutes">En parler 15 minutes</a>
-      </article>
-
-      <article class="offre" id="facture-electronique">
-        <p class="offre-cible">PME de négoce, distribution, fabrication</p>
-        <h3>Préparation e-facture</h3>
-        <p class="offre-promesse">Je relis votre fichier clients et fournisseurs et vos modèles de factures avant le passage à la facture électronique.</p>
-        <div class="mini" role="region" aria-label="Corrections proposées, exemple fictif" tabindex="0">
-          <table>
-            <caption class="visuel-cache">Corrections proposées, exemple fictif</caption>
-            <thead><tr><th scope="col">Champ</th><th scope="col">Actuel → proposé</th><th scope="col">Statut</th></tr></thead>
-            <tbody>
-              <tr><td>Code postal</td><td><code>6000</code> → <code>06000</code></td><td><span class="pastille ok">Calculée</span></td></tr>
-              <tr><td>SIREN</td><td><code>123 456 789</code></td><td><span class="pastille revoir">À vérifier</span></td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p class="prix"><strong>490 € HT</strong> le dossier <span>diagnostic de 50 lignes offert</span></p>
-        <p class="note-source">Émission électronique obligatoire pour les PME au 1<sup>er</sup> septembre 2027 (<a href="https://www.economie.gouv.fr/tout-savoir-sur-la-facturation-electronique-pour-les-entreprises">economie.gouv.fr</a>).</p>
-        <a class="lien-fleche" href="mailto:?subject=Facture%20%C3%A9lectronique%20%E2%80%94%20diagnostic">Demander le diagnostic</a>
-      </article>
-
-    </div>
-  </div>
+<div class="repere cadre"><span>Des outils familiers.</span><p>Gmail <span aria-hidden="true">/</span> Google Sheets <span aria-hidden="true">/</span> Excel & CSV</p><span>Un fonctionnement plus clair.</span></div>
+<section class="section cadre" id="offres" aria-labelledby="offres-titre">
+  <div class="section-entete"><p class="surtitre">Ce que je peux faire pour vous</p><h2 id="offres-titre">Deux points de départ.<br> Des problèmes <em>bien concrets.</em></h2></div>
+  <article class="service" id="flow-inbox">
+    <div class="service-identite"><span class="service-num">01 /</span><h3>Flow Inbox</h3><p>Pour les agences marketing,<br> communication et web.</p><button class="lien-simple" type="button" data-demo="flow">Voir l’aperçu <span aria-hidden="true">↗</span></button></div>
+    <div class="service-contenu"><h4>Une demande arrive.<br> Vous savez quoi en faire.</h4><p>Chaque demande commerciale reçue par e-mail rejoint un tableau de suivi. Les informations manquantes sont signalées et un brouillon peut être préparé.</p><ul class="points"><li>Le budget et le délai, tels qu’ils sont écrits.</li><li>Les demandes sans réponse, repérées.</li><li>La relecture et l’envoi restent entre vos mains.</li></ul></div>
+    <div class="service-prix"><span class="micro-label">Installation</span><p><strong>790 €</strong> HT</p><span>Prix indicatif,<br> confirmé au devis.</span><a href="#contact" class="service-cta">En parler <span aria-hidden="true">↗</span></a></div>
+  </article>
+  <article class="service" id="facture-electronique">
+    <div class="service-identite"><span class="service-num">02 /</span><h3>Préparation<br> e-facture</h3><p>Pour les PME de négoce,<br> distribution et fabrication.</p><button class="lien-simple" type="button" data-demo="facture">Voir l’aperçu <span aria-hidden="true">↗</span></button></div>
+    <div class="service-contenu"><h4>Des fichiers plus propres.<br> Une transition mieux préparée.</h4><p>Je passe en revue votre fichier clients et fournisseurs et vos modèles de factures. Vous recevez les anomalies repérées et des propositions de correction à valider.</p><ul class="points"><li>Les champs manquants et les incohérences, listés.</li><li>Les corrections proposées, séparées des sources.</li><li>Un dossier pour préparer la suite avec vos partenaires.</li></ul><p class="precision">Cette préparation ne constitue pas une certification de conformité.</p></div>
+    <div class="service-prix"><span class="micro-label">Le dossier</span><p><strong>490 €</strong> HT</p><span>Prix indicatif, confirmé au devis.<br> Diagnostic de 50 lignes offert.</span><a href="#contact" class="service-cta">En parler <span aria-hidden="true">↗</span></a></div>
+  </article>
 </section>
-
-<section class="section section-teinte" id="deroulement" aria-labelledby="deroulement-titre">
-  <div class="cadre">
-    <h2 id="deroulement-titre">Comment ça se passe</h2>
-    <ol class="etapes">
-      <li><span class="num">1</span><strong>15 minutes</strong> pour regarder votre fonctionnement, sans vos données.</li>
-      <li><span class="num">2</span><strong>Une proposition écrite</strong> avec un périmètre et un prix.</li>
-      <li><span class="num">3</span><strong>La mise en place</strong> dans vos outils, testée avec vous.</li>
-      <li><span class="num">4</span><strong>La prise en main</strong> : vous savez lire et utiliser ce qui est remis.</li>
-    </ol>
-  </div>
-</section>
-
-<section class="section" aria-labelledby="engagements-titre">
-  <div class="cadre engagements">
-    <h2 id="engagements-titre" class="visuel-cache">Mes engagements</h2>
-    <div>
-      <h3>Rien d’inventé</h3>
-      <p>Une information absente reste absente. Un doute passe en « à revoir ».</p>
-    </div>
-    <div>
-      <h3>Vous gardez la main</h3>
-      <p>Aucun envoi automatique. Je ne modifie pas votre logiciel.</p>
-    </div>
-    <div>
-      <h3>Pas d’abonnement imposé</h3>
-      <p>Un projet, un prix. Le reste est optionnel.</p>
-    </div>
-  </div>
-</section>
-
-<section class="section section-qui" id="qui" aria-labelledby="qui-titre">
-  <div class="cadre qui">
-    <span class="avatar" aria-hidden="true">KK</span>
-    <div>
-      <h2 id="qui-titre">Kélian Kaddouri</h2>
-      <p>Entrepreneur individuel, data scientist (Python, automatisation), formé à l’ENSAE Paris. Je démarre : c’est pourquoi je commence toujours par un échange de 15 minutes.</p>
-    </div>
-  </div>
-</section>
-
-<section class="appel" aria-labelledby="appel-titre">
-  <div class="cadre appel-int">
-    <h2 id="appel-titre">15 minutes pour voir si c’est utile chez vous.</h2>
-    <a class="bouton bouton-clair" href="mailto:?subject=%C3%89change%20de%2015%20minutes">Écrire</a>
-  </div>
-</section>
-
+<section class="methode" id="deroulement" aria-labelledby="methode-titre"><div class="cadre">
+  <div class="section-entete"><p class="surtitre">Travailler ensemble</p><h2 id="methode-titre">On commence par<br> <em>vous écouter.</em></h2><p class="section-description">Un besoin précis, un périmètre écrit, puis une mise en place que vous comprenez.</p></div>
+  <ol class="etapes"><li><span class="num">01</span><h3>On fait le point.</h3><p>15 minutes pour comprendre votre fonctionnement et voir si le service est adapté.</p></li><li><span class="num">02</span><h3>On cadre le projet.</h3><p>Vous recevez une proposition écrite : le périmètre, les livrables et le prix.</p></li><li><span class="num">03</span><h3>On teste ensemble.</h3><p>La mise en place est vérifiée avec vous, puis accompagnée d’une prise en main.</p></li></ol>
+</div></section>
+<section class="section cadre questions" aria-labelledby="questions-titre"><div><p class="surtitre">Avant de commencer</p><h2 id="questions-titre">Simple,<br> <em>jusqu’au bout.</em></h2></div><div class="faq">
+  <details><summary>Est-ce que je dois changer d’outils ?<span aria-hidden="true">+</span></summary><p>Flow Inbox est conçu autour de Gmail et Google Sheets. Pour la préparation e-facture, on part de vos exports. La compatibilité avec votre fonctionnement est vérifiée avant de vous proposer un projet.</p></details>
+  <details><summary>Les réponses partent-elles toutes seules ?<span aria-hidden="true">+</span></summary><p>Flow Inbox prépare des brouillons. Votre équipe les relit, les adapte si nécessaire et effectue l’envoi.</p></details>
+  <details><summary>Est-ce qu’un abonnement est obligatoire ?<span aria-hidden="true">+</span></summary><p>Les prestations présentées sont ponctuelles. Tout accompagnement optionnel ou coût d’outil nécessaire est précisé dans la proposition avant de commencer.</p></details>
+</div></section>
+<section class="contact" id="contact" aria-labelledby="contact-titre"><div class="cadre contact-int">
+  <div><p class="surtitre">Un premier échange, tout simplement</p><h2 id="contact-titre">Qu’est-ce qui vous prend<br> <em>trop de temps ?</em></h2><p>Parlons de votre quotidien pendant 15 minutes.<br> On verra ensemble par où commencer.</p><p class="contact-attente">Prise de contact disponible à la publication du site.</p></div>
+  <div class="signature"><svg class="symbole" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 3v26M3 16h26M6.8 6.8l18.4 18.4M6.8 25.2 25.2 6.8" stroke="currentColor" stroke-width="2"/></svg><h3>Kélian Kaddouri</h3><p>Python, données et automatisation.<br> Votre interlocuteur, du premier<br> échange à la prise en main.</p></div>
+</div></section>
 </main>
-
-<footer class="pied">
-  <div class="cadre pied-int">
-    <p>Kélian Kaddouri, entrepreneur individuel · SIRET <span class="todo">À COMPLÉTER</span> · Contact <span class="todo">À COMPLÉTER</span></p>
-    <p><a href="mentions-legales.html">Mentions légales</a> · Aucun cookie, aucune mesure d’audience.</p>
-  </div>
-</footer>
+<footer class="pied"><div class="cadre pied-int"><p>Kélian Kaddouri <span>·</span> Données & automatisation</p><a href="mentions-legales.html">Mentions légales <span aria-hidden="true">↗</span></a><span>Sans cookies ni mesure d’audience.</span></div></footer>
 </body>
 </html>

@@ -1,6 +1,16 @@
 # Page vitrine locale (non publiée)
 
-Fichiers : `index.html`, `styles.css`, `mentions-legales.html`. Aucune dépendance externe, aucun script, aucun formulaire, aucun traceur. Les deux pages portent `<meta name="robots" content="noindex">` : à retirer seulement à la publication.
+Fichiers : `index.html`, `styles.css`, `site.js`, `mentions-legales.html`. Aucune dépendance externe, aucun formulaire, aucun traceur. Le script local sert uniquement aux deux aperçus de service : onglets, navigation au clavier et boutons « Voir l’aperçu ». Aucun appel réseau du script ni stockage. Les deux pages portent `<meta name="robots" content="noindex">` : à retirer seulement à la publication.
+
+## Refonte locale du 18 octobre 2026
+
+Le HTML précédent utilisait notamment `cadre`, `barre` et `hero`, alors que la feuille de styles définissait `conteneur`, `entete` et `bande`. Le CSS se chargeait mais ne mettait pas en page l’accueil. Les styles correspondent désormais au HTML ; les classes de la page légale restent prises en charge.
+
+Direction : fond ivoire, titres Georgia, accent bleu, offres en lignes et maquettes locales Flow Inbox / e-facture. Animations d’entrée courtes, supprimées avec `prefers-reduced-motion`. Les données des aperçus sont fictives. Les versions conservées dans `versions/` ne sont pas modifiées.
+
+Les liens commerciaux mènent à `#contact`. Aucun lien `mailto:` vide : le contact est explicitement indisponible jusqu’à la configuration d’une adresse réelle. Pour l’activer, renseigner cette adresse dans la section contact et les mentions légales, puis ajouter le lien de contact souhaité. Aucun calendrier ni formulaire ne sont connectés.
+
+Contrôles exécutés après refonte : audit Chrome local, 32/32 vérifications en mode normal et 34/34 en mouvements réduits. Chargement CSS/JS, titre principal unique, ancres, onglets (clic, flèches, Home/End, focus), CTA d’aperçu et FAQ. Aucun débordement de page pour les deux aperçus à 320, 390, 740, 768, 1024, 1440 et 1600 px. Aucun chargement de ressource distante observé. Captures relues : accueil desktop/mobile, offres desktop/mobile, contact mobile et mentions légales mobile. Fichier HTML également ouvert directement. Ces contrôles ne constituent pas un audit complet d’accessibilité ; lecteur d’écran non testé. Aucun compte, envoi, workflow ou déploiement activé.
 
 ## Ouvrir
 
@@ -10,13 +20,13 @@ Double-clic sur `index.html` (ou `open livrables/site/index.html`). Rien à inst
 
 | Champ | Où |
 |---|---|
-| Adresse e-mail de contact (boîte Gmail dédiée) | en-tête, section « Qui je suis », pied de page, mentions légales ; le bouton « Écrire » est un `mailto:` sans destinataire : ajouter l'adresse après `mailto:` aux deux endroits d'`index.html` |
-| SIRET | en-tête, « Qui je suis », mentions légales |
+| Adresse e-mail de contact (boîte Gmail dédiée) | section `#contact` et mentions légales ; remplacer le message d’attente par un lien réel |
+| SIRET | mentions légales |
 | Adresse postale de l'éditeur | mentions légales |
 | Hébergeur (nom, adresse) | mentions légales |
 | Durée de conservation des e-mails reçus | mentions légales |
 
-## Contrôles
+## Contrôles de la version précédente (avant refonte)
 
 Faits à la rédaction : relecture contre les deux offres relues (textes, prix, dates, liens de sources recopiés de `offre-v3-efacture.md`), colonnes et statuts de Flow Inbox (`FI_COLONNES`, README du dossier `flow-inbox-gmail`), libellés « Calculée » / « À vérifier » et champs de `corrections.js`, contrastes calculés à la main (texte secondaire 6,7:1, orange sur fond orange pâle 6,7:1, blanc sur vert 6,4:1), relecture manuelle des mots exclus.
 
